@@ -1,0 +1,54 @@
+.button {
+    -fx-font-weight: bold;
+}
+
+.custom-dashed-border {
+    -fx-border-color: #D2D2D2 ;
+    -fx-border-width: 2 ; 
+    -fx-border-style: segments(8, 8, 8, 8)  line-cap round ;
+}
+
+.button-browse{
+    -fx-background-color: #007BCC;
+    -fx-text-fill: #FFFFFF;
+    
+}
+
+.status-bar{
+   -fx-background-color: #007BCC;
+    -fx-text-fill: #FFFFFF; 
+}
+
+JFXListView .scroll-bar:horizontal .track,
+JFXListView .scroll-bar:vertical .track{
+    -fx-background-color:transparent;
+    -fx-border-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-border-radius:0em;
+}
+
+JFXListView .scroll-bar:horizontal .increment-button ,
+JFXListView .scroll-bar:horizontal .decrement-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 0 10 0;
+}
+
+JFXListView .scroll-bar:vertical .increment-button ,
+JFXListView .scroll-bar:vertical .decrement-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 10 0 0;
+}
+JFXListView  .scroll-bar .increment-arrow,
+JFXListView  .scroll-bar .decrement-arrow{
+    -fx-shape:" ";  
+    -fx-padding:0;
+}
+
+JFXListView .scroll-bar:horizontal .thumb,
+JFXListView .scroll-bar:vertical .thumb {
+    -fx-background-color:transparent;
+    -fx-background-insets: 0, 0, 0;
+    -fx-background-radius: 0em;
+}
