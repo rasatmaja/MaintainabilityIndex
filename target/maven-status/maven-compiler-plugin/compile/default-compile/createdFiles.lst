@@ -1,3 +1,4 @@
 edu\maintainabilityindex\MainApp.class
 edu\maintainabilityindex\FileChooserController.class
 edu\maintainabilityindex\FXMLController.class
+edu\maintainabilityindex\FileChooserController$1.class

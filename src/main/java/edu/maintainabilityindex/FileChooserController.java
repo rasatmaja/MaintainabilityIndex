@@ -7,14 +7,16 @@ package edu.maintainabilityindex;
  */
 import com.jfoenix.controls.JFXListView;
 import java.io.File;
+import java.io.FileFilter;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.stage.DirectoryChooser;
-
 
 /**
  * FXML Controller class
@@ -46,31 +48,37 @@ public class FileChooserController implements Initializable {
         if (selectedDirectory == null) {
             status.setText("No Directory selected");
         } else {
+            listFile.getItems().clear();
             status.setText(selectedDirectory.getAbsolutePath());
             walk(selectedDirectory.getAbsolutePath());
         }
     }
-    
-    public void walk( String path ) {
 
-        File root = new File( path );
-        File[] list = root.listFiles();
-
-        if (list == null) return;
-               
-        for ( File f : list ) {
-            if ( f.isDirectory() ) {
-                walk( f.getAbsolutePath() );
-                System.out.println( "Dir:" + f.getAbsoluteFile() );
+    public void walk(String path) {
+        File root = new File(path);
+        File[] list = root.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                 return file.getName().toLowerCase().endsWith(".pdf") || file.isDirectory();
             }
-            else {
-                System.out.println( "File:" + f.getAbsoluteFile() );
+        });
+
+        if (list == null) {
+            return;
+        }
+
+        for (File f : list) {
+            if (f.isDirectory()) {
+                walk(f.getAbsolutePath());
+                System.out.println("Dir:" + f.getAbsoluteFile());
+            } else {
+                System.out.println("File:" + f.getAbsoluteFile());
                 Label file = new Label(f.getName());
                 listFile.getItems().add(file);
             }
         }
-        
-        totalFile.setText(listFile.getItems().size()+" Java file ");
+
+        totalFile.setText(listFile.getItems().size() + " Java file ");
     }
 
 }
