@@ -59,7 +59,7 @@ public class FileChooserController implements Initializable {
         File[] list = root.listFiles(new FileFilter() {
             @Override
             public boolean accept(File file) {
-                 return file.getName().toLowerCase().endsWith(".pdf") || file.isDirectory();
+                 return file.getName().toLowerCase().endsWith(".java") || file.isDirectory();
             }
         });
 
