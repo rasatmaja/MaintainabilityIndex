@@ -11,10 +11,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F6F8FA;" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.maintainabilityindex.FileChooserController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.maintainabilityindex.FileChooserController">
    <left>
       <AnchorPane prefHeight="600.0" prefWidth="331.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
          <children>
@@ -28,7 +29,7 @@
                   </ImageView>
                   <Text fill="#a1a0a0" layoutX="54.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-browese" text="Browse directory of java project" textAlignment="CENTER" wrappingWidth="178.13671875">
                      <font>
-                        <Font name="Open Sans SemiBold" size="15.0" />
+                        <Font name="Segoe UI" size="15.0" />
                      </font>
                   </Text>
                </children>
@@ -56,21 +57,26 @@
       </HBox>
    </bottom>
    <center>
-      <AnchorPane BorderPane.alignment="CENTER">
+      <StackPane BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
          <children>
-            <Label layoutX="14.0" layoutY="94.0" text="List of File :">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-               <graphic>
-                  <FontAwesomeIconView glyphName="LIST" size="18.0" />
-               </graphic>
-            </Label>
-            <JFXListView fx:id="listFile" layoutX="-1.0" layoutY="121.0" prefHeight="443.0" prefWidth="472.0" style="-fx-background-color: #F6F8FA;" />
+            <AnchorPane prefHeight="578.0" prefWidth="553.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="94.0" text="List of File :">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="LIST" size="18.0" />
+                     </graphic>
+                  </Label>
+                  <JFXListView fx:id="listFile" layoutX="-2.0" layoutY="129.0" prefHeight="440.0" prefWidth="562.0" style="-fx-background-color: #F6F8FA;" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" />
          </children>
-      </AnchorPane>
+      </StackPane>
    </center>
 </BorderPane>
