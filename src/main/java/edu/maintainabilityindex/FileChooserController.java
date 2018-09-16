@@ -5,6 +5,7 @@ package edu.maintainabilityindex;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import java.io.File;
 import java.io.FileFilter;
@@ -16,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 
 /**
@@ -31,6 +33,12 @@ public class FileChooserController implements Initializable {
     private JFXListView<Label> listFile;
     @FXML
     private Label totalFile;
+    @FXML
+    private Pane pane1;
+    @FXML
+    private JFXButton btnBack;
+    @FXML
+    private JFXButton btnCalculate;
 
     /**
      * Initializes the controller class.
@@ -51,6 +59,7 @@ public class FileChooserController implements Initializable {
             listFile.getItems().clear();
             status.setText(selectedDirectory.getAbsolutePath());
             walk(selectedDirectory.getAbsolutePath());
+            pane1.toBack();
         }
     }
 
@@ -79,6 +88,17 @@ public class FileChooserController implements Initializable {
         }
 
         totalFile.setText(listFile.getItems().size() + " Java file ");
+    }
+
+    @FXML
+    private void back(ActionEvent event) {
+        pane1.toFront();
+        status.setText("No directory open");
+        totalFile.setText("No java file found");
+    }
+
+    @FXML
+    private void calculate(ActionEvent event) {
     }
 
 }
