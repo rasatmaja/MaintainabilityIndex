@@ -69,7 +69,7 @@
                   <FontAwesomeIconView glyphName="LIST" size="18.0" />
                </graphic>
             </Label>
-            <JFXListView fx:id="listFile" layoutX="-1.0" layoutY="121.0" prefHeight="443.0" prefWidth="472.0" style="-fx-background-color: #F6F8FA;" />
+            <JFXListView fx:id="listFile" layoutX="-2.0" layoutY="121.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="470.0" style="-fx-background-color: #F6F8FA;" />
          </children>
       </AnchorPane>
    </center>
