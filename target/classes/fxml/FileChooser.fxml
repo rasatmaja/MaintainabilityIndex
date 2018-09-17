@@ -18,12 +18,12 @@
    <bottom>
       <HBox prefHeight="22.0" spacing="10.0" style="-fx-background-color: #007BCC;" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="status" text="Directory" textFill="WHITE">
+            <Label fx:id="status" text="No directory open" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="#fcfcfc" glyphName="FOLDER" />
                </graphic>
             </Label>
-            <Label fx:id="totalFile" text="Label" textFill="WHITE">
+            <Label fx:id="totalFile" text="No java file found" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="CUBES" />
                </graphic>
@@ -42,7 +42,7 @@
          <children>
             <AnchorPane prefHeight="578.0" prefWidth="553.0" style="-fx-background-color: #F6F8FA;">
                <children>
-                  <Label layoutX="45.0" layoutY="84.0" text="List of File :">
+                  <Label layoutX="45.0" layoutY="80.0" text="List of File :">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -63,7 +63,7 @@
                      </image>
                   </ImageView>
                   <Label layoutX="383.0" layoutY="470.0" text="No Java project open " textFill="#90a4ae" />
-                  <Label layoutX="322.0" layoutY="487.0" text="Would you to open your java projet in here ?" textFill="#90a4ae" />
+                  <Label layoutX="322.0" layoutY="487.0" text="Would you to open your java project in here ?" textFill="#90a4ae" />
                   <JFXButton layoutX="305.0" layoutY="515.0" onAction="#openDirectoryChooser" prefHeight="25.0" prefWidth="281.0" styleClass="button-browse" text="Browse" />
                </children>
             </Pane>
