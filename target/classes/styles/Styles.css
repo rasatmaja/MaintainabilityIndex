@@ -12,7 +12,6 @@
     -fx-background-color: #007BCC;
     -fx-text-fill: #FFFFFF;
     -fx-font: Segoe UI;
-    
 }
 
 .status-bar{
@@ -52,4 +51,11 @@ JFXListView .scroll-bar:vertical .thumb {
     -fx-background-color:transparent;
     -fx-background-insets: 0, 0, 0;
     -fx-background-radius: 0em;
+}
+
+.progress-indicator .indicator {
+    -fx-background-color: transparent ;
+}
+.progress-indicator {
+    -fx-progress-color: white ;
 }

@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -16,22 +17,36 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.maintainabilityindex.FileChooserController">
    <bottom>
-      <HBox prefHeight="22.0" spacing="10.0" style="-fx-background-color: #007BCC;" BorderPane.alignment="CENTER">
+      <HBox prefHeight="22.0" spacing="18.0" style="-fx-background-color: #007BCC;" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="status" text="No directory open" textFill="WHITE">
+            <Label fx:id="statusbar_directoryPath" prefHeight="41.0" text="No directory open" textFill="WHITE">
                <graphic>
-                  <FontAwesomeIconView fill="#fcfcfc" glyphName="FOLDER" />
+                  <OctIconView fill="WHITE" glyphName="FILE_DIRECTORY" size="16" />
+               </graphic>
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="statusbar_fileFound" prefHeight="35.0" text="No java file found" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+               <graphic>
+                  <OctIconView fill="WHITE" glyphName="FILE_CODE" size="16" />
                </graphic>
             </Label>
-            <Label fx:id="totalFile" text="No java file found" textFill="WHITE">
+            <Label fx:id="statusbar_executionTime" prefHeight="29.0" text="There is no execution yet" textFill="WHITE">
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="CUBES" />
+                  <OctIconView fill="WHITE" glyphName="CLOCK" size="16" />
                </graphic>
             </Label>
          </children>
          <padding>
-            <Insets left="5.0" top="3.0" />
+            <Insets left="10.0" />
          </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </HBox>
    </bottom>
    <center>
@@ -40,7 +55,7 @@
             <Insets />
          </BorderPane.margin>
          <children>
-            <AnchorPane prefHeight="578.0" prefWidth="553.0" style="-fx-background-color: #F6F8FA;">
+            <AnchorPane fx:id="pane_listFile" prefHeight="578.0" prefWidth="553.0" style="-fx-background-color: #F6F8FA;">
                <children>
                   <Label layoutX="45.0" layoutY="80.0" text="List of File :">
                      <font>
@@ -52,7 +67,7 @@
                   </Label>
                   <JFXButton fx:id="btnBack" layoutX="716.0" layoutY="523.0" onAction="#back" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Back" />
                   <JFXListView fx:id="listFile" layoutX="45.0" layoutY="111.0" prefHeight="400.0" prefWidth="801.0" style="-fx-background-color: #F6F8FA;" />
-                  <JFXButton fx:id="btnCalculate" layoutX="565.0" layoutY="523.0" onAction="#openDirectoryChooser" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Calculate" />
+                  <JFXButton fx:id="btnCalculate" layoutX="565.0" layoutY="523.0" onAction="#calculate" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Calculate" />
                </children>
             </AnchorPane>
             <Pane fx:id="pane1" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F6F8FA;">
