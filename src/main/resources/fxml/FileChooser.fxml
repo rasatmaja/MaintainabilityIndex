@@ -5,6 +5,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -70,12 +71,15 @@
                   <JFXButton fx:id="btnCalculate" layoutX="565.0" layoutY="523.0" onAction="#calculate" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Calculate" />
                </children>
             </AnchorPane>
-            <Pane fx:id="pane1" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F6F8FA;">
+            <Pane fx:id="pane1" style="-fx-background-color: #F6F8FA;">
                <children>
-                  <ImageView fitHeight="421.0" fitWidth="904.0" layoutX="-10.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="421.0" fitWidth="904.0" layoutX="-10.0" layoutY="22.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/bakcground.png" />
                      </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
                   </ImageView>
                   <Label layoutX="383.0" layoutY="470.0" text="No Java project open " textFill="#90a4ae" />
                   <Label layoutX="322.0" layoutY="487.0" text="Would you to open your java project in here ?" textFill="#90a4ae" />
