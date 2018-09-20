@@ -66,9 +66,9 @@
                         <FontAwesomeIconView glyphName="LIST" size="18.0" />
                      </graphic>
                   </Label>
-                  <JFXButton fx:id="btnBack" layoutX="716.0" layoutY="523.0" onAction="#back" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Back" />
-                  <JFXListView fx:id="listFile" layoutX="45.0" layoutY="111.0" prefHeight="400.0" prefWidth="801.0" style="-fx-background-color: #F6F8FA;" />
-                  <JFXButton fx:id="btnCalculate" layoutX="565.0" layoutY="523.0" onAction="#calculate" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Calculate" />
+                  <JFXButton fx:id="btnBack" layoutX="716.0" layoutY="523.0" onAction="#back" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Back" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="45.0" />
+                  <JFXListView fx:id="listFile" layoutX="45.0" layoutY="111.0" style="-fx-background-color: #F6F8FA;" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="111.0" />
+                  <JFXButton fx:id="btnCalculate" layoutX="565.0" layoutY="523.0" onAction="#calculate" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Calculate" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="190.0" />
                </children>
             </AnchorPane>
             <Pane fx:id="pane1" style="-fx-background-color: #F6F8FA;">
