@@ -5,18 +5,10 @@ package edu.maintainabilityindex;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import animatefx.animation.FadeInDown;
-import animatefx.animation.FadeInLeft;
 import animatefx.animation.FadeInLeftBig;
-import animatefx.animation.FadeInRight;
 import animatefx.animation.FadeInRightBig;
-import animatefx.animation.FadeOutLeft;
-import animatefx.animation.Swing;
-import animatefx.animation.ZoomInRight;
-import animatefx.animation.ZoomOutLeft;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
-import de.jensd.fx.glyphs.octicons.OctIconView;
 import java.io.File;
 import java.io.FileFilter;
 import java.net.URL;
@@ -27,7 +19,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 
@@ -84,8 +75,6 @@ public class FileChooserController implements Initializable {
            
             pane_listFile.toFront();
             new FadeInRightBig(pane_listFile).play();
-            
-            //progressbar_scanning.setVisible(false);
         }
     }
 
@@ -117,8 +106,7 @@ public class FileChooserController implements Initializable {
                 listFile.getItems().add(file);
             }
         }
-
-        
+      
     }
 
     @FXML
