@@ -43,7 +43,7 @@
                   <OctIconView fill="WHITE" glyphName="CLOCK" size="16" />
                </graphic>
             </Label>
-            <HBox fx:id="pane_progress" prefHeight="100.0" prefWidth="200.0" spacing="8.0" visible="false">
+            <HBox fx:id="pane_progress" prefHeight="100.0" prefWidth="200.0" spacing="5.0" visible="false">
                <children>
                   <StackPane>
                      <children>
@@ -87,9 +87,9 @@
                   <JFXButton fx:id="btnCalculate" layoutX="565.0" layoutY="523.0" onAction="#calculate" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Calculate" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="190.0" />
                   <TableView fx:id="list_files_table" layoutX="45.0" layoutY="111.0" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="111.0">
                     <columns>
-                      <TableColumn fx:id="file_name_column" maxWidth="512.0" minWidth="494.0" prefWidth="494.0" resizable="false" text="File Name" />
-                      <TableColumn fx:id="size_column" maxWidth="116.0" minWidth="93.0" prefWidth="98.0" resizable="false" text="Size" />
-                      <TableColumn fx:id="date_modified_column" maxWidth="206.0" minWidth="181.0" prefWidth="206.0" resizable="false" text="Date Modified" />
+                      <TableColumn fx:id="file_name_column" maxWidth="546.0" minWidth="488.0" prefWidth="488.0" resizable="false" text="File Name" />
+                      <TableColumn fx:id="size_column" maxWidth="157.0" minWidth="93.0" prefWidth="143.0" resizable="false" text="Size" />
+                      <TableColumn fx:id="date_modified_column" maxWidth="206.0" minWidth="122.0" prefWidth="166.0" resizable="false" text="Date Modified" />
                     </columns>
                   </TableView>
                </children>
