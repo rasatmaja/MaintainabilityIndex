@@ -27,13 +27,32 @@
 
 }
 
+.table-view{
+    -fx-border-color: transparent;
+}
 .table-view .column-header,
 .table-view .column-header-background .filler {
-    -fx-background-color:  #6622CC; 
+    -fx-background-color:  #007BCC; 
+    -fx-border-color: transparent;
+        
 }
 .table-view .column-header .label{
-   -fx-text-fill: white;
+   -fx-text-fill: #FFFFFF;
    -fx-font-weight: bold; 
-   -fx-alignment: CENTER_LEFT;
+   -fx-alignment: CENTER;
 }
 
+.table-row-cell:selected {
+   -fx-background-color: #ddefff; 
+   -fx-border-color: transparent;
+   -fx-text-background-color:  #24292E;
+}
+
+.table-view *.increment-button,
+.table-view *.decrement-button,
+.table-view *.increment-arrow,
+.table-view *.decrement-arrow
+{
+    -fx-padding: 0;
+    -fx-shape: "";
+}

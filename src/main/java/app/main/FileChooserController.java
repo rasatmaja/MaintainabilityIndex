@@ -104,22 +104,20 @@ public class FileChooserController implements Initializable {
     }
 
     private void setTableListFiles(String path) {
-        file_name_column.setCellValueFactory(new PropertyValueFactory<Files, String>("file_name"));
-        size_column.setCellValueFactory(new PropertyValueFactory<Files, String>("size"));
+        file_name_column.setCellValueFactory(new PropertyValueFactory<>("file_name"));
+        size_column.setCellValueFactory(new PropertyValueFactory<>("size"));
         size_column.setStyle("-fx-alignment: CENTER-RIGHT;");
-        date_modified_column.setCellValueFactory(new PropertyValueFactory<Files, String>("date_modified"));
+        date_modified_column.setCellValueFactory(new PropertyValueFactory<>("date_modified"));
         date_modified_column.setStyle("-fx-alignment: CENTER;");
         
         try {
             FileSearch fileSearch = new FileSearch(path);
-            
             statusbar_scanning.textProperty().bind(fileSearch.messageProperty());
-
+            
             fileSearch.setOnRunning((succeesesEvent) -> {
                 statusbar_complete.setVisible(false);
                 statusbar_indicator.setVisible(true);
-                pane_progress.setVisible(true);
-                
+                pane_progress.setVisible(true);                
             });
             
             fileSearch.setOnSucceeded((succeededEvent) -> {
