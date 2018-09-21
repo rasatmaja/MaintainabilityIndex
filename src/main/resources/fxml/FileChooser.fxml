@@ -7,6 +7,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,7 +19,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.main.FileChooserController">
    <bottom>
-      <HBox prefHeight="22.0" spacing="18.0" style="-fx-background-color: #007BCC;" BorderPane.alignment="CENTER">
+      <HBox prefHeight="22.0" prefWidth="891.0" spacing="18.0" style="-fx-background-color: #007BCC;" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="statusbar_directoryPath" prefHeight="41.0" text="No directory open" textFill="WHITE">
                <graphic>
@@ -41,6 +42,20 @@
                   <OctIconView fill="WHITE" glyphName="CLOCK" size="16" />
                </graphic>
             </Label>
+            <HBox fx:id="pane_progress" prefHeight="100.0" prefWidth="200.0" spacing="8.0">
+               <children>
+                  <ProgressIndicator prefHeight="0.0" prefWidth="0.0">
+                     <HBox.margin>
+                        <Insets left="8.0" />
+                     </HBox.margin>
+                  </ProgressIndicator>
+                  <Label fx:id="statusbar_scanning" prefHeight="35.0" text="Scanning...." textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
          <padding>
             <Insets left="10.0" />

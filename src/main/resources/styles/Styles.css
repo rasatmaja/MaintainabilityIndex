@@ -51,3 +51,13 @@ JFXListView .scroll-bar:vertical .thumb {
     -fx-background-insets: 0, 0, 0;
     -fx-background-radius: 0em;
 }
+
+.progress-indicator {
+    -fx-progress-color: white ;
+    
+}
+.progress-indicator .spinner {
+    -fx-background-color: transparent ;
+
+}
+
