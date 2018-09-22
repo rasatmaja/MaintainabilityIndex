@@ -1,5 +1,4 @@
 app\main\FileChooserController.class
 app\controllers\FileSearch.class
-app\controllers\FileSearch$1.class
 app\models\Files.class
 app\main\MainApp.class
