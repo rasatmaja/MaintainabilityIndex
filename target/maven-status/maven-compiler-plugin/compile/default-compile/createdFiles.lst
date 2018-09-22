@@ -1,4 +1,4 @@
-edu\maintainabilityindex\MainApp.class
-edu\maintainabilityindex\FileChooserController.class
-edu\maintainabilityindex\FXMLController.class
-edu\maintainabilityindex\FileChooserController$1.class
+app\main\FileChooserController.class
+app\controllers\FileSearch.class
+app\models\Files.class
+app\main\MainApp.class

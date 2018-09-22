@@ -18,36 +18,41 @@
     -fx-text-fill: #FFFFFF; 
 }
 
-JFXListView .scroll-bar:horizontal .track,
-JFXListView .scroll-bar:vertical .track{
-    -fx-background-color:transparent;
-    -fx-border-color:transparent;
-    -fx-background-radius: 0em;
-    -fx-border-radius:0em;
+.progress-indicator {
+    -fx-progress-color: white ;
+    
+}
+.progress-indicator .spinner {
+    -fx-background-color: transparent ;
+
 }
 
-JFXListView .scroll-bar:horizontal .increment-button ,
-JFXListView .scroll-bar:horizontal .decrement-button {
-    -fx-background-color:transparent;
-    -fx-background-radius: 0em;
-    -fx-padding:0 0 10 0;
+.table-view{
+    -fx-border-color: transparent;
+}
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color:  #007BCC; 
+    -fx-border-color: transparent;
+        
+}
+.table-view .column-header .label{
+   -fx-text-fill: #FFFFFF;
+   -fx-font-weight: bold; 
+   -fx-alignment: CENTER;
 }
 
-JFXListView .scroll-bar:vertical .increment-button ,
-JFXListView .scroll-bar:vertical .decrement-button {
-    -fx-background-color:transparent;
-    -fx-background-radius: 0em;
-    -fx-padding:0 10 0 0;
-}
-JFXListView  .scroll-bar .increment-arrow,
-JFXListView  .scroll-bar .decrement-arrow{
-    -fx-shape:" ";  
-    -fx-padding:0;
+.table-row-cell:selected {
+   -fx-background-color: #ddefff; 
+   -fx-border-color: transparent;
+   -fx-text-background-color:  #24292E;
 }
 
-JFXListView .scroll-bar:horizontal .thumb,
-JFXListView .scroll-bar:vertical .thumb {
-    -fx-background-color:transparent;
-    -fx-background-insets: 0, 0, 0;
-    -fx-background-radius: 0em;
+.table-view *.increment-button,
+.table-view *.decrement-button,
+.table-view *.increment-arrow,
+.table-view *.decrement-arrow
+{
+    -fx-padding: 0;
+    -fx-shape: "";
 }

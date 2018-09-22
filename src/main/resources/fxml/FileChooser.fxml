@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXListView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,9 +18,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.maintainabilityindex.FileChooserController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.main.FileChooserController">
    <bottom>
-      <HBox prefHeight="22.0" spacing="18.0" style="-fx-background-color: #007BCC;" BorderPane.alignment="CENTER">
+      <HBox prefHeight="22.0" prefWidth="891.0" spacing="18.0" style="-fx-background-color: #007BCC;" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="statusbar_directoryPath" prefHeight="41.0" text="No directory open" textFill="WHITE">
                <graphic>
@@ -41,6 +43,21 @@
                   <OctIconView fill="WHITE" glyphName="CLOCK" size="16" />
                </graphic>
             </Label>
+            <HBox fx:id="pane_progress" prefHeight="100.0" prefWidth="200.0" spacing="5.0" visible="false">
+               <children>
+                  <StackPane>
+                     <children>
+                        <ProgressIndicator fx:id="statusbar_indicator" prefHeight="22.0" prefWidth="18.0" />
+                        <FontAwesomeIconView fx:id="statusbar_complete" fill="WHITE" glyphName="CHECK_CIRCLE" size="16" />
+                     </children>
+                  </StackPane>
+                  <Label fx:id="statusbar_scanning" prefHeight="35.0" text="Scanning...." textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
          <padding>
             <Insets left="10.0" />
@@ -58,17 +75,20 @@
          <children>
             <AnchorPane fx:id="pane_listFile" prefHeight="578.0" prefWidth="553.0" style="-fx-background-color: #F6F8FA;">
                <children>
-                  <Label layoutX="45.0" layoutY="80.0" text="List of File :">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <graphic>
-                        <FontAwesomeIconView glyphName="LIST" size="18.0" />
-                     </graphic>
-                  </Label>
+                  <ImageView fitHeight="167.0" fitWidth="799.0" layoutX="44.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="21.0">
+                     <image>
+                        <Image url="@../img/backround_header.png" />
+                     </image>
+                  </ImageView>
                   <JFXButton fx:id="btnBack" layoutX="716.0" layoutY="523.0" onAction="#back" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Back" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="45.0" />
-                  <JFXListView fx:id="listFile" layoutX="45.0" layoutY="111.0" style="-fx-background-color: #F6F8FA;" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="111.0" />
                   <JFXButton fx:id="btnCalculate" layoutX="565.0" layoutY="523.0" onAction="#calculate" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Calculate" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="190.0" />
+                  <TableView fx:id="list_files_table" layoutX="45.0" layoutY="111.0" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="111.0">
+                    <columns>
+                      <TableColumn fx:id="file_name_column" maxWidth="546.0" minWidth="488.0" prefWidth="488.0" resizable="false" text="File Name" />
+                      <TableColumn fx:id="size_column" maxWidth="157.0" minWidth="93.0" prefWidth="143.0" resizable="false" text="Size" />
+                      <TableColumn fx:id="date_modified_column" maxWidth="206.0" minWidth="122.0" prefWidth="166.0" resizable="false" text="Last Modified" />
+                    </columns>
+                  </TableView>
                </children>
             </AnchorPane>
             <Pane fx:id="pane1" style="-fx-background-color: #F6F8FA;">
