@@ -7,12 +7,10 @@ package app.controllers;
 
 import app.models.Files;
 import java.io.File;
-import java.io.FileFilter;
 import java.text.SimpleDateFormat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import javafx.scene.control.Label;
 
 /**
  *
@@ -37,12 +35,7 @@ public class FileSearch extends Task<ObservableList<Files>> {
     
     public void fileWalker(String path) {
         File root = new File(path);
-        File[] list = root.listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                return file.getName().toLowerCase().endsWith(".java") || file.isDirectory();
-            }
-        });
+        File[] list = root.listFiles((File file) -> file.getName().toLowerCase().endsWith(".java") || file.isDirectory());
 
         if (list == null) {
             return;
