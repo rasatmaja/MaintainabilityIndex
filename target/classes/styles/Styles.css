@@ -2,12 +2,6 @@
     -fx-font-weight: bold;
 }
 
-.custom-dashed-border {
-    -fx-border-color: #D2D2D2 ;
-    -fx-border-width: 2 ; 
-    -fx-border-style: segments(8, 8, 8, 8)  line-cap round ;
-}
-
 .button-browse{
     -fx-background-color: #007BCC;
     -fx-text-fill: #FFFFFF;
