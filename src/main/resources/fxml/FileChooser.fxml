@@ -98,7 +98,7 @@
             </AnchorPane>
             <VBox fx:id="pane_home" alignment="CENTER_RIGHT" style="-fx-background-color: #F6F8FA;">
                <children>
-                  <HBox alignment="CENTER" prefHeight="519.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;">
+                  <HBox alignment="CENTER" prefHeight="535.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;">
                      <children>
                         <Pane fx:id="pane1" prefHeight="502.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;">
                            <children>
@@ -110,9 +110,9 @@
                                     <Rectangle2D />
                                  </viewport>
                               </ImageView>
-                              <Label layoutX="383.0" layoutY="441.0" text="No Java project open " textFill="#90a4ae" />
-                              <Label layoutX="324.0" layoutY="456.0" text="Would you to open your java project in here ?" textFill="#90a4ae" />
-                              <JFXButton layoutX="305.0" layoutY="478.0" onAction="#openDirectoryChooser" prefHeight="25.0" prefWidth="281.0" styleClass="button-browse" text="Browse" />
+                              <Label layoutX="388.0" layoutY="441.0" text="No Java project open " textFill="#90a4ae" />
+                              <Label layoutX="324.0" layoutY="458.0" text="Would you to open your java project in here ?" textFill="#90a4ae" />
+                              <JFXButton layoutX="305.0" layoutY="487.0" onAction="#openDirectoryChooser" prefHeight="25.0" prefWidth="281.0" styleClass="button-browse" text="Browse" />
                            </children>
                         </Pane>
                      </children>
