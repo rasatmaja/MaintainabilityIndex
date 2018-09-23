@@ -8,11 +8,14 @@ package app.main;
 import animatefx.animation.FadeInLeftBig;
 import animatefx.animation.FadeInRightBig;
 import app.controllers.FileSearch;
+import app.models.FilePath;
 import app.models.Files;
 import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.File;
 import java.net.URL;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -65,9 +68,6 @@ public class FileChooserController implements Initializable {
     private HBox pane_progress;
     @FXML
     private Label statusbar_scanning;
-
-    long start;
-    public ObservableList<Files> list_file = FXCollections.observableArrayList();
     @FXML
     private ProgressIndicator statusbar_indicator;
     @FXML
@@ -75,12 +75,16 @@ public class FileChooserController implements Initializable {
     @FXML
     private VBox pane_home;
 
+    long start;
+    public ObservableList<Files> list_file = FXCollections.observableArrayList();
+    FilePath filePath;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        filePath = FilePath.getInstance();
     }
 
     @FXML
@@ -91,8 +95,6 @@ public class FileChooserController implements Initializable {
         if (selectedDirectory == null) {
             statusbar_directoryPath.setText("No Directory selected");
         } else {
-            list_file.clear();
-
             start = System.currentTimeMillis();
             setTableListFiles(selectedDirectory.getAbsolutePath());
 
@@ -110,21 +112,21 @@ public class FileChooserController implements Initializable {
         size_column.setStyle("-fx-alignment: CENTER-RIGHT;");
         date_modified_column.setCellValueFactory(new PropertyValueFactory<>("date_modified"));
         date_modified_column.setStyle("-fx-alignment: CENTER;");
-        
+
         try {
             FileSearch fileSearch = new FileSearch(path);
             statusbar_scanning.textProperty().bind(fileSearch.messageProperty());
-            
+
             fileSearch.setOnRunning((succeesesEvent) -> {
                 statusbar_complete.setVisible(false);
                 statusbar_indicator.setVisible(true);
-                pane_progress.setVisible(true);                
+                pane_progress.setVisible(true);
             });
-            
+
             fileSearch.setOnSucceeded((succeededEvent) -> {
                 list_file = fileSearch.getValue();
                 list_files_table.setItems(list_file);
-                
+
                 statusbar_indicator.setVisible(false);
                 statusbar_complete.setVisible(true);
                 statusbar_fileFound.setText(list_file.size() + " Java file ");
@@ -146,7 +148,10 @@ public class FileChooserController implements Initializable {
     private void back(ActionEvent event) {
         pane_home.toFront();
         new FadeInLeftBig(pane_home).play();
-
+        
+        list_file.clear();
+        filePath.clearFilePath();
+        
         statusbar_directoryPath.setText("No directory open");
         statusbar_fileFound.setText("No java file found");
         statusbar_executionTime.setText("There is no execution yet");
@@ -155,6 +160,13 @@ public class FileChooserController implements Initializable {
 
     @FXML
     private void calculate(ActionEvent event) {
+
+        filePath.getFilePath().entrySet().forEach((entry) -> {
+            int key = entry.getKey();
+            List<String> values = entry.getValue();
+            System.out.println("Key = " + key);
+            System.out.println("Values = " + values.get(1) + "\n");
+        });
     }
 
 }
