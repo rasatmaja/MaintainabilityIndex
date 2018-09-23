@@ -12,9 +12,7 @@ import app.models.Files;
 import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.File;
-import java.io.FileFilter;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -31,6 +29,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 
 /**
@@ -73,6 +72,8 @@ public class FileChooserController implements Initializable {
     private ProgressIndicator statusbar_indicator;
     @FXML
     private FontAwesomeIconView statusbar_complete;
+    @FXML
+    private VBox pane_home;
 
     /**
      * Initializes the controller class.
@@ -143,8 +144,8 @@ public class FileChooserController implements Initializable {
 
     @FXML
     private void back(ActionEvent event) {
-        pane1.toFront();
-        new FadeInLeftBig(pane1).play();
+        pane_home.toFront();
+        new FadeInLeftBig(pane_home).play();
 
         statusbar_directoryPath.setText("No directory open");
         statusbar_fileFound.setText("No java file found");
