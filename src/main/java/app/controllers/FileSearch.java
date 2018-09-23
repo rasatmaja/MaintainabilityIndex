@@ -5,6 +5,7 @@
  */
 package app.controllers;
 
+import app.models.FilePath;
 import app.models.Files;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -17,7 +18,7 @@ import javafx.concurrent.Task;
  * @author rasio
  */
 public class FileSearch extends Task<ObservableList<Files>> {
-    private String path;
+    private final String path;
     public ObservableList<Files> list_file = FXCollections.observableArrayList();
 
     public FileSearch(String path){
@@ -44,12 +45,14 @@ public class FileSearch extends Task<ObservableList<Files>> {
         for (File f : list) {
             
             if (f.isDirectory()) {
-                System.out.println("Dir:" + f.getAbsoluteFile());
+                //System.out.println("Dir:" + f.getAbsoluteFile());
                 updateMessage("Scanning: "+ f.getName());
                 fileWalker(f.getAbsolutePath());
                 
             } else {
-                System.out.println("File:" + f.getAbsoluteFile());
+                //System.out.println("File:" + f.getAbsoluteFile());
+                FilePath filePath = FilePath.getInstance();
+                filePath.setFilePath(f.getName(), f.getAbsoluteFile().toString());
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
                 list_file.add( new Files (f.getName(), f.length()+" byte", sdf.format(f.lastModified())));
             }
