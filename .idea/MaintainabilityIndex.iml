@@ -14,5 +14,6 @@
     <orderEntry type="library" name="Maven: com.jfoenix:jfoenix:8.0.1" level="project" />
     <orderEntry type="library" name="Maven: de.jensd:fontawesomefx:8.9" level="project" />
     <orderEntry type="library" name="Maven: io.github.typhon0:AnimateFX:1.2.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.javaparser:javaparser-core:3.6.12" level="project" />
   </component>
 </module>

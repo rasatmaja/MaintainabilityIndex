@@ -1,5 +1,7 @@
 app\main\FileChooserController.class
 app\models\FilePath.class
+app\controllers\ClassAttributeExtraction.class
 app\controllers\FileSearch.class
 app\models\Files.class
+app\controllers\ASTExtractions.class
 app\main\MainApp.class

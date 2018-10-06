@@ -7,12 +7,14 @@ package app.main;
  */
 import animatefx.animation.FadeInLeftBig;
 import animatefx.animation.FadeInRightBig;
+import app.controllers.ASTExtractions;
 import app.controllers.FileSearch;
 import app.models.FilePath;
 import app.models.Files;
 import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -101,7 +103,7 @@ public class FileChooserController implements Initializable {
             pane_listFile.toFront();
             new FadeInRightBig(pane_listFile).play();
 
-            statusbar_directoryPath.setText(selectedDirectory.getAbsolutePath());
+            statusbar_directoryPath.setText(selectedDirectory.getName());
 
         }
     }
@@ -159,14 +161,36 @@ public class FileChooserController implements Initializable {
     }
 
     @FXML
-    private void calculate(ActionEvent event) {
+    private void calculate(ActionEvent event) throws FileNotFoundException {
 
-        filePath.getFilePath().entrySet().forEach((entry) -> {
-            int key = entry.getKey();
-            List<String> values = entry.getValue();
-            System.out.println("Key = " + key);
-            System.out.println("Values = " + values.get(1) + "\n");
-        });
+        try {
+            start = System.currentTimeMillis();
+            ASTExtractions astExtractions = new ASTExtractions();
+            statusbar_scanning.textProperty().bind(astExtractions.messageProperty());
+
+            astExtractions.setOnRunning((succeesesEvent) -> {
+                statusbar_complete.setVisible(false);
+                statusbar_indicator.setVisible(true);
+                pane_progress.setVisible(true);
+            });
+
+            astExtractions.setOnSucceeded((succeededEvent) -> {
+                
+                statusbar_indicator.setVisible(false);
+                statusbar_complete.setVisible(true);
+                statusbar_fileFound.setText(list_file.size() + " Java file ");
+                long time = (System.currentTimeMillis() - start);
+                statusbar_executionTime.setText("Time to extractions: " + time + "ms");
+            });
+
+            ExecutorService executorService = Executors.newFixedThreadPool(1);
+            executorService.execute(astExtractions);
+            executorService.shutdown();
+
+        } catch (Exception e) {
+
+        }
+
     }
 
 }
