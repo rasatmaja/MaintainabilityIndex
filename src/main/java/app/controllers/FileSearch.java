@@ -52,7 +52,7 @@ public class FileSearch extends Task<ObservableList<Files>> {
             } else {
                 //System.out.println("File:" + f.getAbsoluteFile());
                 FilePath filePath = FilePath.getInstance();
-                filePath.setFilePath(f.getName(), f.getAbsoluteFile().toString());
+                filePath.set(f.getName(), f.getAbsoluteFile().toString());
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
                 list_file.add( new Files (f.getName(), f.length()+" byte", sdf.format(f.lastModified())));
             }

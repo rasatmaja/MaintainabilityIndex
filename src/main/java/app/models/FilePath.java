@@ -40,18 +40,18 @@ public class FilePath {
      * Method setFilPath()
      * untuk menyimpan namafile dan alamat directory
      */
-    public void setFilePath(String name, String path){
+    public void set(String name, String path){
         List<String> filePath = new ArrayList<>();
         filePath.add(name);
         filePath.add(path);
         listOfFilePath.put(listOfFilePath.size(), filePath);
     }
     
-    public Map<Integer, List<String>> getFilePath(){
+    public Map<Integer, List<String>> get(){
         return listOfFilePath;
     }
     
-    public void clearFilePath(){
+    public void clear(){
         listOfFilePath.clear();
     }
 }
