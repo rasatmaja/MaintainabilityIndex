@@ -47,14 +47,9 @@ public class ClassAttributeExtraction extends VoidVisitorAdapter<Void> {
                 if (node instanceof MethodDeclaration) {
                     MethodDeclaration md = (MethodDeclaration) node;
                     System.out.println("Method Name : " + md.getDeclarationAsString(false, true, false));
-                    System.out.println("body Method : \n" + md.getBody());
+                    System.out.println("body Method : \n" + md.getBody().get().asBlockStmt());
                 }
             });
         }
-
-
-
-
-        
     }
 }

@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b0f1457-6605-456d-9102-f0b846d209b3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/ASTExtractions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/ASTExtractions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/ClassAttributeExtraction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/ClassAttributeExtraction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/main/FileChooserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/main/FileChooserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/models/ClassAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/models/ClassAttribute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/app/controllers/ASTExtractions.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/app/controllers/ASTExtractions.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/app/controllers/ClassAttributeExtraction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/app/controllers/ClassAttributeExtraction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/app/main/FileChooserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/app/main/FileChooserController.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,12 +37,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1963" />
+          <entry key="JAVA" value="1970" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1963" />
+          <entry key="java" value="1970" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -92,8 +85,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ClassAttributeExtraction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="49" column="72" selection-start-line="49" selection-start-column="72" selection-end-line="49" selection-end-column="72" />
+            <state relative-caret-position="770">
+              <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#645#646#0" expanded="true" />
@@ -276,7 +269,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538894434915" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538907475928" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RunDashboard">
@@ -337,7 +330,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2553305" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2553305" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -346,7 +339,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -480,8 +473,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ClassAttributeExtraction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="49" column="72" selection-start-line="49" selection-start-column="72" selection-end-line="49" selection-end-column="72" />
+        <state relative-caret-position="770">
+          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#645#646#0" expanded="true" />
