@@ -28,12 +28,10 @@ public class ASTExtractions extends Task<Void> {
 
     private void extract () throws FileNotFoundException {
 
-        filePath.getFilePath().entrySet().forEach((entry) -> {
+        filePath.get().entrySet().forEach((entry) -> {
             int key = entry.getKey();
             List<String> values = entry.getValue();
-            //System.out.println("Key = " + key);
             updateMessage("Extracting : " + values.get(0));
-            System.out.println("Values = " + values.get(1) + "\n");
 
             FILE_PATH = values.get(1);
             try {
@@ -41,8 +39,11 @@ public class ASTExtractions extends Task<Void> {
                 ClassAttributeExtraction cae = new ClassAttributeExtraction();
                 cae.visit(cu, null);
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                //e.printStackTrace();
+                System.out.print((char)27 + "[31m" + "[ERROR] : ");
+                System.out.println(FILE_PATH + " : The identifier doesn't represent a java file");
+                System.out.println();
             }
 
         });
