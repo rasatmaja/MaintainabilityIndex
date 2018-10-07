@@ -17,6 +17,7 @@ public class ClassAttribute {
      * [1] LOC
      * [2] line of comment
      * [3] source code
+     * [4] class type
      */
 
     public static synchronized ClassAttribute getInstance() {
@@ -26,12 +27,13 @@ public class ClassAttribute {
         return instance;
     }
 
-    public void set(String className, int lineOfCode, int lineOfComment, String sourceCode){
+    public void set(String className, int lineOfCode, int lineOfComment, String sourceCode, String classType){
         List<String> classAttribute = new ArrayList<>();
         classAttribute.add(className);
         classAttribute.add( String.valueOf(lineOfCode) );
         classAttribute.add( String.valueOf(lineOfComment) );
         classAttribute.add(sourceCode);
+        classAttribute.add(classType);
         listOfClassAttribute.put(listOfClassAttribute.size(), classAttribute);
     }
 

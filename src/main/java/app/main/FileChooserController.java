@@ -9,6 +9,7 @@ import animatefx.animation.FadeInLeftBig;
 import animatefx.animation.FadeInRightBig;
 import app.controllers.ASTExtractions;
 import app.controllers.FileSearch;
+import app.models.ClassAttribute;
 import app.models.FilePath;
 import app.models.Files;
 import com.jfoenix.controls.JFXButton;
@@ -80,6 +81,7 @@ public class FileChooserController implements Initializable {
     long start;
     public ObservableList<Files> list_file = FXCollections.observableArrayList();
     FilePath filePath;
+    ClassAttribute classAttribute;
 
     /**
      * Initializes the controller class.
@@ -87,6 +89,7 @@ public class FileChooserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         filePath = FilePath.getInstance();
+        classAttribute = ClassAttribute.getInstance();
     }
 
     @FXML
@@ -152,7 +155,8 @@ public class FileChooserController implements Initializable {
         new FadeInLeftBig(pane_home).play();
         
         list_file.clear();
-        filePath.clearFilePath();
+        filePath.clear();
+        classAttribute.clear();
         
         statusbar_directoryPath.setText("No directory open");
         statusbar_fileFound.setText("No java file found");
@@ -172,6 +176,7 @@ public class FileChooserController implements Initializable {
                 statusbar_complete.setVisible(false);
                 statusbar_indicator.setVisible(true);
                 pane_progress.setVisible(true);
+                statusbar_executionTime.setText("Calculating...");
             });
 
             astExtractions.setOnSucceeded((succeededEvent) -> {
@@ -181,6 +186,7 @@ public class FileChooserController implements Initializable {
                 statusbar_fileFound.setText(list_file.size() + " Java file ");
                 long time = (System.currentTimeMillis() - start);
                 statusbar_executionTime.setText("Time to extractions: " + time + "ms");
+                showClassAttribute();
             });
 
             ExecutorService executorService = Executors.newFixedThreadPool(1);
@@ -190,6 +196,23 @@ public class FileChooserController implements Initializable {
         } catch (Exception e) {
 
         }
+
+    }
+
+    public void showClassAttribute (){
+
+        classAttribute.get().entrySet().forEach((classAttribut) -> {
+            int key = classAttribut.getKey();
+            List<String> values = classAttribut.getValue();
+            System.out.println((char)27 + "[30m" + "[DEBUG]");
+            System.out.println("Class Name : " + values.get(0));
+            System.out.println("LOC        : " + values.get(1));
+            System.out.println("Comments   : " + values.get(2));
+            //System.out.println("SC         : \n" + values.get(3));
+            System.out.println("Class Type : " + values.get(4));
+            System.out.println("----------------------------------------");
+            System.out.println();
+        });
 
     }
 
