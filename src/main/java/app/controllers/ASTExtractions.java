@@ -36,7 +36,7 @@ public class ASTExtractions extends Task<Void> {
             FILE_PATH = values.get(1);
             try {
                 cu = JavaParser.parse(new File(FILE_PATH));
-                ClassAttributeExtraction cae = new ClassAttributeExtraction();
+                ClassAndMethodPropertyExtraction cae = new ClassAndMethodPropertyExtraction();
                 cae.visit(cu, null);
 
             } catch (Exception e) {

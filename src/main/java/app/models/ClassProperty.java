@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ClassAttribute {
-    private static ClassAttribute instance;
-    private ClassAttribute(){};
+public class ClassProperty {
+    private static ClassProperty instance;
+    private ClassProperty(){};
 
-    Map<Integer, List<String>> listOfClassAttribute = new HashMap<>();
+    Map<Integer, List<String>> listOfClassProperty = new HashMap<>();
     /**
-     * listOfClassAttribute
+     * listOfClassProperty
      * int key
      * [0] name class
      * [1] LOC
@@ -20,9 +20,9 @@ public class ClassAttribute {
      * [4] class type
      */
 
-    public static synchronized ClassAttribute getInstance() {
+    public static synchronized ClassProperty getInstance() {
         if (instance == null) {
-            instance = new ClassAttribute();
+            instance = new ClassProperty();
         }
         return instance;
     }
@@ -34,14 +34,14 @@ public class ClassAttribute {
         classAttribute.add( String.valueOf(lineOfComment) );
         classAttribute.add(sourceCode);
         classAttribute.add(classType);
-        listOfClassAttribute.put(listOfClassAttribute.size(), classAttribute);
+        listOfClassProperty.put(listOfClassProperty.size(), classAttribute);
     }
 
     public Map<Integer, List<String>> get(){
-        return listOfClassAttribute;
+        return listOfClassProperty;
     }
 
     public void clear(){
-        listOfClassAttribute.clear();
+        listOfClassProperty.clear();
     }
 }

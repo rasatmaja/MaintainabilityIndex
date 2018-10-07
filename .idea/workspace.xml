@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b0f1457-6605-456d-9102-f0b846d209b3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/ClassAttributeExtraction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/ClassAttributeExtraction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/models/MethodProperty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/ASTExtractions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/ASTExtractions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/ClassAttributeExtraction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/ClassAndMethodPropertyExtraction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/main/FileChooserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/main/FileChooserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/models/ClassAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/models/ClassProperty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/app/controllers/ASTExtractions.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/app/controllers/ASTExtractions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/app/controllers/ClassAttributeExtraction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/app/main/FileChooserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/app/main/FileChooserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/app/models/ClassAttribute.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,24 +35,26 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="fxml" value="1" />
-          <entry key="java" value="15" />
+          <entry key="java" value="19" />
           <entry key="xml" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="15" />
+          <entry key="JAVA" value="19" />
           <entry key="XML" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1970" />
+          <entry key="JAVA" value="3106" />
+          <entry key="PLAIN_TEXT" value="27" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1970" />
+          <entry key="dummy" value="27" />
+          <entry key="java" value="3106" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -59,11 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/main/FileChooserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="219" lean-forward="true" selection-start-line="219" selection-end-line="219" />
+            <state relative-caret-position="2278">
+              <caret line="225" column="48" selection-start-line="225" selection-start-column="48" selection-end-line="225" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -82,22 +94,32 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ClassAttributeExtraction.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ClassAndMethodPropertyExtraction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="770">
-              <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+            <state relative-caret-position="535">
+              <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#645#646#0" expanded="true" />
-                <element signature="e#706#707#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/models/ClassAttribute.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/models/MethodProperty.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" column="7" lean-forward="true" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/models/ClassProperty.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="425">
               <caret line="35" column="38" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
@@ -108,24 +130,6 @@
                 <element signature="e#1259#1260#0" expanded="true" />
                 <element signature="e#1294#1295#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/models/Files.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="25" column="30" lean-forward="true" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/models/FilePath.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -150,8 +154,12 @@
         <option value="$PROJECT_DIR$/src/main/java/app/models/Files.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/controllers/ASTExtractions.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/models/ClassAttribute.java" />
-        <option value="$PROJECT_DIR$/src/main/java/app/main/FileChooserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/controllers/MethodAttributeExtraction.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/controllers/ClassAttributeExtraction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/models/ClassProperty.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/models/MethodProperty.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/controllers/ClassAndMethodPropertyExtraction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/main/FileChooserController.java" />
       </list>
     </option>
   </component>
@@ -269,7 +277,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538907475928" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538919040275" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RunDashboard">
@@ -338,8 +346,8 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -358,6 +366,35 @@
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="right" id="Maven Projects" order="7" weight="0.32995737" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2553305" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32936078" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32936078" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32936078" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="0" side_tool="true" weight="0.32995737" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Maven Projects" order="8" weight="0.32995737" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -424,13 +461,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/main/FileChooserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="219" lean-forward="true" selection-start-line="219" selection-end-line="219" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/models/Files.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -442,20 +472,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
           <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/models/ClassAttribute.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="35" column="38" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1199#1200#0" expanded="true" />
-            <element signature="e#1236#1237#0" expanded="true" />
-            <element signature="e#1259#1260#0" expanded="true" />
-            <element signature="e#1294#1295#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -471,15 +487,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ClassAttributeExtraction.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/MethodAttributeExtraction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+        <state relative-caret-position="119">
+          <caret line="7" column="4" lean-forward="true" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#645#646#0" expanded="true" />
-            <element signature="e#706#707#0" expanded="true" />
+            <element signature="e#312#313#0" expanded="true" />
+            <element signature="e#332#333#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/models/ClassProperty.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="35" column="38" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1199#1200#0" expanded="true" />
+            <element signature="e#1236#1237#0" expanded="true" />
+            <element signature="e#1259#1260#0" expanded="true" />
+            <element signature="e#1294#1295#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/models/MethodProperty.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="7" lean-forward="true" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ClassAndMethodPropertyExtraction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="535">
+          <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/main/FileChooserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2278">
+          <caret line="225" column="48" selection-start-line="225" selection-start-column="48" selection-end-line="225" selection-end-column="48" />
         </state>
       </provider>
     </entry>
