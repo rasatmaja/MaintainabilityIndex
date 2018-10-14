@@ -44,11 +44,10 @@ public class ClassAndMethodPropertyExtraction extends VoidVisitorAdapter<Void> {
                     MethodDeclaration methodDeclaration = (MethodDeclaration) node;
                     //System.out.println("Method Name : " + methodDeclaration.getDeclarationAsString(false, true, false));
                     //System.out.println("body Method : \n" + methodDeclaration.getBody().get().toString());
-
                     String methodName = methodDeclaration.getDeclarationAsString(false, true, false);
-                    int methodLineOfCode = (methodDeclaration.getEnd().get().line - methodDeclaration.getBegin().get().line - 2);
+                    int methodLineOfCode = (methodDeclaration.getType().toString().equalsIgnoreCase("void")) ? (methodDeclaration.getEnd().get().line - methodDeclaration.getBegin().get().line - 2) : (methodDeclaration.getEnd().get().line - methodDeclaration.getBegin().get().line - 1);
                     int methodLineOfComment = methodDeclaration.getAllContainedComments().stream().mapToInt(comment -> ((comment.getEnd().get().line - comment.getBegin().get().line) + 1)).sum();
-                    String methodSourceCode = methodDeclaration.getBody().get().toString();
+                    String methodSourceCode = methodDeclaration.toString();
 
                     methodProperty.set(className, methodName, methodLineOfCode, methodLineOfComment, methodSourceCode);
                 }

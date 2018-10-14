@@ -21,12 +21,13 @@ public class ASTExtractions extends Task<Void> {
     @Override
     protected Void call() throws Exception {
         updateMessage("Start extracting... ");
-        extract();
+        classAndMethodExtraction();
+        operandAndOperatorExtraction();
         updateMessage("Extraction is complete ");
         return null;
     }
 
-    private void extract () throws FileNotFoundException {
+    private void classAndMethodExtraction () throws FileNotFoundException {
 
         filePath.get().entrySet().forEach((entry) -> {
             int key = entry.getKey();
@@ -47,6 +48,10 @@ public class ASTExtractions extends Task<Void> {
             }
 
         });
+    }
+
+    private void operandAndOperatorExtraction(){
+
     }
 
 

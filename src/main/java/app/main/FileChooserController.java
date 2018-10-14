@@ -189,6 +189,10 @@ public class FileChooserController implements Initializable {
                 long time = (System.currentTimeMillis() - start);
                 statusbar_executionTime.setText("Time to extractions: " + time + "ms");
                 debug();
+
+                MaintainabilityIndexResultUI ui = new MaintainabilityIndexResultUI();
+                ui.open();
+
             });
 
             ExecutorService executorService = Executors.newFixedThreadPool(1);
