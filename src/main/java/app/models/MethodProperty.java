@@ -19,6 +19,7 @@ public class MethodProperty {
      * [2] LOC
      * [3] comment
      * [4] source code
+     * [5] body method block statement
      */
 
     public static synchronized MethodProperty getInstance() {
@@ -28,13 +29,14 @@ public class MethodProperty {
         return instance;
     }
 
-    public void set(String className, String methodName, int lineOfCode, int lineOfComment, String sourceCode){
+    public void set(String className, String methodName, int lineOfCode, int lineOfComment, String sourceCode, String bodyMethod){
         List<String> methodProperty = new ArrayList<>();
         methodProperty.add(className);
         methodProperty.add(methodName);
         methodProperty.add( String.valueOf(lineOfCode) );
         methodProperty.add( String.valueOf(lineOfComment) );
         methodProperty.add(sourceCode);
+        methodProperty.add(bodyMethod);
         lifOfMethodProperty.put(lifOfMethodProperty.size(), methodProperty);
     }
 
