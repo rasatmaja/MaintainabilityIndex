@@ -188,10 +188,11 @@ public class FileChooserController implements Initializable {
                 statusbar_fileFound.setText(list_file.size() + " Java file ");
                 long time = (System.currentTimeMillis() - start);
                 statusbar_executionTime.setText("Time to extractions: " + time + "ms");
-                debug();
+                //debug();
 
                 MaintainabilityIndexResultUI ui = new MaintainabilityIndexResultUI();
                 ui.open();
+
 
             });
 
