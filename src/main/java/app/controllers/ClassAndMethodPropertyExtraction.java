@@ -3,6 +3,7 @@ package app.controllers;
 import app.models.ClassProperty;
 import app.models.MethodProperty;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
@@ -48,8 +49,19 @@ public class ClassAndMethodPropertyExtraction extends VoidVisitorAdapter<Void> {
                     int methodLineOfCode = (methodDeclaration.getType().toString().equalsIgnoreCase("void")) ? (methodDeclaration.getEnd().get().line - methodDeclaration.getBegin().get().line - 2) : (methodDeclaration.getEnd().get().line - methodDeclaration.getBegin().get().line - 1);
                     int methodLineOfComment = methodDeclaration.getAllContainedComments().stream().mapToInt(comment -> ((comment.getEnd().get().line - comment.getBegin().get().line) + 1)).sum();
                     String methodSourceCode = methodDeclaration.toString();
+                    String bodyMethod = methodDeclaration.getBody().get().toString();
 
-                    methodProperty.set(className, methodName, methodLineOfCode, methodLineOfComment, methodSourceCode);
+                    methodProperty.set(className, methodName, methodLineOfCode, methodLineOfComment, methodSourceCode, bodyMethod);
+                } else if (node instanceof ConstructorDeclaration){
+                    ConstructorDeclaration constructorDeclaration = (ConstructorDeclaration) node;
+
+                    String methodName = constructorDeclaration.getDeclarationAsString(false, true, false);
+                    int methodLineOfCode = (constructorDeclaration.getEnd().get().line - constructorDeclaration.getBegin().get().line - 1);
+                    int methodLineOfComment = constructorDeclaration.getAllContainedComments().stream().mapToInt(comment -> ((comment.getEnd().get().line - comment.getBegin().get().line) + 1)).sum();
+                    String methodSourceCode = constructorDeclaration.toString();
+                    String bodyMethod = constructorDeclaration.getBody().toString();
+
+                    methodProperty.set(className, methodName, methodLineOfCode, methodLineOfComment, methodSourceCode, bodyMethod);
                 }
             });
         }
