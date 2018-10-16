@@ -48,6 +48,7 @@ public class ASTExtractions extends Task<Void> {
                 //e.printStackTrace();
                 System.out.print((char)27 + "[31m" + "[ERROR] : ");
                 System.out.println(FILE_PATH + " : The identifier doesn't represent a java file");
+                System.out.println((char)27 + "[30m");
                 System.out.println();
             }
 
