@@ -5,10 +5,15 @@
  */
 package app.main;
 
+import app.controllers.MaintainaibilityIndexCalculation;
+import app.models.OperandAndOperator;
 import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -55,12 +60,14 @@ public class MaintainabilityIndexResultController implements Initializable {
     @FXML
     private TableView<?> maintainabilityIndexResult_table;
 
+    long start;
+    MaintainaibilityIndexCalculation maintainaibilityIndexCalculation;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+       this.maintainaibilityIndexCalculation = new MaintainaibilityIndexCalculation();
     }    
 
     @FXML
@@ -68,7 +75,35 @@ public class MaintainabilityIndexResultController implements Initializable {
         MaintainabilityIndexResultUI.getPrimaryStage().close();
     }
 
-    public void calculateHalsteadMetrics(){}
-    public void calculateCyclomaticComplexity(){}
-    public void calculateMaintainabilityIndex(){}
+    public void Visualization(ActionEvent actionEvent) {
+        OperandAndOperator operandAndOperator = OperandAndOperator.getInstance();
+        operandAndOperator.debug();
+
+        try {
+            start = System.currentTimeMillis();
+            statusbar_scanning.textProperty().bind(this.maintainaibilityIndexCalculation.messageProperty());
+
+            this.maintainaibilityIndexCalculation.setOnRunning((succeesesEvent) -> {
+                statusbar_complete.setVisible(false);
+                statusbar_indicator.setVisible(true);
+                pane_progress.setVisible(true);
+                statusbar_executionTime.setText("Calculating...");
+            });
+
+            this.maintainaibilityIndexCalculation.setOnSucceeded(succeededEvent -> {
+                statusbar_indicator.setVisible(false);
+                statusbar_complete.setVisible(true);
+
+                long time = (System.currentTimeMillis() - start);
+                statusbar_executionTime.setText("Time to extractions: " + time + "ms");
+            });
+
+            ExecutorService executorService = Executors.newFixedThreadPool(1);
+            executorService.execute(maintainaibilityIndexCalculation);
+            executorService.shutdown();
+
+        }catch (Exception e) {
+
+        }
+    }
 }
