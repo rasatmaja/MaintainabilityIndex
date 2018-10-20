@@ -26,8 +26,6 @@ import java.util.Map;
 
 public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
 
-    String methodName;
-    String className;
     Map<String, Integer> listOfOperator = new HashMap<>();
     Map<String, Integer> listOfOperand = new HashMap<>();
     int countPredicaeNode;
@@ -36,6 +34,7 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
 
     public OperandAndOperatorExtraction(int key){
         predicateNode = PredicateNode.getInstance();
+        predicateNode.setMethodPropertyKey(key);
         operandAndOperator = OperandAndOperator.getInstance();
         operandAndOperator.setMethodPropertyKey(key);
     }
