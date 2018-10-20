@@ -31,19 +31,33 @@ public class OperandAndOperator {
         this.listMethodOperator.put(this.methodPropertyKey, lisOperator);
     }
 
-    public int getDistinctOperand(int key){
-        return 0;
-    }
+    public int getDistinctOperand(int key){ return listMethodOperand.get(key).size(); }
 
     public int getDistinctOperator(int key){
-        return 0;
+        return listMethodOperator.get(key).size();
     }
 
     public int getTotalOperand(int key){
-        return 0;
-    }
+        return listMethodOperand.get(key).entrySet().stream().mapToInt(Map.Entry::getValue).sum(); }
 
     public int getTotalOperator(int key){
-        return 0;
+        return listMethodOperator.get(key).entrySet().stream().mapToInt(Map.Entry::getValue).sum();
+    }
+
+    public void debug(){
+        System.out.println("================= DEBUG FOR CLASS MODEL OperandAndOperator =================");
+        MethodProperty methodProperty = MethodProperty.getInstance();
+        methodProperty.get().entrySet().forEach(property -> {
+            int curKey = property.getKey();
+            System.out.println("class name        : " + property.getValue().get(0));
+            System.out.println("Method name       : " + property.getValue().get(1));
+            System.out.println("source Code       : \n" + property.getValue().get(4));
+            System.out.println("disctict operator : " + getDistinctOperator(curKey));
+            System.out.println("disctict operand  : " + getDistinctOperand(curKey));
+            System.out.println("total operator    : " + getTotalOperator(curKey));
+            System.out.println("total operand     : " + getTotalOperand(curKey));
+        });
+        System.out.println("=============== END DEBUG FOR CLASS MODEL OperandAndOperator ===============");
+
     }
 }

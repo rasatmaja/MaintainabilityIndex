@@ -1,8 +1,12 @@
 package app.models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PredicateNode {
     private static PredicateNode instance;
-    private int predicateNode;
+    private int methodPropertyKey;
+    Map<Integer, Integer> listPredicateNode = new HashMap<>();
 
     public static PredicateNode getInstance() {
         if (instance == null) {
@@ -14,11 +18,16 @@ public class PredicateNode {
     private PredicateNode() {
     }
 
-    public void setPredicateNode(int numberOfPredicateNode){
-        this.predicateNode = numberOfPredicateNode;
+    public void setMethodPropertyKey(int key){
+        this.methodPropertyKey = key;
+
     }
 
-    public int getPredicateNode(){
-        return this.predicateNode;
+    public void setPredicateNode(int numberOfPredicateNode){
+        this.listPredicateNode.put(this.methodPropertyKey, numberOfPredicateNode);
+    }
+
+    public int getPredicateNode(int key){
+        return listPredicateNode.get(key);
     }
 }
