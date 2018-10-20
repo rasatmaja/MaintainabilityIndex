@@ -73,7 +73,7 @@
                <children>
                   <HBox alignment="TOP_CENTER" layoutX="46.0" layoutY="22.0" prefHeight="120.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="22.0" />
                   <JFXButton fx:id="btnClose" layoutX="575.0" layoutY="523.0" onAction="#close" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Close" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="186.0" />
-                  <JFXButton fx:id="btnVisualization" layoutX="714.0" layoutY="523.0" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Visualization" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="47.0" />
+                  <JFXButton fx:id="btnVisualization" layoutX="714.0" layoutY="523.0" onAction="#Visualization" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Visualization" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="47.0" />
                   <TableView fx:id="maintainabilityIndexResult_table" layoutX="45.0" layoutY="48.0" prefHeight="463.0" prefWidth="799.0" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="48.0">
                     <columns>
                       <TableColumn fx:id="file_name_column" maxWidth="546.0" minWidth="488.0" prefWidth="488.0" resizable="false" text="File Name" />
