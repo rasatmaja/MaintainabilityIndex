@@ -2,6 +2,7 @@ package app.controllers;
 
 import app.models.FilePath;
 import app.models.MethodProperty;
+import app.models.OperandAndOperator;
 import com.github.javaparser.*;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.stmt.BlockStmt;
@@ -57,15 +58,16 @@ public class ASTExtractions extends Task<Void> {
 
     private void operandAndOperatorExtraction(){
         methodProperty.get().entrySet().forEach(dataMethodProperty ->{
-            int key = dataMethodProperty.getKey();
+            int dataMethodkey = dataMethodProperty.getKey();
             System.out.println("Class name  : " + dataMethodProperty.getValue().get(0));
             System.out.println("Method name : " + dataMethodProperty.getValue().get(1));
             System.out.println("Body Method : \n" + dataMethodProperty.getValue().get(5));
             updateMessage("Extracting Operator and Operand from: " + dataMethodProperty.getValue().get(1));
 
             BlockStmt bodyMethod = JavaParser.parseBlock(dataMethodProperty.getValue().get(5));
-            OperandAndOperatorExtraction operandAndOperatorExtraction = new OperandAndOperatorExtraction();
+            OperandAndOperatorExtraction operandAndOperatorExtraction = new OperandAndOperatorExtraction(dataMethodkey);
             operandAndOperatorExtraction.visit(bodyMethod, null);
+            operandAndOperatorExtraction.save();
 
             System.out.println("------------------------------------------------------------------------------");
         });
