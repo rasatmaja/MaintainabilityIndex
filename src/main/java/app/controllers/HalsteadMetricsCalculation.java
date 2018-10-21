@@ -32,17 +32,28 @@ public class HalsteadMetricsCalculation {
         this.methodKey = key;
 
         operandAndOperator = OperandAndOperator.getInstance();
-        int totalOperator = operandAndOperator.getTotalOperator(this.methodKey);
-        int totalOperand = operandAndOperator.getTotalOperand(this.methodKey);
-        int distinctOperator = operandAndOperator.getDistinctOperator(this.methodKey);
-        int distinctOperand = operandAndOperator.getDistinctOperand(this.methodKey);
+        double totalOperator = operandAndOperator.getTotalOperator(this.methodKey);
+        double totalOperand = operandAndOperator.getTotalOperand(this.methodKey);
+        double distinctOperator = operandAndOperator.getDistinctOperator(this.methodKey);
+        double distinctOperand = operandAndOperator.getDistinctOperand(this.methodKey);
 
         this.lengthOfProgram = totalOperand + totalOperator;
+        System.out.println(methodKey + ": " + lengthOfProgram);
+
         this.vocabularyOfProgram = distinctOperand + distinctOperator;
-        this.volumeOfProgram = this.lengthOfProgram  * (Math.log(this.vocabularyOfProgram)/Math.log(2));
-        this.difficulty = (distinctOperator/2) * (totalOperand/distinctOperand);
+        System.out.println(methodKey + ": " + vocabularyOfProgram);
+
+        this.volumeOfProgram = (this.lengthOfProgram != 0)? this.lengthOfProgram  * (Math.log(this.vocabularyOfProgram)/Math.log(2)) : 0;
+        System.out.println(methodKey + ": " + volumeOfProgram);
+
+        this.difficulty = (distinctOperand != 0 && distinctOperator != 0)? (distinctOperator/2.0) * (totalOperand/distinctOperand) : 0;
+        System.out.println(methodKey + ": " + difficulty);
+
         this.effort = this.difficulty * this.volumeOfProgram;
+        System.out.println(methodKey + ": " + effort);
+
         this.bugExpected = this.volumeOfProgram / 3000;
+        System.out.println(methodKey + ": " + bugExpected);
 
         save();
 

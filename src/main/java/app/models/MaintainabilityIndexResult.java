@@ -24,4 +24,8 @@ public class MaintainabilityIndexResult {
     public void set(double maintainabilitiIndex){
         listOfMaintainanibilityIndez.put(this.methodPropertyKey, maintainabilitiIndex);
     }
+
+    public Map<Integer, Double> get(){
+        return listOfMaintainanibilityIndez;
+    }
 }

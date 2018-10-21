@@ -2,6 +2,8 @@ package app.controllers;
 
 import app.models.OperandAndOperator;
 import app.models.PredicateNode;
+import com.github.javaparser.ast.body.ConstructorDeclaration;
+import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.AssignExpr;
 import com.github.javaparser.ast.expr.BinaryExpr;
 import com.github.javaparser.ast.expr.BooleanLiteralExpr;
@@ -42,202 +44,212 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
     @Override
     public void visit(BlockStmt blockStmt, Void arg) {
         super.visit(blockStmt, arg);
-        blockStmt.walk(node -> {
-            if (node instanceof VariableDeclarationExpr) {
-                VariableDeclarationExpr vde = (VariableDeclarationExpr) node;
 
-                //untuk mengantisipasi ketika ada multiple deklarasi inisialisasi seperti int a=8,b=9;
-                vde.getVariables().forEach(variable -> {
-                    //System.out.println("VariableDeclarationExpr: " + variable.toString() + "->" + variable.getName());
-                    //System.out.println("VariableDeclarationExpr: " + "["+node.getBegin().get()+"] " + variable.getName().toString());
-                    insertIntoHasMaps("OPERAND", variable.getName().toString());
-                    if (variable.toString().contains("=")) {
-                        //System.out.println("Get AssignExpr : = ");
-                        insertIntoHasMaps("OPERATOR", "=");
-                        //menunjukan bahwa ini merupakan deklarasi inisiaalisasi seperti int a = 1;
-                        //merupakan operator
-                    }
-                });
-            } else if (node instanceof NameExpr) {
-                NameExpr ne = (NameExpr) node;
-                System.out.println("Name Expression : " + "["+node.getBegin().get()+"] " + ne.toString());
-                insertIntoHasMaps("OPERAND", ne.toString());
-                //untuk mencari operand dari stament a = 123
-                //perlu dibuatkan fungsi untu mengecek apakh name expression meruakan class name. seperti Operator.getInstance;
+        if(!blockStmt.isEmpty()){
+            blockStmt.walk(node -> {
+                if (node instanceof VariableDeclarationExpr) {
+                    VariableDeclarationExpr vde = (VariableDeclarationExpr) node;
 
-            } else if (node instanceof PrimitiveType) {
-                PrimitiveType pt = (PrimitiveType) node;
-                //System.out.println("PrimitiveType : " + "["+node.getBegin().get()+"] " + pt.asString());
-                insertIntoHasMaps("OPERAND", pt.asString());
+                    //untuk mengantisipasi ketika ada multiple deklarasi inisialisasi seperti int a=8,b=9;
+                    vde.getVariables().forEach(variable -> {
+                        //System.out.println("VariableDeclarationExpr: " + variable.toString() + "->" + variable.getName());
+                        //System.out.println("VariableDeclarationExpr: " + "["+node.getBegin().get()+"] " + variable.getName().toString());
+                        insertIntoHasMaps("OPERAND", variable.getName().toString());
+                        if (variable.toString().contains("=")) {
+                            //System.out.println("Get AssignExpr : = ");
+                            insertIntoHasMaps("OPERATOR", "=");
+                            //menunjukan bahwa ini merupakan deklarasi inisiaalisasi seperti int a = 1;
+                            //merupakan operator
+                        }
+                    });
+                } else if (node instanceof NameExpr) {
+                    NameExpr ne = (NameExpr) node;
+                    System.out.println("Name Expression : " + "["+node.getBegin().get()+"] " + ne.toString());
+                    insertIntoHasMaps("OPERAND", ne.toString());
+                    //untuk mencari operand dari stament a = 123
+                    //perlu dibuatkan fungsi untu mengecek apakh name expression meruakan class name. seperti Operator.getInstance;
 
-            } else if (node instanceof StringLiteralExpr) {
-                StringLiteralExpr sle = (StringLiteralExpr) node;
-                //dalam node ini akan menemukan tipe variable STRING dan nilainya;
-                System.out.println("get type String : String");
-                insertIntoHasMaps("OPERAND", "String");
-                //System.out.println("StringLiteralExpr : " + sle.asString());
-                insertIntoHasMaps("OPERAND", sle.asString());
+                } else if (node instanceof PrimitiveType) {
+                    PrimitiveType pt = (PrimitiveType) node;
+                    //System.out.println("PrimitiveType : " + "["+node.getBegin().get()+"] " + pt.asString());
+                    insertIntoHasMaps("OPERAND", pt.asString());
 
-            } else if (node instanceof AssignExpr) {
-                AssignExpr ae = (AssignExpr) node;
-                System.out.println("AssignExpr   : " + "["+node.getBegin().get()+"] " + ae.getOperator().asString());
-                //System.out.println("AssignExpr   : " + ae.asAssignExpr() + " -> " + ae.getOperator().asString());
-                //merupakan operator
-                insertIntoHasMaps("OPERATOR", ae.getOperator().asString());
+                } else if (node instanceof StringLiteralExpr) {
+                    StringLiteralExpr sle = (StringLiteralExpr) node;
+                    //dalam node ini akan menemukan tipe variable STRING dan nilainya;
+                    System.out.println("get type String : String");
+                    insertIntoHasMaps("OPERAND", "String");
+                    //System.out.println("StringLiteralExpr : " + sle.asString());
+                    insertIntoHasMaps("OPERAND", sle.asString());
 
-            } else if (node instanceof IntegerLiteralExpr){
-                //Mencari nilai INTERGER -> 1234
-                IntegerLiteralExpr ile = (IntegerLiteralExpr) node;
-                //System.out.println("IntegerLiteralExpr : " + "["+node.getBegin().get()+"] " + ile.toString());
+                } else if (node instanceof AssignExpr) {
+                    AssignExpr ae = (AssignExpr) node;
+                    System.out.println("AssignExpr   : " + "["+node.getBegin().get()+"] " + ae.getOperator().asString());
+                    //System.out.println("AssignExpr   : " + ae.asAssignExpr() + " -> " + ae.getOperator().asString());
+                    //merupakan operator
+                    insertIntoHasMaps("OPERATOR", ae.getOperator().asString());
 
-                insertIntoHasMaps("OPERAND", ile.toString());
+                } else if (node instanceof IntegerLiteralExpr){
+                    //Mencari nilai INTERGER -> 1234
+                    IntegerLiteralExpr ile = (IntegerLiteralExpr) node;
+                    //System.out.println("IntegerLiteralExpr : " + "["+node.getBegin().get()+"] " + ile.toString());
 
-            } else if (node instanceof LongLiteralExpr){
-                LongLiteralExpr lle = (LongLiteralExpr) node;
-                //System.out.println("LongLiteralExpr : " + "["+node.getBegin().get()+"] " + lle.asLongLiteralExpr());
+                    insertIntoHasMaps("OPERAND", ile.toString());
 
-                insertIntoHasMaps("OPERAND", lle.toString());
+                } else if (node instanceof LongLiteralExpr){
+                    LongLiteralExpr lle = (LongLiteralExpr) node;
+                    //System.out.println("LongLiteralExpr : " + "["+node.getBegin().get()+"] " + lle.asLongLiteralExpr());
 
-            } else if (node instanceof DoubleLiteralExpr){
-                DoubleLiteralExpr dle = (DoubleLiteralExpr) node;
-                //System.out.println("DoubleLiteralExpr : " + "["+node.getBegin().get()+"] " + dle.asDoubleLiteralExpr());
+                    insertIntoHasMaps("OPERAND", lle.toString());
 
-                insertIntoHasMaps("OPERAND", dle.toString());
+                } else if (node instanceof DoubleLiteralExpr){
+                    DoubleLiteralExpr dle = (DoubleLiteralExpr) node;
+                    //System.out.println("DoubleLiteralExpr : " + "["+node.getBegin().get()+"] " + dle.asDoubleLiteralExpr());
 
-            } else if (node instanceof CharLiteralExpr){
-                //untuk mencari nilai dari variable char -> 'a'
+                    insertIntoHasMaps("OPERAND", dle.toString());
 
-                CharLiteralExpr cle = (CharLiteralExpr) node;
-                //System.out.println("CharLiteralExpr : " + "["+node.getBegin().get()+"] " + cle.asCharLiteralExpr());
+                } else if (node instanceof CharLiteralExpr){
+                    //untuk mencari nilai dari variable char -> 'a'
 
-                insertIntoHasMaps("OPERAND", cle.toString());
+                    CharLiteralExpr cle = (CharLiteralExpr) node;
+                    //System.out.println("CharLiteralExpr : " + "["+node.getBegin().get()+"] " + cle.asCharLiteralExpr());
 
-            } else if (node instanceof BooleanLiteralExpr){
-                //untuk mencari nilai dari variable boolean -> 'true'/'false'
+                    insertIntoHasMaps("OPERAND", cle.toString());
 
-                BooleanLiteralExpr ble = (BooleanLiteralExpr) node;
-                //System.out.println("BooleanLiteralExpr : " + "["+node.getBegin().get()+"] " + ble.asBooleanLiteralExpr());
+                } else if (node instanceof BooleanLiteralExpr){
+                    //untuk mencari nilai dari variable boolean -> 'true'/'false'
 
-                insertIntoHasMaps("OPERAND", ble.toString());
+                    BooleanLiteralExpr ble = (BooleanLiteralExpr) node;
+                    //System.out.println("BooleanLiteralExpr : " + "["+node.getBegin().get()+"] " + ble.asBooleanLiteralExpr());
 
-            } else if (node instanceof CastExpr){
-                //perlu pengkondisian apakah didlama casting merupakan tipe prymitif
-            } else if (node instanceof BinaryExpr){
-                //untuk mencari operator +, - * /
+                    insertIntoHasMaps("OPERAND", ble.toString());
 
-                BinaryExpr be = (BinaryExpr) node;
-                //System.out.println("BinaryExpr : " + "["+node.getBegin().get()+"] " + be.getOperator().asString());
+                } else if (node instanceof CastExpr){
+                    //perlu pengkondisian apakah didlama casting merupakan tipe prymitif
+                } else if (node instanceof BinaryExpr){
+                    //untuk mencari operator +, - * /
 
-                insertIntoHasMaps("OPERATOR", be.getOperator().asString());
+                    BinaryExpr be = (BinaryExpr) node;
+                    //System.out.println("BinaryExpr : " + "["+node.getBegin().get()+"] " + be.getOperator().asString());
 
-            } else if (node instanceof UnaryExpr){
-                //untuk mencari operator seperti ++, --
-                UnaryExpr ue = (UnaryExpr) node;
-                //System.out.println("UnaryExpr : " + "["+node.getBegin().get()+"] " + ue.getOperator().asString());
+                    insertIntoHasMaps("OPERATOR", be.getOperator().asString());
 
-                insertIntoHasMaps("OPERATOR", ue.getOperator().asString());
+                } else if (node instanceof UnaryExpr){
+                    //untuk mencari operator seperti ++, --
+                    UnaryExpr ue = (UnaryExpr) node;
+                    //System.out.println("UnaryExpr : " + "["+node.getBegin().get()+"] " + ue.getOperator().asString());
 
-            } else if(node instanceof ConditionalExpr){
-                ConditionalExpr ce = (ConditionalExpr) node;
-                System.out.println("ConditionalExpr : " + "["+node.getBegin().get()+"] " + ce.asConditionalExpr());
+                    insertIntoHasMaps("OPERATOR", ue.getOperator().asString());
 
-            } else if(node instanceof IfStmt){
+                } else if(node instanceof ConditionalExpr){
+                    ConditionalExpr ce = (ConditionalExpr) node;
+                    System.out.println("ConditionalExpr : " + "["+node.getBegin().get()+"] " + ce.asConditionalExpr());
 
-                countPredicaeNode++;
+                } else if(node instanceof IfStmt){
 
-                IfStmt is = (IfStmt) node;
-                System.out.println("IfStmt : " + "["+node.getBegin().get()+"] " + is.asIfStmt());
-                insertIntoHasMaps("OPERATOR", "if");
+                    countPredicaeNode++;
 
-            } else if (node instanceof SwitchStmt){
+                    IfStmt is = (IfStmt) node;
+                    System.out.println("IfStmt : " + "["+node.getBegin().get()+"] " + is.asIfStmt());
+                    insertIntoHasMaps("OPERATOR", "if");
 
-                countPredicaeNode++;
+                } else if (node instanceof SwitchStmt){
 
-                SwitchStmt ss = (SwitchStmt) node;
-                System.out.println("SwitchStmt : " + "["+node.getBegin().get()+"] " + ss.asSwitchStmt());
+                    countPredicaeNode++;
 
-                insertIntoHasMaps("OPERATOR", "Switch");
+                    SwitchStmt ss = (SwitchStmt) node;
+                    System.out.println("SwitchStmt : " + "["+node.getBegin().get()+"] " + ss.asSwitchStmt());
 
-            } else if (node instanceof DoStmt){
+                    insertIntoHasMaps("OPERATOR", "Switch");
 
-                countPredicaeNode++;
+                } else if (node instanceof DoStmt){
 
-                DoStmt ds = (DoStmt) node;
-                System.out.println("DoStmt : " + "["+node.getBegin().get()+"] " + ds.asDoStmt());
+                    countPredicaeNode++;
 
-                insertIntoHasMaps("OPERATOR", "do");
+                    DoStmt ds = (DoStmt) node;
+                    System.out.println("DoStmt : " + "["+node.getBegin().get()+"] " + ds.asDoStmt());
 
-            } else if (node instanceof ForStmt){
+                    insertIntoHasMaps("OPERATOR", "do");
 
-                countPredicaeNode++;
+                } else if (node instanceof ForStmt){
 
-                ForStmt ft = (ForStmt) node;
-                System.out.println("ForStmt : " + "["+node.getBegin().get()+"] " + ft.asForStmt());
+                    countPredicaeNode++;
 
-                insertIntoHasMaps("OPERATOR", "for");
+                    ForStmt ft = (ForStmt) node;
+                    System.out.println("ForStmt : " + "["+node.getBegin().get()+"] " + ft.asForStmt());
 
-            } else if (node instanceof ForeachStmt){
+                    insertIntoHasMaps("OPERATOR", "for");
 
-                countPredicaeNode++;
+                } else if (node instanceof ForeachStmt){
 
-                ForeachStmt fet = (ForeachStmt) node;
-                System.out.println("ForStmt : " + "["+node.getBegin().get()+"] " + fet.asForeachStmt());
+                    countPredicaeNode++;
 
-                insertIntoHasMaps("OPERATOR", "for");
+                    ForeachStmt fet = (ForeachStmt) node;
+                    System.out.println("ForStmt : " + "["+node.getBegin().get()+"] " + fet.asForeachStmt());
 
-            } else if (node instanceof WhileStmt){
+                    insertIntoHasMaps("OPERATOR", "for");
 
-                countPredicaeNode++;
+                } else if (node instanceof WhileStmt){
 
-                WhileStmt ws = (WhileStmt) node;
-                System.out.println("WhileStmt : " + "["+node.getBegin().get()+"] " + ws.asWhileStmt());
+                    countPredicaeNode++;
 
-                insertIntoHasMaps("OPERATOR", "while");
+                    WhileStmt ws = (WhileStmt) node;
+                    System.out.println("WhileStmt : " + "["+node.getBegin().get()+"] " + ws.asWhileStmt());
 
-            } else if (node instanceof TryStmt){
-                TryStmt ts = (TryStmt) node;
-                System.out.println("TryStmt : " + "["+node.getBegin().get()+"] " + ts.asTryStmt());
+                    insertIntoHasMaps("OPERATOR", "while");
 
-                insertIntoHasMaps("OPERATOR", "try");
+                } else if (node instanceof TryStmt){
+                    TryStmt ts = (TryStmt) node;
+                    System.out.println("TryStmt : " + "["+node.getBegin().get()+"] " + ts.asTryStmt());
 
-            } else if (node instanceof CatchClause){
-                CatchClause cc = (CatchClause) node;
-                System.out.println("CatchClause : " + "["+node.getBegin().get()+"] " + cc.toString());
+                    insertIntoHasMaps("OPERATOR", "try");
 
-                insertIntoHasMaps("OPERATOR", "catch");
+                } else if (node instanceof CatchClause){
+                    CatchClause cc = (CatchClause) node;
+                    System.out.println("CatchClause : " + "["+node.getBegin().get()+"] " + cc.toString());
 
-            } else if (node instanceof ThisExpr){
-                ThisExpr te = (ThisExpr) node;
-                System.out.println("ThisExpr : " + "["+node.getBegin().get()+"] " + te.asThisExpr());
+                    insertIntoHasMaps("OPERATOR", "catch");
 
-                insertIntoHasMaps("OPERATOR", "this");
+                } else if (node instanceof ThisExpr){
+                    ThisExpr te = (ThisExpr) node;
+                    System.out.println("ThisExpr : " + "["+node.getBegin().get()+"] " + te.asThisExpr());
 
-            } else if (node instanceof SuperExpr){
-                SuperExpr se = (SuperExpr) node;
-                System.out.println("SuperExpr : " + "["+node.getBegin().get()+"] " + se.asSuperExpr());
+                    insertIntoHasMaps("OPERATOR", "this");
 
-                insertIntoHasMaps("OPERATOR", "super");
+                } else if (node instanceof SuperExpr){
+                    SuperExpr se = (SuperExpr) node;
+                    System.out.println("SuperExpr : " + "["+node.getBegin().get()+"] " + se.asSuperExpr());
 
-            } else if (node instanceof ReturnStmt){
-                ReturnStmt rs = (ReturnStmt) node;
-                //System.out.println("ReturnStmt : " + rs.asReturnStmt());
-                System.out.println("ReturnStmt : return");
+                    insertIntoHasMaps("OPERATOR", "super");
 
-                insertIntoHasMaps("OPERATOR", "return");
+                } else if (node instanceof ReturnStmt){
+                    ReturnStmt rs = (ReturnStmt) node;
+                    //System.out.println("ReturnStmt : " + rs.asReturnStmt());
+                    System.out.println("ReturnStmt : return");
 
-            } else if (node instanceof ContinueStmt){
-                ContinueStmt cs = (ContinueStmt) node;
-                System.out.println("ContinueStmt : " + cs.asContinueStmt());
+                    insertIntoHasMaps("OPERATOR", "return");
 
-                insertIntoHasMaps("OPERATOR", "continue");
+                } else if (node instanceof ContinueStmt){
+                    ContinueStmt cs = (ContinueStmt) node;
+                    System.out.println("ContinueStmt : " + cs.asContinueStmt());
 
-            } else if (node instanceof BreakStmt){
-                BreakStmt bs = (BreakStmt) node;
-                System.out.println("BreakStmt : " + bs.asBreakStmt());
+                    insertIntoHasMaps("OPERATOR", "continue");
 
-                insertIntoHasMaps("OPERATOR", "break");
-            }
-        });
+                } else if (node instanceof BreakStmt){
+                    BreakStmt bs = (BreakStmt) node;
+                    System.out.println("BreakStmt : " + bs.asBreakStmt());
+
+                    insertIntoHasMaps("OPERATOR", "break");
+                }
+            });
+        } else {
+            System.out.println("There is no body method");
+            System.out.println("nilai hasmap opeator " + listOfOperator.size());
+            System.out.println("nilai hasmap operand " + listOfOperand.size());
+            countPredicaeNode = 0;
+            System.out.println("nilai predicate node " + countPredicaeNode);
+        }
+
     }
 
     public void insertIntoHasMaps(String category, String node){
@@ -271,4 +283,8 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         predicateNode.setPredicateNode(countPredicaeNode);
         System.out.println("Operator and Operand's Data has been saved");
     }
+
+
+
+
 }

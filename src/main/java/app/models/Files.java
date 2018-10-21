@@ -23,13 +23,9 @@ public class Files {
         this.date_modified = new SimpleStringProperty(date_modified);
     }
 
-    public String getFile_name() {
-        return file_name.get();
-    }
+    public String getFile_name() { return file_name.get(); }
 
-    public String getSize() {
-        return size.get();
-    }
+    public String getSize() { return size.get(); }
 
     public String getDate_modified() {
         return date_modified.get();

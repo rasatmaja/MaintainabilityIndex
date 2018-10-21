@@ -33,11 +33,24 @@ public class MaintainaibilityIndexCalculation extends Task<Void> {
         methodProperty.get().entrySet().forEach(method ->{
             int methodKey = method.getKey();
 
+            updateMessage("calculating method: " + method.getValue().get(1));
+
             double halsteadValume = halsteadMetricsCalculation.calculate(methodKey);
+            System.out.println("HV: " + halsteadValume);
+
             int cyclomaticComplexity = cyclomaticComplexityCalculations.calclulate(methodKey);
+            System.out.println("CC: " + cyclomaticComplexity);
+
             int loc = Integer.valueOf(method.getValue().get(2));
-            double perCM = Integer.valueOf(method.getValue().get(3)) / Integer.valueOf(method.getValue().get(2));
-            double maintainabilityIndex = 171 - 5.2 * (Math.log(halsteadValume)) - (0.23 * cyclomaticComplexity) - (16.2 * Math.log(loc)) + (50 * Math.sin(Math.sqrt(2.46 * perCM)));
+            System.out.println("LOC: " + loc);
+
+            double perCM = (loc != 0) ? Integer.valueOf(method.getValue().get(3)) / Integer.valueOf(method.getValue().get(2)) : 0;
+            System.out.println("perCM: " + perCM);
+
+            double maintainabilityIndex = (loc != 0) ?
+                                          171 - 5.2 * (Math.log(halsteadValume)) - (0.23 * cyclomaticComplexity) - (16.2 * Math.log(loc)) + (50 * Math.sin(Math.sqrt(2.46 * perCM)))
+                                          : 0;
+            System.out.println("MI: " + maintainabilityIndex);
 
             maintainabilityIndexResult.setMethodPropertyKey(methodKey);
             maintainabilityIndexResult.set(maintainabilityIndex);
