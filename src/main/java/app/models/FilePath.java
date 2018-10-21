@@ -17,7 +17,8 @@ import java.util.Map;
 public class FilePath {
     private static FilePath instance;
     private FilePath(){};
-    
+
+    String rootDirectory;
     Map<Integer, List<String>> listOfFilePath = new HashMap<>();
     
     
@@ -46,10 +47,16 @@ public class FilePath {
         filePath.add(path);
         listOfFilePath.put(listOfFilePath.size(), filePath);
     }
+
+    public void set(String rootDirectory){
+        this.rootDirectory = rootDirectory;
+    }
     
     public Map<Integer, List<String>> get(){
         return listOfFilePath;
     }
+
+    public String getRootDorectory (){return this.rootDirectory;}
     
     public void clear(){
         listOfFilePath.clear();

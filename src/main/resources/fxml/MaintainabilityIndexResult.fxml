@@ -74,7 +74,7 @@
                   <HBox alignment="TOP_CENTER" layoutX="46.0" layoutY="22.0" prefHeight="120.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="22.0" />
                   <JFXButton fx:id="btnClose" layoutX="575.0" layoutY="523.0" onAction="#close" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Close" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="186.0" />
                   <JFXButton fx:id="btnVisualization" layoutX="714.0" layoutY="523.0" onAction="#Visualization" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Visualization" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="47.0" />
-                  <TreeTableView fx:id="MI_TreeTableView" layoutX="46.0" layoutY="48.0" prefHeight="457.0" prefWidth="799.0" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="48.0">
+                  <TreeTableView fx:id="MI_TreeTableView" layoutX="46.0" layoutY="48.0" onMouseClicked="#treeTableClick" prefHeight="457.0" prefWidth="799.0" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="48.0">
                     <columns>
                       <TreeTableColumn fx:id="name_column" maxWidth="1.7976931348623157E308" prefWidth="454.0" text="Name" />
                       <TreeTableColumn fx:id="maintainabiliiti_index_column" prefWidth="176.0" text="Maintainability Index" />

@@ -27,8 +27,6 @@ public class MaintainabilityIndexResultUI{
             root = FXMLLoader.load(getClass().getResource("/fxml/MaintainabilityIndexResult.fxml"));
             Scene scene = new Scene(root);
             scene.getStylesheets().add("/styles/Styles.css");
-
-
             stage.setTitle("Maintainability Index Calculation System");
             stage.setScene(scene);
             stage.showAndWait();

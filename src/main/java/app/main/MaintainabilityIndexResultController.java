@@ -6,6 +6,7 @@
 package app.main;
 
 import app.controllers.MaintainaibilityIndexCalculation;
+import app.models.FilePath;
 import app.models.MaintainabilityIndexProperty;
 import app.models.MaintainabilityIndexResult;
 import app.models.MethodProperty;
@@ -25,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
@@ -60,6 +62,10 @@ public class MaintainabilityIndexResultController implements Initializable {
 
     long start;
     MaintainaibilityIndexCalculation maintainaibilityIndexCalculation;
+    MaintainabilityIndexResult maintainabilityIndexResult;
+    MethodProperty methodProperty;
+    FilePath filePath;
+
     @FXML
     private TreeTableColumn<MaintainabilityIndexProperty, String> id_column;
     @FXML
@@ -74,7 +80,13 @@ public class MaintainabilityIndexResultController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       this.maintainaibilityIndexCalculation = new MaintainaibilityIndexCalculation();
+
+        this.maintainabilityIndexResult = MaintainabilityIndexResult.getInstance();
+        this.methodProperty = MethodProperty.getInstance();
+        this.maintainaibilityIndexCalculation = new MaintainaibilityIndexCalculation();
+        this.filePath = FilePath.getInstance();
+
+        statusbar_directoryPath.setText(filePath.getRootDorectory());
 
         try {
             start = System.currentTimeMillis();
@@ -85,6 +97,7 @@ public class MaintainabilityIndexResultController implements Initializable {
                 statusbar_indicator.setVisible(true);
                 pane_progress.setVisible(true);
                 statusbar_executionTime.setText("Calculating...");
+                statusbar_fileFound.setText("Calculating...");
             });
 
             this.maintainaibilityIndexCalculation.setOnSucceeded(succeededEvent -> {
@@ -95,6 +108,8 @@ public class MaintainabilityIndexResultController implements Initializable {
 
                 long time = (System.currentTimeMillis() - start);
                 statusbar_executionTime.setText("Time to calculations: " + time + "ms");
+
+                statusbar_fileFound.setText(methodProperty.get().size()+" method has been calculated");
             });
 
             ExecutorService executorService = Executors.newFixedThreadPool(1);
@@ -121,8 +136,7 @@ public class MaintainabilityIndexResultController implements Initializable {
 
     public void populateTreeTable(){
 
-        MaintainabilityIndexResult maintainabilityIndexResult = MaintainabilityIndexResult.getInstance();
-        MethodProperty methodProperty = MethodProperty.getInstance();
+
 
         String tempClassName ="";
         TreeItem<MaintainabilityIndexProperty> className = null;
@@ -153,6 +167,7 @@ public class MaintainabilityIndexResultController implements Initializable {
                 tempClassName = classNameProperty;
                 className = new TreeItem<>(new MaintainabilityIndexProperty("", property.getValue().get(0), 0.0), new ImageView(icon));
                 TreeItem<MaintainabilityIndexProperty> method = new TreeItem<>(new MaintainabilityIndexProperty(property.getKey().toString(), methodNameProperty, miValue), new ImageView(icon));
+
                 className.getChildren().add(method);
                 className.setExpanded(true);
                 root.getChildren().add(className);
@@ -178,6 +193,14 @@ public class MaintainabilityIndexResultController implements Initializable {
         MI_TreeTableView.setRoot(root);
         MI_TreeTableView.setShowRoot(false);
 
+    }
 
+    @FXML
+    public void treeTableClick (MouseEvent event){
+        if(event.getClickCount() == 2){
+            System.out.println(MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getName());
+            System.out.println(MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getStatus());
+            System.out.println(MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getId());
+        }
     }
 }
