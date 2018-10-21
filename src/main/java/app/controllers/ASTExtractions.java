@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import static com.github.javaparser.JavaParser.parse;
+
 public class ASTExtractions extends Task<Void> {
     private  String FILE_PATH;
     CompilationUnit cu;
@@ -41,7 +43,7 @@ public class ASTExtractions extends Task<Void> {
 
             FILE_PATH = values.get(1);
             try {
-                cu = JavaParser.parse(new File(FILE_PATH));
+                cu = parse(new File(FILE_PATH));
                 ClassAndMethodPropertyExtraction cae = new ClassAndMethodPropertyExtraction();
                 cae.visit(cu, null);
 
@@ -59,17 +61,24 @@ public class ASTExtractions extends Task<Void> {
     private void operandAndOperatorExtraction(){
         methodProperty.get().entrySet().forEach(dataMethodProperty ->{
             int dataMethodkey = dataMethodProperty.getKey();
+            System.out.println("Key         : " + dataMethodkey);
             System.out.println("Class name  : " + dataMethodProperty.getValue().get(0));
             System.out.println("Method name : " + dataMethodProperty.getValue().get(1));
             System.out.println("Body Method : \n" + dataMethodProperty.getValue().get(5));
             updateMessage("Extracting Operator and Operand from: " + dataMethodProperty.getValue().get(1));
 
-            BlockStmt bodyMethod = JavaParser.parseBlock(dataMethodProperty.getValue().get(5));
-            OperandAndOperatorExtraction operandAndOperatorExtraction = new OperandAndOperatorExtraction(dataMethodkey);
-            operandAndOperatorExtraction.visit(bodyMethod, null);
-            operandAndOperatorExtraction.save();
+            try {
+                String sourceCode = dataMethodProperty.getValue().get(5).replace("super();", "");
+                BlockStmt bodyMethod = JavaParser.parseBlock(sourceCode);
 
-            System.out.println("------------------------------------------------------------------------------");
+                OperandAndOperatorExtraction operandAndOperatorExtraction = new OperandAndOperatorExtraction(dataMethodkey);
+                operandAndOperatorExtraction.visit(bodyMethod, null);
+                operandAndOperatorExtraction.save();
+
+                System.out.println("------------------------------------------------------------------------------");
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         });
 
     }
