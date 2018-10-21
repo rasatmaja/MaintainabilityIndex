@@ -109,6 +109,7 @@ public class FileChooserController implements Initializable {
             new FadeInRightBig(pane_listFile).play();
 
             statusbar_directoryPath.setText(selectedDirectory.getName());
+            filePath.set(selectedDirectory.getName());
 
         }
     }
