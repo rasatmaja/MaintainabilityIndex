@@ -38,11 +38,13 @@
    -fx-alignment: CENTER;
 }
 
-.tree-table-row-cell:selected {
+.tree-table-row-cell:selected,
+.tree-table-row-cell:selected:odd{
    -fx-background-color: #ddefff; 
    -fx-border-color: transparent;
    -fx-text-background-color: #007BCC;
    -fx-font-weight: bold;
+   -fx-background-insets: 1;
 }
 
 .tree-table-view *.increment-button,
@@ -63,6 +65,12 @@
     -fx-border-color: transparent;
 
 }
+
+.tree-table-row-cell:odd {
+    -fx-background-color: -fx-table-cell-border-color, #F9F9F9;
+    -fx-background-insets: 0, 1 0 1 0;
+}
+
 .table-view .column-header .label{
    -fx-text-fill: #FFFFFF;
    -fx-font-weight: bold;
@@ -74,6 +82,7 @@
    -fx-border-color: transparent;
    -fx-text-background-color: #007BCC;
    -fx-font-weight: bold;
+   -fx-background-insets: 0, 0 0 0 0;
 }
 
 .table-view *.increment-button,
@@ -83,4 +92,30 @@
 {
     -fx-padding: 0;
     -fx-shape: "";
+}
+
+.card {
+	-fx-background-color: rgb(255.0, 255.0, 255.0);
+	-fx-background-radius: 4.0;
+
+	-fx-padding: 16 16 16 16;
+	-fx-border-color: #E1E1E1;
+	-fx-border-radius: 4;
+}
+
+.card-title {
+    -fx-font-family: 'Open Sans';
+	-fx-font-size: 12.0px;
+	-fx-padding: 5 0 5 0;
+}
+
+.card-title .text {
+	-fx-fill: rgb(45, 45, 45);
+}
+
+.code{
+	-fx-background-color: rgb(255.0, 255.0, 255.0);
+	-fx-background-radius: 4.0;
+	-fx-border-radius: 4;
+	-fx-border-color: #E1E1E1;
 }

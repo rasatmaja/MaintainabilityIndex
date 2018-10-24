@@ -10,7 +10,7 @@ public class MaintainabilityIndexProperty {
     private final SimpleStringProperty maintainability_index;
     private final SimpleStringProperty status;
 
-    DecimalFormat numberFormat = new DecimalFormat("#.00");
+    DecimalFormat numberFormat = new DecimalFormat("0.##");
 
     public MaintainabilityIndexProperty(String idmethod, String name, double value){
         super();

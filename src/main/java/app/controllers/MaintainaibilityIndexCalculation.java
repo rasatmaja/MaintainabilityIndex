@@ -47,7 +47,7 @@ public class MaintainaibilityIndexCalculation extends Task<Void> {
             double perCM = (loc != 0) ? Integer.valueOf(method.getValue().get(3)) / Integer.valueOf(method.getValue().get(2)) : 0;
             System.out.println("perCM: " + perCM);
 
-            double maintainabilityIndex = (loc != 0) ?
+            double maintainabilityIndex = (loc != 0 && halsteadValume != 0) ?
                                           171 - 5.2 * (Math.log(halsteadValume)) - (0.23 * cyclomaticComplexity) - (16.2 * Math.log(loc)) + (50 * Math.sin(Math.sqrt(2.46 * perCM)))
                                           : 0;
             System.out.println("MI: " + maintainabilityIndex);

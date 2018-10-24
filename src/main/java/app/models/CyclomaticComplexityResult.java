@@ -24,4 +24,6 @@ public class CyclomaticComplexityResult {
     public void set(int cyclomaticComplexity){
         listOfCyclomaticComplexity.put(this.methodPropertyKey, cyclomaticComplexity);
     }
+
+    public Map<Integer, Integer> get(){return this.listOfCyclomaticComplexity;}
 }

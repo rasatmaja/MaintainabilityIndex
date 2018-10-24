@@ -8,10 +8,13 @@
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.main.MaintainabilityIndexResultController">
@@ -71,9 +74,8 @@
          <children>
             <AnchorPane fx:id="pane_listFile" prefHeight="578.0" prefWidth="553.0" style="-fx-background-color: #F6F8FA;">
                <children>
-                  <HBox alignment="TOP_CENTER" layoutX="46.0" layoutY="22.0" prefHeight="120.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="22.0" />
-                  <JFXButton fx:id="btnClose" layoutX="575.0" layoutY="523.0" onAction="#close" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Close" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="186.0" />
-                  <JFXButton fx:id="btnVisualization" layoutX="714.0" layoutY="523.0" onAction="#Visualization" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Visualization" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="47.0" />
+                  <JFXButton fx:id="btnClose" focusTraversable="false" layoutX="575.0" layoutY="531.0" onAction="#close" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Close" AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="186.0" />
+                  <JFXButton fx:id="btnVisualization" focusTraversable="false" layoutX="714.0" layoutY="530.0" onAction="#Visualization" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Visualization" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="47.0" />
                   <TreeTableView fx:id="MI_TreeTableView" layoutX="46.0" layoutY="48.0" onMouseClicked="#treeTableClick" prefHeight="457.0" prefWidth="799.0" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="48.0">
                     <columns>
                       <TreeTableColumn fx:id="name_column" maxWidth="1.7976931348623157E308" prefWidth="454.0" text="Name" />
@@ -82,6 +84,58 @@
                         <TreeTableColumn fx:id="id_column" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
                     </columns>
                   </TreeTableView>
+                  <VBox fx:id="indicator_pane" layoutX="46.0" layoutY="516.0" prefHeight="52.0" prefWidth="444.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="401.0">
+                     <padding>
+                        <Insets left="8.0" top="5.0" />
+                     </padding>
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="INDICATORS">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="18.0" prefWidth="425.0" spacing="12.0">
+                           <children>
+                              <Label text="Highly maintainable">
+                                 <font>
+                                    <Font name="Segoe UI" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/high.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label text="Moderately maintainable">
+                                 <font>
+                                    <Font name="Segoe UI" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/moderate.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label text="Difﬁcult to maintain">
+                                 <font>
+                                    <Font name="Segoe UI" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/low.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
             </AnchorPane>
          </children>

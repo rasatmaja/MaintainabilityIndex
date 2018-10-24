@@ -125,5 +125,10 @@
             <artifactId>javaparser-core</artifactId>
             <version>3.6.12</version>
         </dependency>
+        <dependency>
+            <groupId>org.fxmisc.richtext</groupId>
+            <artifactId>richtextfx</artifactId>
+            <version>0.9.1</version>
+        </dependency>
     </dependencies>
 </project>

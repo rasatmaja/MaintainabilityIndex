@@ -85,8 +85,8 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <JFXButton fx:id="btnBack" layoutX="575.0" layoutY="523.0" onAction="#back" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Back" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="186.0" />
-                  <JFXButton fx:id="btnCalculate" layoutX="714.0" layoutY="523.0" onAction="#calculate" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Calculate" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="47.0" />
+                  <JFXButton fx:id="btnBack" focusTraversable="false" layoutX="575.0" layoutY="523.0" onAction="#back" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Back" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="186.0" />
+                  <JFXButton fx:id="btnCalculate" focusTraversable="false" layoutX="714.0" layoutY="523.0" onAction="#calculate" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Calculate" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="47.0" />
                   <TableView fx:id="list_files_table" layoutX="45.0" layoutY="111.0" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="111.0">
                     <columns>
                       <TableColumn fx:id="file_name_column" maxWidth="546.0" minWidth="488.0" prefWidth="488.0" resizable="false" text="File Name" />
@@ -112,7 +112,7 @@
                               </ImageView>
                               <Label layoutX="388.0" layoutY="441.0" text="No Java project open " textFill="#90a4ae" />
                               <Label layoutX="324.0" layoutY="458.0" text="Would you to open your java project in here ?" textFill="#90a4ae" />
-                              <JFXButton layoutX="305.0" layoutY="487.0" onAction="#openDirectoryChooser" prefHeight="25.0" prefWidth="281.0" styleClass="button-browse" text="Browse" />
+                              <JFXButton focusTraversable="false" layoutX="305.0" layoutY="487.0" onAction="#openDirectoryChooser" prefHeight="25.0" prefWidth="281.0" styleClass="button-browse" text="Browse" />
                            </children>
                         </Pane>
                      </children>

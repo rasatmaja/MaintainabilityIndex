@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.octicons.OctIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import org.fxmisc.richtext.CodeArea?>
+
+<BorderPane style="-fx-background-color: #F6F8FA;" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <StackPane>
+         <children>
+            <AnchorPane prefHeight="600.0" prefWidth="891.0" style="-fx-background-color: #F4F7FA;" stylesheets="@../styles/Styles.css">
+               <children>
+                  <Pane layoutX="564.0" layoutY="74.0" prefHeight="74.0" prefWidth="304.0" styleClass="card" AnchorPane.rightAnchor="23.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Maintainability Index" textFill="#324c5b" />
+                        <Label fx:id="label_MI_value" layoutX="9.0" layoutY="25.0" text="120.68" textFill="#f14c52">
+                           <font>
+                              <Font name="Roboto Bold" size="35.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="label_status_MI" layoutX="203.0" layoutY="31.0" prefHeight="39.0" prefWidth="93.0" text="Moderately Maintainable" textAlignment="RIGHT" textFill="#da3b29" wrapText="true">
+                           <font>
+                              <Font name="Open Sans Italic" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="564.0" layoutY="244.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="179.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Programs Length" textFill="#324c5b" />
+                        <Label fx:id="label_HL" layoutX="11.0" layoutY="25.0" text="13" textFill="#324c5b">
+                           <font>
+                              <Font name="Roboto Bold" size="35.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="721.0" layoutY="244.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="22.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Programs Vocabulary" textFill="#324c5b" />
+                        <Label fx:id="label_HVc" layoutX="11.0" layoutY="25.0" text="3" textFill="#324c5b">
+                           <font>
+                              <Font name="Roboto Bold" size="35.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="564.0" layoutY="329.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="179.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Programs Volume" textFill="#324c5b" />
+                        <Label fx:id="label_HV" layoutX="11.0" layoutY="25.0" text="78.35" textFill="#324c5b">
+                           <font>
+                              <Font name="Roboto Bold" size="35.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="721.0" layoutY="329.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="22.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Programs Difficulties" textFill="#324c5b" />
+                        <Label fx:id="label_HD" layoutX="11.0" layoutY="25.0" text="98.76" textFill="#324c5b">
+                           <font>
+                              <Font name="Roboto Bold" size="35.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="564.0" layoutY="414.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="179.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Programs Effots" textFill="#324c5b" />
+                        <Label fx:id="label_HE" layoutX="11.0" layoutY="25.0" text="46.9" textFill="#324c5b">
+                           <font>
+                              <Font name="Roboto Bold" size="35.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="721.0" layoutY="414.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="22.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Bug Expected" textFill="#324c5b" />
+                        <Label fx:id="label_HB" layoutX="11.0" layoutY="25.0" text="43.6" textFill="#324c5b">
+                           <font>
+                              <Font name="Roboto Bold" size="35.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="564.0" layoutY="499.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="179.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Cyclomatic Complexity" textFill="#324c5b" />
+                        <Label fx:id="label_CC" layoutX="11.0" layoutY="25.0" text="9" textFill="#324c5b">
+                           <font>
+                              <Font name="Roboto Bold" size="35.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="721.0" layoutY="499.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="22.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Line of Code" textFill="#2d2d2d" />
+                        <Label fx:id="label_LOC" layoutX="11.0" layoutY="25.0" text="119" textFill="#324c5b">
+                           <font>
+                              <Font name="Roboto Bold" size="35.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="564.0" layoutY="159.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="179.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Operands" textFill="#324c5b" />
+                        <Label fx:id="label_operand" layoutX="11.0" layoutY="25.0" text="3/10" textFill="#324c5b">
+                           <font>
+                              <Font name="Roboto Bold" size="35.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="721.0" layoutY="159.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="23.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Operators" textFill="#324c5b" />
+                        <Label fx:id="label_operator" layoutX="11.0" layoutY="25.0" text="5/39" textFill="#324c5b">
+                           <font>
+                              <Font name="Roboto Bold" size="35.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <AnchorPane fx:id="panel_code_area" layoutX="24.0" layoutY="74.0" prefHeight="500.0" prefWidth="527.0" styleClass="code" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="340.0" AnchorPane.topAnchor="74.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="9.0" text="Source Code" textFill="#324c5b">
+                           <font>
+                              <Font name="Roboto" size="12.0" />
+                           </font>
+                        </Label>
+                        <CodeArea fx:id="code_area" layoutX="2.0" layoutY="31.0" prefHeight="469.0" prefWidth="525.0" stylesheets="@../styles/java-keywords.css" wrapText="true" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="30.0" />
+                     </children>
+                  </AnchorPane>
+                  <Label layoutX="38.0" layoutY="41.0" text="Name : " textFill="#314b599c">
+                     <font>
+                        <Font name="Roboto Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="label_name" alignment="TOP_LEFT" layoutX="94.0" layoutY="41.0" maxWidth="774.0" prefHeight="23.0" prefWidth="773.0" text="void populateTreeTable()" textFill="#324c5b">
+                     <font>
+                        <Font name="Roboto Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </center>
+   <bottom>
+      <HBox prefHeight="22.0" prefWidth="891.0" spacing="18.0" style="-fx-background-color: #007BCC;" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="statusbar_directoryPath" maxWidth="-Infinity" prefHeight="22.0" text="No directory open" textFill="WHITE">
+               <graphic>
+                  <OctIconView fill="WHITE" glyphName="FILE_DIRECTORY" size="16" />
+               </graphic>
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="statusbar_fileFound" prefHeight="35.0" text="No java file found" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+               <graphic>
+                  <OctIconView fill="WHITE" glyphName="FILE_CODE" size="16" />
+               </graphic>
+            </Label>
+            <Label fx:id="statusbar_executionTime" prefHeight="29.0" text="There is no execution yet" textFill="WHITE">
+               <graphic>
+                  <OctIconView fill="WHITE" glyphName="CLOCK" size="16" />
+               </graphic>
+            </Label>
+            <HBox fx:id="pane_progress" prefHeight="100.0" spacing="5.0" visible="false">
+               <children>
+                  <StackPane>
+                     <children>
+                        <ProgressIndicator fx:id="statusbar_indicator" prefHeight="22.0" prefWidth="18.0" />
+                        <FontAwesomeIconView fx:id="statusbar_complete" fill="WHITE" glyphName="CHECK_CIRCLE" size="16" />
+                     </children>
+                  </StackPane>
+                  <Label fx:id="statusbar_scanning" prefHeight="35.0" text="Scanning...." textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </HBox>
+   </bottom>
+</BorderPane>

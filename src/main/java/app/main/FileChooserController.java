@@ -5,8 +5,7 @@ package app.main;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import animatefx.animation.FadeInLeftBig;
-import animatefx.animation.FadeInRightBig;
+import animatefx.animation.*;
 import app.controllers.ASTExtractions;
 import app.controllers.FileSearch;
 import app.models.ClassProperty;
@@ -92,6 +91,10 @@ public class FileChooserController implements Initializable {
         filePath = FilePath.getInstance();
         classProperty = ClassProperty.getInstance();
         methodProperty = MethodProperty.getInstance();
+
+        list_files_table.setVisible(false);
+        btnBack.setVisible(false);
+        btnCalculate.setVisible(false);
     }
 
     @FXML
@@ -140,6 +143,13 @@ public class FileChooserController implements Initializable {
                 statusbar_fileFound.setText(list_file.size() + " Java file ");
                 long time = (System.currentTimeMillis() - start);
                 statusbar_executionTime.setText("Time to execution: " + time + "ms");
+
+                list_files_table.setVisible(true);
+                new FadeInDown(list_files_table).play();
+                btnBack.setVisible(true);
+                new FadeInLeft(btnBack).play();
+                btnCalculate.setVisible(true);
+                new FadeInRight(btnCalculate).play();
             });
 
             ExecutorService executorService = Executors.newFixedThreadPool(1);
@@ -154,6 +164,13 @@ public class FileChooserController implements Initializable {
 
     @FXML
     private void back(ActionEvent event) {
+
+        new FadeOutDown(list_files_table).play();
+        list_files_table.setVisible(false);
+        new FadeOutLeft(btnBack).play();
+        btnBack.setVisible(true);
+        new FadeOutRight(btnCalculate).play();
+        btnCalculate.setVisible(true);
         pane_home.toFront();
         new FadeInLeftBig(pane_home).play();
         

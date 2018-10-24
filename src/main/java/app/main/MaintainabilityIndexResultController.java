@@ -5,6 +5,8 @@
  */
 package app.main;
 
+import animatefx.animation.*;
+import app.controllers.AvgMaintainabilityIndexCalculations;
 import app.controllers.MaintainaibilityIndexCalculation;
 import app.models.FilePath;
 import app.models.MaintainabilityIndexProperty;
@@ -29,6 +31,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 /**
@@ -39,6 +42,8 @@ import javafx.util.Callback;
 public class MaintainabilityIndexResultController implements Initializable {
 
     public TreeTableView<MaintainabilityIndexProperty> MI_TreeTableView;
+    @FXML
+    public VBox indicator_pane;
     @FXML
     private Label statusbar_directoryPath;
     @FXML
@@ -80,6 +85,11 @@ public class MaintainabilityIndexResultController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        MI_TreeTableView.setVisible(false);
+        btnClose.setVisible(false);
+        btnVisualization.setVisible(false);
+        indicator_pane.setVisible(false);
+
 
         this.maintainabilityIndexResult = MaintainabilityIndexResult.getInstance();
         this.methodProperty = MethodProperty.getInstance();
@@ -101,15 +111,25 @@ public class MaintainabilityIndexResultController implements Initializable {
             });
 
             this.maintainaibilityIndexCalculation.setOnSucceeded(succeededEvent -> {
-                populateTreeTable();
+                calculateAVG();
 
                 statusbar_indicator.setVisible(false);
                 statusbar_complete.setVisible(true);
 
                 long time = (System.currentTimeMillis() - start);
                 statusbar_executionTime.setText("Time to calculations: " + time + "ms");
-
                 statusbar_fileFound.setText(methodProperty.get().size()+" method has been calculated");
+
+                populateTreeTable();
+
+                MI_TreeTableView.setVisible(true);
+                new FadeInDown(MI_TreeTableView).play();
+                btnClose.setVisible(true);
+                new FadeInLeft(btnClose).play();
+                btnVisualization.setVisible(true);
+                new FadeInRight(btnVisualization).play();
+                indicator_pane.setVisible(true);
+                new FadeInLeft(indicator_pane).play();
             });
 
             ExecutorService executorService = Executors.newFixedThreadPool(1);
@@ -136,8 +156,6 @@ public class MaintainabilityIndexResultController implements Initializable {
 
     public void populateTreeTable(){
 
-
-
         String tempClassName ="";
         TreeItem<MaintainabilityIndexProperty> className = null;
         TreeItem<MaintainabilityIndexProperty> root = new TreeItem<>(new MaintainabilityIndexProperty("","",0.0));
@@ -152,27 +170,38 @@ public class MaintainabilityIndexResultController implements Initializable {
             String classNameProperty = property.getValue().get(0);
             String methodNameProperty = property.getValue().get(1);
             double miValue = maintainabilityIndexResult.get().get(key);
+            double avgMI = maintainabilityIndexResult.getListOfAvgMaintainabilityIndex().get(classNameProperty);
 
-            Image icon;
+            Image iconMethod;
+            Image iconClass;
 
             if (miValue > 85){
-                icon = new Image(getClass().getResourceAsStream("/img/high.png"), 10, 10, false, true);
+                iconMethod = new Image(getClass().getResourceAsStream("/img/high.png"), 13, 13, false, true);
             } else if (miValue <= 85 && miValue >65){
-                icon = new Image(getClass().getResourceAsStream("/img/moderate.png"), 10, 10, false, true);
+                iconMethod = new Image(getClass().getResourceAsStream("/img/moderate.png"), 13, 13, false, true);
             } else {
-                icon = new Image(getClass().getResourceAsStream("/img/low.png"), 10, 10, false, true);
+                iconMethod = new Image(getClass().getResourceAsStream("/img/low.png"), 13, 13, false, true);
+            }
+
+            if (avgMI > 85){
+                iconClass = new Image(getClass().getResourceAsStream("/img/high.png"), 13, 13, false, true);
+            } else if (avgMI <= 85 && avgMI >65){
+                iconClass = new Image(getClass().getResourceAsStream("/img/moderate.png"), 13, 13, false, true);
+            } else {
+                iconClass = new Image(getClass().getResourceAsStream("/img/low.png"), 13, 13, false, true);
             }
 
             if (tempClassName != classNameProperty) {
                 tempClassName = classNameProperty;
-                className = new TreeItem<>(new MaintainabilityIndexProperty("", property.getValue().get(0), 0.0), new ImageView(icon));
-                TreeItem<MaintainabilityIndexProperty> method = new TreeItem<>(new MaintainabilityIndexProperty(property.getKey().toString(), methodNameProperty, miValue), new ImageView(icon));
+
+                className = new TreeItem<>(new MaintainabilityIndexProperty("", property.getValue().get(0), avgMI), new ImageView(iconClass));
+                TreeItem<MaintainabilityIndexProperty> method = new TreeItem<>(new MaintainabilityIndexProperty(property.getKey().toString(), methodNameProperty, miValue), new ImageView(iconMethod));
 
                 className.getChildren().add(method);
                 className.setExpanded(true);
                 root.getChildren().add(className);
             } else{
-                TreeItem<MaintainabilityIndexProperty> method = new TreeItem<>(new MaintainabilityIndexProperty(property.getKey().toString(), methodNameProperty, miValue), new ImageView(icon));
+                TreeItem<MaintainabilityIndexProperty> method = new TreeItem<>(new MaintainabilityIndexProperty(property.getKey().toString(), methodNameProperty, miValue), new ImageView(iconMethod));
                 className.getChildren().add(method);
                 className.setExpanded(true);
 
@@ -201,6 +230,19 @@ public class MaintainabilityIndexResultController implements Initializable {
             System.out.println(MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getName());
             System.out.println(MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getStatus());
             System.out.println(MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getId());
+            System.out.println(MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getMaintainability_index());
+
+            int methodKey = Integer.valueOf(MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getId());
+
+            DetailsController detailsController = new DetailsController();
+            detailsController.setMethodKey(methodKey);
+            detailsController.showStage();
+            detailsController.populateMethodData();
         }
+    }
+
+    public void calculateAVG(){
+        AvgMaintainabilityIndexCalculations aa = new AvgMaintainabilityIndexCalculations();
+        aa.calculate();
     }
 }

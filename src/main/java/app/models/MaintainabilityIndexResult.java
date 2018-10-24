@@ -8,6 +8,7 @@ public class MaintainabilityIndexResult {
     private static MaintainabilityIndexResult instance;
     private int methodPropertyKey;
     Map<Integer, Double> listOfMaintainanibilityIndez = new HashMap<>();
+    Map<String, Double> listOfAvgMaintainabilityIndex = new HashMap<>();
 
     private MaintainabilityIndexResult(){}
     public static synchronized MaintainabilityIndexResult getInstance() {
@@ -25,7 +26,13 @@ public class MaintainabilityIndexResult {
         listOfMaintainanibilityIndez.put(this.methodPropertyKey, maintainabilitiIndex);
     }
 
+    public void setListOfAvgMaintainabilityIndex(String className, double value){
+        this.listOfAvgMaintainabilityIndex.put(className, value);
+    }
+
     public Map<Integer, Double> get(){
         return listOfMaintainanibilityIndez;
     }
+
+    public Map<String, Double> getListOfAvgMaintainabilityIndex(){return this.listOfAvgMaintainabilityIndex;}
 }
