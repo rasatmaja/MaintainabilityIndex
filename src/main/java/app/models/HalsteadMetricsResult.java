@@ -39,4 +39,12 @@ public class HalsteadMetricsResult {
     }
 
     public Map<Integer, List<Double>> get(){return this.listOfHalsteadMetrics;};
+
+    public void setListOfAvgHalsteadMetric(String className, List<Double> halsteadMeric){
+        listOfAvgHalsteadMetric.put(className, halsteadMeric);
+    }
+
+    public  Map<String, List<Double>> getListOfAvgHalsteadMetric(){
+        return this.listOfAvgHalsteadMetric;
+    }
 }

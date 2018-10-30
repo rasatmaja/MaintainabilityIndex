@@ -7,6 +7,7 @@ public class CyclomaticComplexityResult {
     private static CyclomaticComplexityResult instance;
     private int methodPropertyKey;
     Map<Integer, Integer> listOfCyclomaticComplexity = new HashMap<>();
+    Map<String, Double> listOfAvgCyclomaticComplexity = new HashMap<>();
 
     private CyclomaticComplexityResult(){};
 
@@ -26,4 +27,10 @@ public class CyclomaticComplexityResult {
     }
 
     public Map<Integer, Integer> get(){return this.listOfCyclomaticComplexity;}
+
+    public void setListOfAvgCyclomaticComplexity(String className, double cc){
+        listOfAvgCyclomaticComplexity.put(className, cc);
+    }
+
+    public  Map<String, Double> getListOfAvgCyclomaticComplexity(){return this.listOfAvgCyclomaticComplexity;}
 }
