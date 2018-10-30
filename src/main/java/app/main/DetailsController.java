@@ -95,7 +95,8 @@ public class DetailsController implements Initializable {
 
     private final Stage detailStage;
     private int methodKey;
-    private String className;
+    private String className = "";
+    private String code;
 
     MaintainabilityIndexResult maintainabilityIndexResult;
     HalsteadMetricsResult halsteadMetricsResult;
@@ -103,44 +104,10 @@ public class DetailsController implements Initializable {
     ClassProperty classProperty;
     MethodProperty methodProperty;
     OperandAndOperator operandAndOperator;
-
+    CodeAreaController codeAreaController;
+    FilePath filePath;
+    long start;
     DecimalFormat numberFormat = new DecimalFormat("0.##");
-
-    private static final String[] KEYWORDS = new String[] {
-            "abstract", "assert", "boolean", "break", "byte",
-            "case", "catch", "char", "class", "const",
-            "continue", "default", "do", "double", "else",
-            "enum", "extends", "final", "finally", "float",
-            "for", "goto", "if", "implements", "import",
-            "instanceof", "int", "interface", "long", "native",
-            "new", "package", "private", "protected", "public",
-            "return", "short", "static", "strictfp", "super",
-            "switch", "synchronized", "this", "throw", "throws",
-            "transient", "try", "void", "volatile", "while"
-    };
-
-    private static final String KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
-    private static final String PAREN_PATTERN = "\\(|\\)";
-    private static final String BRACE_PATTERN = "\\{|\\}";
-    private static final String BRACKET_PATTERN = "\\[|\\]";
-    private static final String SEMICOLON_PATTERN = "\\;";
-    private static final String STRING_PATTERN = "\"([^\"\\\\]|\\\\.)*\"";
-    private static final String COMMENT_PATTERN = "//[^\n]*" + "|" + "/\\*(.|\\R)*?\\*/";
-
-    private static final Pattern PATTERN = Pattern.compile(
-            "(?<KEYWORD>" + KEYWORD_PATTERN + ")"
-                    + "|(?<PAREN>" + PAREN_PATTERN + ")"
-                    + "|(?<BRACE>" + BRACE_PATTERN + ")"
-                    + "|(?<BRACKET>" + BRACKET_PATTERN + ")"
-                    + "|(?<SEMICOLON>" + SEMICOLON_PATTERN + ")"
-                    + "|(?<STRING>" + STRING_PATTERN + ")"
-                    + "|(?<COMMENT>" + COMMENT_PATTERN + ")"
-    );
-
-    private String code;
-
-    private ExecutorService executor;
-
 
     public DetailsController(){
         operandAndOperator = OperandAndOperator.getInstance();
@@ -149,6 +116,8 @@ public class DetailsController implements Initializable {
         halsteadMetricsResult = HalsteadMetricsResult.getInstance();
         cyclomaticComplexityResult = CyclomaticComplexityResult.getInstance();
         maintainabilityIndexResult = MaintainabilityIndexResult.getInstance();
+        this.filePath = FilePath.getInstance();
+        start = System.currentTimeMillis();
 
         this.detailStage = new Stage();
         Parent root;
@@ -163,9 +132,7 @@ public class DetailsController implements Initializable {
             this.detailStage.setTitle("Details Maintainability Index Calculatios");
             this.detailStage.initModality(Modality.APPLICATION_MODAL);
             this.detailStage.initOwner(null);
-            this.detailStage.setOnCloseRequest(e -> {
-                stop();
-            });
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -175,8 +142,20 @@ public class DetailsController implements Initializable {
     public void showStage() {
         System.out.println(methodKey);
         this.detailStage.show();
-        populateMethodData();
-        codeArea();
+        statusbar_directoryPath.setText(filePath.getRootDorectory());
+        if(!this.className.equalsIgnoreCase("")){
+            populateClassData();
+        }else{
+            populateMethodData();
+        }
+
+        codeAreaController = new CodeAreaController(code_area, this.code);
+        this.detailStage.setOnCloseRequest(e -> {
+            codeAreaController.stop();
+        });
+
+        long time = (System.currentTimeMillis() - start);
+        statusbar_executionTime.setText("Time to execution: " + time + "ms");
     }
 
     public void setMethodKey(int key){
@@ -233,76 +212,46 @@ public class DetailsController implements Initializable {
         label_HB.setText(numberFormat.format(halsteadMetricsResult.get().get(methodKey).get(5)));
 
         this.code = methodProperty.get().get(methodKey).get(4);
-
-
     }
 
-    public void codeArea(){
-        executor = Executors.newSingleThreadExecutor();
-
-        code_area.setParagraphGraphicFactory(LineNumberFactory.get(code_area));
-        Subscription cleanupWhenDone = code_area.multiPlainChanges()
-                .successionEnds(Duration.ofMillis(500))
-                .supplyTask(this::computeHighlightingAsync)
-                .awaitLatest(code_area.multiPlainChanges())
-                .filterMap(t -> {
-                    if(t.isSuccess()) {
-                        return Optional.of(t.get());
-                    } else {
-                        t.getFailure().printStackTrace();
-                        return Optional.empty();
-                    }
-                })
-                .subscribe(this::applyHighlighting);
-
-        // call when no longer need it: `cleanupWhenFinished.unsubscribe();`
-
-        code_area.replaceText(0, 0, this.code);
-
-    }
+    public void populateClassData(){
 
 
-    public void stop() {
-        executor.shutdown();
-    }
-
-    private Task<StyleSpans<Collection<String>>> computeHighlightingAsync() {
-        String text = code_area.getText();
-        Task<StyleSpans<Collection<String>>> task = new Task<StyleSpans<Collection<String>>>() {
-            @Override
-            protected StyleSpans<Collection<String>> call() throws Exception {
-                return computeHighlighting(text);
+        classProperty.get().entrySet().forEach(classData -> {
+            if(classData.getValue().get(0).equalsIgnoreCase(this.className)){
+                label_LOC.setText(classData.getValue().get(1));
+                this.code = classData.getValue().get(3);
+                label_name.setText(classData.getValue().get(0));
             }
-        };
-        executor.execute(task);
-        return task;
-    }
+        });
 
-    private void applyHighlighting(StyleSpans<Collection<String>> highlighting) {
-        code_area.setStyleSpans(0, highlighting);
-    }
-
-    private static StyleSpans<Collection<String>> computeHighlighting(String text) {
-        Matcher matcher = PATTERN.matcher(text);
-        int lastKwEnd = 0;
-        StyleSpansBuilder<Collection<String>> spansBuilder
-                = new StyleSpansBuilder<>();
-        while(matcher.find()) {
-            String styleClass =
-                    matcher.group("KEYWORD") != null ? "keyword" :
-                            matcher.group("PAREN") != null ? "paren" :
-                                    matcher.group("BRACE") != null ? "brace" :
-                                            matcher.group("BRACKET") != null ? "bracket" :
-                                                    matcher.group("SEMICOLON") != null ? "semicolon" :
-                                                            matcher.group("STRING") != null ? "string" :
-                                                                    matcher.group("COMMENT") != null ? "comment" :
-                                                                            null; /* never happens */ assert styleClass != null;
-            spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
-            spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
-            lastKwEnd = matcher.end();
+        double miValue = maintainabilityIndexResult.getListOfAvgMaintainabilityIndex().get(this.className);
+        label_MI_value.setText(numberFormat.format(miValue));
+        if (miValue > 85){
+            label_status_MI.setText("Highly Maintainable");
+            label_status_MI.setTextFill(Color.web("#16C48D"));
+            label_MI_value.setTextFill(Color.web("#16C48D"));
+        } else if (miValue <= 85 && miValue >65){
+            label_status_MI.setText("Moderately Maintainable");
+            label_status_MI.setTextFill(Color.web("#F3923D"));
+            label_MI_value.setTextFill(Color.web("#F3923D"));
+        } else {
+            label_status_MI.setText("Difﬁcult to Maintain");
+            label_status_MI.setTextFill(Color.web("#DA3B29"));
+            label_MI_value.setTextFill(Color.web("#DA3B29"));
         }
-        spansBuilder.add(Collections.emptyList(), text.length() - lastKwEnd);
-        return spansBuilder.create();
+
+        label_CC.setText(cyclomaticComplexityResult.getListOfAvgCyclomaticComplexity().get(this.className).toString());
+
+        label_operand.setText("~");
+        label_operator.setText("~");
+
+        label_HL.setText(numberFormat.format(halsteadMetricsResult.getListOfAvgHalsteadMetric().get(this.className).get(0)));
+        label_HVc.setText(numberFormat.format(halsteadMetricsResult.getListOfAvgHalsteadMetric().get(this.className).get(1)));
+        label_HV.setText(numberFormat.format(halsteadMetricsResult.getListOfAvgHalsteadMetric().get(this.className).get(2)));
+        label_HD.setText(numberFormat.format(halsteadMetricsResult.getListOfAvgHalsteadMetric().get(this.className).get(3)));
+        label_HE.setText(numberFormat.format(halsteadMetricsResult.getListOfAvgHalsteadMetric().get(this.className).get(4)));
+        label_HB.setText(numberFormat.format(halsteadMetricsResult.getListOfAvgHalsteadMetric().get(this.className).get(5)));
     }
-    
+
 }
