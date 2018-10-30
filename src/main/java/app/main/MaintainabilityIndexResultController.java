@@ -7,6 +7,8 @@ package app.main;
 
 import animatefx.animation.*;
 import app.controllers.AvgMaintainabilityIndexCalculations;
+import app.controllers.CyclomaticComplexityCalculations;
+import app.controllers.HalsteadMetricsCalculation;
 import app.controllers.MaintainaibilityIndexCalculation;
 import app.models.FilePath;
 import app.models.MaintainabilityIndexProperty;
@@ -227,22 +229,27 @@ public class MaintainabilityIndexResultController implements Initializable {
     @FXML
     public void treeTableClick (MouseEvent event){
         if(event.getClickCount() == 2){
-            System.out.println(MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getName());
-            System.out.println(MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getStatus());
-            System.out.println(MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getId());
-            System.out.println(MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getMaintainability_index());
-
-            int methodKey = Integer.valueOf(MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getId());
-
             DetailsController detailsController = new DetailsController();
-            detailsController.setMethodKey(methodKey);
+
+            if (MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getId().equalsIgnoreCase("")){
+                String className = MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getName();
+                detailsController.setClassName(className);
+            } else{
+                int methodKey = Integer.valueOf(MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getId());
+                detailsController.setMethodKey(methodKey);
+            }
             detailsController.showStage();
-            detailsController.populateMethodData();
         }
     }
 
     public void calculateAVG(){
         AvgMaintainabilityIndexCalculations aa = new AvgMaintainabilityIndexCalculations();
         aa.calculate();
+
+        HalsteadMetricsCalculation halsteadMetricsCalculation = HalsteadMetricsCalculation.getInstance();
+        CyclomaticComplexityCalculations cyclomaticComplexityCalculations = CyclomaticComplexityCalculations.getInstance();
+
+        halsteadMetricsCalculation.calculateAvg();
+        cyclomaticComplexityCalculations.calculateAvg();
     }
 }

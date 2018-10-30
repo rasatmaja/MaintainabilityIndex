@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -77,7 +75,7 @@
                   <Pane layoutX="564.0" layoutY="414.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="179.0">
                      <children>
                         <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Programs Effots" textFill="#324c5b" />
-                        <Label fx:id="label_HE" layoutX="11.0" layoutY="25.0" text="46.9" textFill="#324c5b">
+                        <Label fx:id="label_HE" layoutX="11.0" layoutY="25.0" maxWidth="-Infinity" prefHeight="43.0" prefWidth="131.0" text="46.9" textFill="#324c5b" wrapText="true">
                            <font>
                               <Font name="Roboto Bold" size="35.0" />
                            </font>
@@ -141,7 +139,7 @@
                               <Font name="Roboto" size="12.0" />
                            </font>
                         </Label>
-                        <CodeArea fx:id="code_area" layoutX="2.0" layoutY="31.0" prefHeight="469.0" prefWidth="525.0" stylesheets="@../styles/java-keywords.css" wrapText="true" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="30.0" />
+                        <CodeArea fx:id="code_area" editable="false" layoutX="2.0" layoutY="31.0" prefHeight="469.0" prefWidth="525.0" stylesheets="@../styles/java-keywords.css" wrapText="true" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
                      </children>
                   </AnchorPane>
                   <Label layoutX="38.0" layoutY="41.0" text="Name : " textFill="#314b599c">
@@ -170,34 +168,11 @@
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="statusbar_fileFound" prefHeight="35.0" text="No java file found" textFill="WHITE">
-               <font>
-                  <Font name="Segoe UI" size="12.0" />
-               </font>
-               <graphic>
-                  <OctIconView fill="WHITE" glyphName="FILE_CODE" size="16" />
-               </graphic>
-            </Label>
             <Label fx:id="statusbar_executionTime" prefHeight="29.0" text="There is no execution yet" textFill="WHITE">
                <graphic>
                   <OctIconView fill="WHITE" glyphName="CLOCK" size="16" />
                </graphic>
             </Label>
-            <HBox fx:id="pane_progress" prefHeight="100.0" spacing="5.0" visible="false">
-               <children>
-                  <StackPane>
-                     <children>
-                        <ProgressIndicator fx:id="statusbar_indicator" prefHeight="22.0" prefWidth="18.0" />
-                        <FontAwesomeIconView fx:id="statusbar_complete" fill="WHITE" glyphName="CHECK_CIRCLE" size="16" />
-                     </children>
-                  </StackPane>
-                  <Label fx:id="statusbar_scanning" prefHeight="35.0" text="Scanning...." textFill="WHITE">
-                     <font>
-                        <Font name="Segoe UI" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
          </children>
          <padding>
             <Insets left="10.0" />
