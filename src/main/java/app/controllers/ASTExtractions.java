@@ -68,7 +68,9 @@ public class ASTExtractions extends Task<Void> {
             updateMessage("Extracting Operator and Operand from: " + dataMethodProperty.getValue().get(1));
 
             try {
-                String sourceCode = dataMethodProperty.getValue().get(5).replace("super();", "");
+                String sourceCode = dataMethodProperty.getValue().get(5)
+                        .replaceAll("super\\(.*?\\);", "")
+                        .replaceAll("this\\(.*?\\);", "");
                 BlockStmt bodyMethod = JavaParser.parseBlock(sourceCode);
 
                 OperandAndOperatorExtraction operandAndOperatorExtraction = new OperandAndOperatorExtraction(dataMethodkey);
