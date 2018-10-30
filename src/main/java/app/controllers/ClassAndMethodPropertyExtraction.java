@@ -47,22 +47,31 @@ public class ClassAndMethodPropertyExtraction extends VoidVisitorAdapter<Void> {
                     //System.out.println("body Method : \n" + methodDeclaration.getBody().get().toString());
                     String methodName = methodDeclaration.getDeclarationAsString(false, true, false);
 
-                    int methodLineOfCode = (methodDeclaration.getType().toString().equalsIgnoreCase("void")) ? (methodDeclaration.getEnd().get().line - methodDeclaration.getBegin().get().line - 2) : (methodDeclaration.getEnd().get().line - methodDeclaration.getBegin().get().line - 1);
-                    methodLineOfCode = (methodLineOfCode < 0) ? 0 : methodLineOfCode;
-
                     int methodLineOfComment = methodDeclaration.getAllContainedComments().stream().mapToInt(comment -> ((comment.getEnd().get().line - comment.getBegin().get().line) + 1)).sum();
                     methodLineOfComment = (methodLineOfComment < 0) ? 0 : methodLineOfComment;
 
                     String methodSourceCode = methodDeclaration.toString();
                     String bodyMethod = methodDeclaration.getBody().get().toString();
 
+                    bodyMethod.replaceAll("(?m)^\\s", "");
+                    int methodLineOfCode = bodyMethod.split(System.getProperty("line.separator")).length - 2;
+
                     methodProperty.set(className, methodName, methodLineOfCode, methodLineOfComment, methodSourceCode, bodyMethod);
+
+                    System.out.println("========================= DEBUG LOC =========================");
+                    System.out.println("Method Name : "  + methodName);
+                    System.out.println("Source Code : \n" + methodSourceCode);
+                    System.out.println("Method type : " + methodDeclaration.getType().toString());
+                    System.out.println("Start Pos   : " + methodDeclaration.getBegin().get().toString());
+                    System.out.println("End Pos     : " + methodDeclaration.getEnd().get().toString());
+                    System.out.println("LOC         : " + methodLineOfCode);
+                    System.out.println("======================= END DEBUG LOC ========================");
+
+
                 } else if (node instanceof ConstructorDeclaration){
                     ConstructorDeclaration constructorDeclaration = (ConstructorDeclaration) node;
 
                     String methodName = constructorDeclaration.getDeclarationAsString(false, true, false);
-                    int methodLineOfCode = (constructorDeclaration.getEnd().get().line - constructorDeclaration.getBegin().get().line - 1);
-                    methodLineOfCode = (methodLineOfCode < 0) ? 0 : methodLineOfCode;
 
                     int methodLineOfComment = constructorDeclaration.getAllContainedComments().stream().mapToInt(comment -> ((comment.getEnd().get().line - comment.getBegin().get().line) + 1)).sum();
                     methodLineOfComment = (methodLineOfComment < 0) ? 0 : methodLineOfComment;
@@ -70,7 +79,22 @@ public class ClassAndMethodPropertyExtraction extends VoidVisitorAdapter<Void> {
                     String methodSourceCode = constructorDeclaration.toString();
                     String bodyMethod = constructorDeclaration.getBody().toString();
 
+                    bodyMethod.replaceAll("(?m)^\\s", "");
+                    int methodLineOfCode = bodyMethod.split(System.getProperty("line.separator")).length - 2;
+
                     methodProperty.set(className, methodName, methodLineOfCode, methodLineOfComment, methodSourceCode, bodyMethod);
+
+                    System.out.println("========================= DEBUG LOC =========================");
+                    System.out.println("Method Name : "  + methodName);
+                    System.out.println("Source Code : \n" + methodSourceCode);
+                    System.out.println("Method type : Constructor " );
+                    System.out.println("Start Pos   : " + constructorDeclaration.getBegin().get().toString());
+                    System.out.println("End Pos     : " + constructorDeclaration.getEnd().get().toString());
+                    System.out.println("LOC         : " + methodLineOfCode);
+                    System.out.println("======================= END DEBUG LOC ========================");
+
+
+
                 }
             });
         }
