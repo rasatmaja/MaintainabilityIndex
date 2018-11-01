@@ -62,10 +62,8 @@ public class VisualizationController implements Initializable {
             root = loader.load();
             Scene scene = new Scene(root);
             scene.getStylesheets().add("/styles/Styles.css");
-
-
+            
             addGraphComponents();
-
 
             this.visualizationStage.setScene(scene);
             this.visualizationStage.setTitle("Visualizations");
