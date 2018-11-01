@@ -103,6 +103,13 @@
 	-fx-border-radius: 4;
 }
 
+.indicator {
+	-fx-background-color: rgb(255.0, 255.0, 255.0);
+	-fx-background-radius: 4.0;
+	-fx-border-color: #E1E1E1;
+	-fx-border-radius: 4;
+}
+
 .card-title {
     -fx-font-family: 'Open Sans';
 	-fx-font-size: 12.0px;
@@ -118,4 +125,35 @@
 	-fx-background-radius: 4.0;
 	-fx-border-radius: 4;
 	-fx-border-color: #E1E1E1;
+}
+
+.containerUML{
+     -fx-background-color: white;
+     -fx-border-color: #E1E1E1;
+     -fx-background-radius: 4.0;
+     -fx-border-radius: 4;
+}
+.containerClass{
+     -fx-background-color: white;
+     -fx-background-radius: 4.0;
+
+}
+.containerMethod{
+     -fx-background-color: white;
+     -fx-background-radius: 4.0;
+     -fx-border-color: #E1E1E1;
+     -fx-border-style: solid none none none;
+}
+
+.className{
+    -fx-font-family: 'Open Sans';
+	-fx-font-size: 14.0px;
+	-fx-font-weight: bold;
+	-fx-padding: 0 5 0 5;
+}
+
+.classType{
+    -fx-font-family: 'Open Sans';
+	-fx-font-size: 12.0px;
+	-fx-padding: 0 5 0 5;
 }
