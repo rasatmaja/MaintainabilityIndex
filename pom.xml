@@ -130,5 +130,11 @@
             <artifactId>richtextfx</artifactId>
             <version>0.9.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.abego.treelayout</groupId>
+            <artifactId>org.abego.treelayout.core</artifactId>
+            <version>1.0.3</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>
