@@ -16,17 +16,21 @@ import app.models.MaintainabilityIndexResult;
 import app.models.MethodProperty;
 import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import javafx.beans.value.ObservableValue;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,7 +38,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -67,6 +72,7 @@ public class MaintainabilityIndexResultController implements Initializable {
     @FXML
     private JFXButton btnVisualization;
 
+    private final Stage maintainabilityIndexResultStage;
     long start;
     MaintainaibilityIndexCalculation maintainaibilityIndexCalculation;
     MaintainabilityIndexResult maintainabilityIndexResult;
@@ -82,11 +88,50 @@ public class MaintainabilityIndexResultController implements Initializable {
     @FXML
     private TreeTableColumn<MaintainabilityIndexProperty, String> status_column;
 
+    public MaintainabilityIndexResultController(){
+        this.maintainabilityIndexResultStage = new Stage();
+        Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MaintainabilityIndexResult.fxml"));
+            loader.setController(this);
+            root = loader.load();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("/styles/Styles.css");
+            this.maintainabilityIndexResultStage.setScene(scene);
+            this.maintainabilityIndexResultStage.setTitle("Maintainability Index Result");
+            this.maintainabilityIndexResultStage.initModality(Modality.APPLICATION_MODAL);
+            this.maintainabilityIndexResultStage.initOwner(null);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showStage() {
+        this.maintainabilityIndexResultStage.show();
+        start();
+    }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+    }
+
+    @FXML
+    private void close(ActionEvent event) {
+        this.maintainabilityIndexResultStage.close();
+    }
+
+    @FXML
+    public void Visualization(ActionEvent actionEvent) {
+        VisualizationController visualizationController = new VisualizationController();
+        visualizationController.showStage();
+    }
+
+    public void start(){
         MI_TreeTableView.setVisible(false);
         btnClose.setVisible(false);
         btnVisualization.setVisible(false);
@@ -139,21 +184,8 @@ public class MaintainabilityIndexResultController implements Initializable {
             executorService.shutdown();
 
         }catch (Exception e) {
-
+            e.printStackTrace();
         }
-    }    
-
-    @FXML
-    private void close(ActionEvent event) {
-        MaintainabilityIndexResultUI.getPrimaryStage().close();
-    }
-
-    @FXML
-    public void Visualization(ActionEvent actionEvent) {
-        //OperandAndOperator operandAndOperator = OperandAndOperator.getInstance();
-        //operandAndOperator.debug();
-
-
     }
 
     public void populateTreeTable(){

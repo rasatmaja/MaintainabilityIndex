@@ -189,6 +189,8 @@ public class FileChooserController implements Initializable {
 
         try {
             start = System.currentTimeMillis();
+            // btnCalculate.setDisable(true);
+            // btnBack.setDisable(true);
             ASTExtractions astExtractions = new ASTExtractions();
             statusbar_scanning.textProperty().bind(astExtractions.messageProperty());
 
@@ -208,9 +210,8 @@ public class FileChooserController implements Initializable {
                 statusbar_executionTime.setText("Time to extractions: " + time + "ms");
                 //debug();
 
-                MaintainabilityIndexResultUI ui = new MaintainabilityIndexResultUI();
-                ui.open();
-
+                MaintainabilityIndexResultController maintainabilityIndexResultController = new MaintainabilityIndexResultController();
+                maintainabilityIndexResultController.showStage();
 
             });
 
