@@ -61,6 +61,8 @@ public class ASTExtractions extends Task<Void> {
     private void operandAndOperatorExtraction(){
         methodProperty.get().entrySet().forEach(dataMethodProperty ->{
             int dataMethodkey = dataMethodProperty.getKey();
+            String className = dataMethodProperty.getValue().get(0);
+
             System.out.println("Key         : " + dataMethodkey);
             System.out.println("Class name  : " + dataMethodProperty.getValue().get(0));
             System.out.println("Method name : " + dataMethodProperty.getValue().get(1));
@@ -73,7 +75,7 @@ public class ASTExtractions extends Task<Void> {
                         .replaceAll("this\\(.*?\\);", "");
                 BlockStmt bodyMethod = JavaParser.parseBlock(sourceCode);
 
-                OperandAndOperatorExtraction operandAndOperatorExtraction = new OperandAndOperatorExtraction(dataMethodkey);
+                OperandAndOperatorExtraction operandAndOperatorExtraction = new OperandAndOperatorExtraction(className, dataMethodkey);
                 operandAndOperatorExtraction.visit(bodyMethod, null);
                 operandAndOperatorExtraction.save();
 
