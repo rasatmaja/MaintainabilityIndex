@@ -154,7 +154,7 @@ public class FileChooserController implements Initializable {
 
             ExecutorService executorService = Executors.newFixedThreadPool(1);
             executorService.execute(fileSearch);
-            executorService.shutdown();
+            executorService.shutdownNow();
 
         } catch (Exception e) {
 
@@ -209,10 +209,7 @@ public class FileChooserController implements Initializable {
                 long time = (System.currentTimeMillis() - start);
                 statusbar_executionTime.setText("Time to extractions: " + time + "ms");
                 //debug();
-
-                MaintainabilityIndexResultController maintainabilityIndexResultController = new MaintainabilityIndexResultController();
-                maintainabilityIndexResultController.showStage();
-
+                new MaintainabilityIndexResultController();
             });
 
             ExecutorService executorService = Executors.newFixedThreadPool(1);
