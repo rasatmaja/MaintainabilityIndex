@@ -1,11 +1,14 @@
 package app.controllers;
 
+import app.models.ClassEdgeProperty;
+import app.models.ClassProperty;
 import app.models.OperandAndOperator;
 import app.models.PredicateNode;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.stmt.*;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.PrimitiveType;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
@@ -19,8 +22,12 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
     int countPredicaeNode;
     OperandAndOperator operandAndOperator;
     PredicateNode predicateNode;
+    ClassEdgeProperty classEdgeProperty;
+    String className;
 
-    public OperandAndOperatorExtraction(int key){
+    public OperandAndOperatorExtraction(String className, int key){
+        this.className = className;
+        classEdgeProperty = ClassEdgeProperty.getInstance();
         predicateNode = PredicateNode.getInstance();
         predicateNode.setMethodPropertyKey(key);
         operandAndOperator = OperandAndOperator.getInstance();
@@ -205,6 +212,31 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         super.visit(bs, arg);
         System.out.println("OPERATOR : break" + " -> ["+bs.getBegin().get()+"]-[BreakStmt]");
         insertIntoHasMaps("OPERATOR", "break");
+    }
+
+    public void visit(MethodCallExpr mce, Void arg){
+        super.visit(mce, arg);
+        System.out.println("OPERAND : " +mce.getName()+ " -> ["+mce.getBegin().get()+"]-[MethodCallExpr]");
+        insertIntoHasMaps("OPERAND", mce.getName().asString());
+
+        System.out.println("OPERATOR : () -> ["+mce.getBegin().get()+"]-[MethodCallExpr]");
+        insertIntoHasMaps("OPERATOR", "(");
+        insertIntoHasMaps("OPERATOR", ")");
+    }
+
+    public void visit(ObjectCreationExpr mce, Void arg){
+        super.visit(mce, arg);
+        System.out.println("OPERATOR : new  -> ["+mce.getBegin().get()+"]-[ObjectCreationExpr]");
+        insertIntoHasMaps("OPERATOR", "new");
+        insertIntoHasMaps("OPERATOR", "(");
+        insertIntoHasMaps("OPERATOR", ")");
+    }
+
+    public void visit(ClassOrInterfaceType coit, Void arg){
+        super.visit(coit, arg);
+        System.out.println("OPERAND : " +coit.toString()+ " -> ["+coit.getBegin().get()+"]-[ClassOrInterfaceType]");
+        insertIntoHasMaps("OPERAND", coit.toString());
+        classEdgeProperty.set(this.className, coit.toString());
     }
 
     public void insertIntoHasMaps(String category, String node){
