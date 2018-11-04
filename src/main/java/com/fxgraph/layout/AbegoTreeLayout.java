@@ -15,7 +15,7 @@ public class AbegoTreeLayout implements Layout {
 	private final Configuration<ICell> configuration;
 
 	public AbegoTreeLayout() {
-		this(500, 300, Location.Bottom);
+		this(500, 300, Location.Top);
 	}
 
 	public AbegoTreeLayout(double gapBetweenLevels, double gapBetweenNodes, Location location) {

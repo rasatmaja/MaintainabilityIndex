@@ -44,6 +44,11 @@ public class OperandAndOperator {
         return listMethodOperator.get(key).entrySet().stream().mapToInt(Map.Entry::getValue).sum();
     }
 
+    public void clear(){
+        this.listMethodOperator.clear();
+        this.listMethodOperand.clear();
+    }
+
     public void debug(){
         System.out.println("================= DEBUG FOR CLASS MODEL OperandAndOperator =================");
         MethodProperty methodProperty = MethodProperty.getInstance();

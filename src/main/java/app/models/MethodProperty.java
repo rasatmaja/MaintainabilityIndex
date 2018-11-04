@@ -20,6 +20,10 @@ public class MethodProperty {
      * [3] comment
      * [4] source code
      * [5] body method block statement
+     * [6] simple name
+     * [7] type
+     * [8] parameter type
+     * [9] parameter name
      */
 
     public static synchronized MethodProperty getInstance() {
@@ -29,7 +33,7 @@ public class MethodProperty {
         return instance;
     }
 
-    public void set(String className, String methodName, int lineOfCode, int lineOfComment, String sourceCode, String bodyMethod){
+    public void set(String className, String methodName, int lineOfCode, int lineOfComment, String sourceCode, String bodyMethod, String simpleName, String type, String parameterTye, String parameterName){
         List<String> methodProperty = new ArrayList<>();
         methodProperty.add(className);
         methodProperty.add(methodName);
@@ -37,6 +41,10 @@ public class MethodProperty {
         methodProperty.add( String.valueOf(lineOfComment) );
         methodProperty.add(sourceCode);
         methodProperty.add(bodyMethod);
+        methodProperty.add(simpleName);
+        methodProperty.add(type);
+        methodProperty.add(parameterTye);
+        methodProperty.add(parameterName);
         lifOfMethodProperty.put(lifOfMethodProperty.size(), methodProperty);
     }
 

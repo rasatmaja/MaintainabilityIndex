@@ -35,4 +35,9 @@ public class MaintainabilityIndexResult {
     }
 
     public Map<String, Double> getListOfAvgMaintainabilityIndex(){return this.listOfAvgMaintainabilityIndex;}
+
+    public void clear(){
+        this.listOfAvgMaintainabilityIndex.clear();
+        this.listOfMaintainanibilityIndez.clear();
+    }
 }

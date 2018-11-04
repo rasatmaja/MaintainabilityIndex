@@ -33,4 +33,9 @@ public class CyclomaticComplexityResult {
     }
 
     public  Map<String, Double> getListOfAvgCyclomaticComplexity(){return this.listOfAvgCyclomaticComplexity;}
+
+    public void clear(){
+        this.listOfAvgCyclomaticComplexity.clear();
+        this.listOfCyclomaticComplexity.clear();
+    }
 }

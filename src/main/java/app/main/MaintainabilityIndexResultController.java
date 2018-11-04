@@ -6,10 +6,7 @@
 package app.main;
 
 import animatefx.animation.*;
-import app.controllers.AvgMaintainabilityIndexCalculations;
-import app.controllers.CyclomaticComplexityCalculations;
-import app.controllers.HalsteadMetricsCalculation;
-import app.controllers.MaintainaibilityIndexCalculation;
+import app.controllers.*;
 import app.models.FilePath;
 import app.models.MaintainabilityIndexProperty;
 import app.models.MaintainabilityIndexResult;
@@ -88,6 +85,10 @@ public class MaintainabilityIndexResultController implements Initializable {
     @FXML
     private TreeTableColumn<MaintainabilityIndexProperty, String> status_column;
 
+    private final Image ICON_HIGH = new Image(getClass().getResourceAsStream("/img/high.png"), 13, 13, false, true);
+    private final Image ICON_MODERATE = new Image(getClass().getResourceAsStream("/img/moderate.png"), 13, 13, false, true);
+    private final Image ICON_LOW = new Image(getClass().getResourceAsStream("/img/low.png"), 13, 13, false, true);
+
     public MaintainabilityIndexResultController(){
         this.maintainabilityIndexResultStage = new Stage();
         Parent root;
@@ -101,15 +102,12 @@ public class MaintainabilityIndexResultController implements Initializable {
             this.maintainabilityIndexResultStage.setTitle("Maintainability Index Result");
             this.maintainabilityIndexResultStage.initModality(Modality.APPLICATION_MODAL);
             this.maintainabilityIndexResultStage.initOwner(null);
+            this.maintainabilityIndexResultStage.show();
+            start();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void showStage() {
-        this.maintainabilityIndexResultStage.show();
-        start();
     }
 
     /**
@@ -123,12 +121,13 @@ public class MaintainabilityIndexResultController implements Initializable {
     @FXML
     private void close(ActionEvent event) {
         this.maintainabilityIndexResultStage.close();
+        ClearData clearData = new ClearData();
+        clearData.execute();
     }
 
     @FXML
     public void Visualization(ActionEvent actionEvent) {
-        VisualizationController visualizationController = new VisualizationController();
-        visualizationController.showStage();
+        new VisualizationController();
     }
 
     public void start(){
@@ -181,7 +180,7 @@ public class MaintainabilityIndexResultController implements Initializable {
 
             ExecutorService executorService = Executors.newFixedThreadPool(1);
             executorService.execute(maintainaibilityIndexCalculation);
-            executorService.shutdown();
+            executorService.shutdownNow();
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -209,20 +208,20 @@ public class MaintainabilityIndexResultController implements Initializable {
             Image iconMethod;
             Image iconClass;
 
-            if (miValue > 85){
-                iconMethod = new Image(getClass().getResourceAsStream("/img/high.png"), 13, 13, false, true);
+            if (miValue > 85 ){
+                iconMethod = this.ICON_HIGH;
             } else if (miValue <= 85 && miValue >65){
-                iconMethod = new Image(getClass().getResourceAsStream("/img/moderate.png"), 13, 13, false, true);
+                iconMethod = this.ICON_MODERATE;
             } else {
-                iconMethod = new Image(getClass().getResourceAsStream("/img/low.png"), 13, 13, false, true);
+                iconMethod = this.ICON_LOW;
             }
 
             if (avgMI > 85){
-                iconClass = new Image(getClass().getResourceAsStream("/img/high.png"), 13, 13, false, true);
+                iconClass = this.ICON_HIGH;
             } else if (avgMI <= 85 && avgMI >65){
-                iconClass = new Image(getClass().getResourceAsStream("/img/moderate.png"), 13, 13, false, true);
+                iconClass = this.ICON_MODERATE;
             } else {
-                iconClass = new Image(getClass().getResourceAsStream("/img/low.png"), 13, 13, false, true);
+                iconClass = this.ICON_LOW;
             }
 
             if (tempClassName != classNameProperty) {

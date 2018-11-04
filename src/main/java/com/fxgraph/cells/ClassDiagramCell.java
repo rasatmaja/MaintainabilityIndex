@@ -6,7 +6,6 @@
 package com.fxgraph.cells;
 
 import app.main.DetailsController;
-import app.main.VisualizationController;
 import app.models.MaintainabilityIndexResult;
 import app.models.MethodProperty;
 import com.fxgraph.graph.Graph;
@@ -16,12 +15,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 import java.text.DecimalFormat;
 
@@ -36,6 +33,10 @@ public class ClassDiagramCell extends AbstractCell {
     Label label_MI_value;
     Label label_status_MI;
     DecimalFormat numberFormat = new DecimalFormat("0.##");
+
+    private final Image ICON_HIGH = new Image(getClass().getResourceAsStream("/img/high.png"), 13, 13, false, true);
+    private final Image ICON_MODERATE = new Image(getClass().getResourceAsStream("/img/moderate.png"), 13, 13, false, true);
+    private final Image ICON_LOW = new Image(getClass().getResourceAsStream("/img/low.png"), 13, 13, false, true);
 
     public ClassDiagramCell(String className, String classType, Label label_MI_value, Label label_status_MI) {
         this.classNameProperty = className;
@@ -80,20 +81,17 @@ public class ClassDiagramCell extends AbstractCell {
                 int methodKey = methodData.getKey();
 
                 final Label lbl_methodName = new Label();
-                lbl_methodName.setText(methodData.getValue().get(1));
+                lbl_methodName.setText(methodData.getValue().get(6) + ": " + methodData.getValue().get(7));
                 lbl_methodName.setStyle("-fx-padding: 3 5 3 5");
 
                 final double miValue = maintainabilityIndexResult.get().get(methodKey);
-                Image iconMethod;
                 if (miValue > 85){
-                    iconMethod = new Image(getClass().getResourceAsStream("/img/high.png"), 13, 13, false, true);
+                    lbl_methodName.setGraphic(new ImageView(this.ICON_HIGH));
                 } else if (miValue <= 85 && miValue >65){
-                    iconMethod = new Image(getClass().getResourceAsStream("/img/moderate.png"), 13, 13, false, true);
+                    lbl_methodName.setGraphic(new ImageView(this.ICON_MODERATE));
                 } else {
-                    iconMethod = new Image(getClass().getResourceAsStream("/img/low.png"), 13, 13, false, true);
+                    lbl_methodName.setGraphic(new ImageView(this.ICON_LOW));
                 }
-
-                lbl_methodName.setGraphic(new ImageView(iconMethod));
                 lbl_methodName.setGraphicTextGap(4);
 
                 lbl_methodName.setOnMouseClicked((MouseEvent event) -> {
@@ -121,14 +119,15 @@ public class ClassDiagramCell extends AbstractCell {
                     }
                 });
                 method.getChildren().add(lbl_methodName);
-
             }
         });
 
         container.getChildren().addAll(className, method);
         final Pane pane = new Pane(container);
         pane.setPrefSize(Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE);
-        //CellGestures.makeResizable(pane);
+
+        System.out.println(pane.getWidth());
+
         return pane;
     }
 }

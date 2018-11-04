@@ -30,4 +30,8 @@ public class PredicateNode {
     public int getPredicateNode(int key){
         return listPredicateNode.get(key);
     }
+
+    public void clear(){
+        this.listPredicateNode.clear();
+    }
 }

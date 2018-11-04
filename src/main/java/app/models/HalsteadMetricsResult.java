@@ -47,4 +47,9 @@ public class HalsteadMetricsResult {
     public  Map<String, List<Double>> getListOfAvgHalsteadMetric(){
         return this.listOfAvgHalsteadMetric;
     }
+
+    public void clear(){
+        this.listOfAvgHalsteadMetric.clear();
+        this.listOfHalsteadMetrics.clear();
+    }
 }
