@@ -60,7 +60,4 @@ public class MaintainaibilityIndexCalculation extends Task<Void> {
         updateMessage("Calculation is complete ");
         return null;
     }
-
-
-
 }

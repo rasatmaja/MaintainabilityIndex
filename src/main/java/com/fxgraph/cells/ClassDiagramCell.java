@@ -126,8 +126,6 @@ public class ClassDiagramCell extends AbstractCell {
         final Pane pane = new Pane(container);
         pane.setPrefSize(Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE);
 
-        System.out.println(pane.getWidth());
-
         return pane;
     }
 }

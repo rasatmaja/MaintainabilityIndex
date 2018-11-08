@@ -99,7 +99,6 @@ public class FileChooserController implements Initializable {
 
     @FXML
     private void openDirectoryChooser(ActionEvent event) {
-
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File selectedDirectory = directoryChooser.showDialog(null);
         if (selectedDirectory == null) {
@@ -185,14 +184,13 @@ public class FileChooserController implements Initializable {
     }
 
     @FXML
-    private void calculate(ActionEvent event) throws FileNotFoundException {
+    private void calculate(ActionEvent event){
 
         try {
             start = System.currentTimeMillis();
-            // btnCalculate.setDisable(true);
-            // btnBack.setDisable(true);
             ASTExtractions astExtractions = new ASTExtractions();
             statusbar_scanning.textProperty().bind(astExtractions.messageProperty());
+
 
             astExtractions.setOnRunning((succeesesEvent) -> {
                 statusbar_complete.setVisible(false);
@@ -202,7 +200,6 @@ public class FileChooserController implements Initializable {
             });
 
             astExtractions.setOnSucceeded((succeededEvent) -> {
-                
                 statusbar_indicator.setVisible(false);
                 statusbar_complete.setVisible(true);
                 statusbar_fileFound.setText(list_file.size() + " Java file ");

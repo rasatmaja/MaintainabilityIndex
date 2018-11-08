@@ -74,16 +74,6 @@ public class ClassAndMethodPropertyExtraction extends VoidVisitorAdapter<Void> {
 
                     methodProperty.set(className, methodName, methodLineOfCode, methodLineOfComment, methodSourceCode, bodyMethod, simpleName, type, parameterType, parameterName);
 
-                    System.out.println("========================= DEBUG LOC =========================");
-                    System.out.println("Method Name : "  + methodName);
-                    System.out.println("Source Code : \n" + methodSourceCode);
-                    System.out.println("Method type : " + methodDeclaration.getType().toString());
-                    System.out.println("Start Pos   : " + methodDeclaration.getBegin().get().toString());
-                    System.out.println("End Pos     : " + methodDeclaration.getEnd().get().toString());
-                    System.out.println("LOC         : " + methodLineOfCode);
-                    System.out.println("======================= END DEBUG LOC ========================");
-
-
                 } else if (node instanceof ConstructorDeclaration){
                     ConstructorDeclaration constructorDeclaration = (ConstructorDeclaration) node;
 
@@ -106,14 +96,6 @@ public class ClassAndMethodPropertyExtraction extends VoidVisitorAdapter<Void> {
 
                     methodProperty.set(className, methodName, methodLineOfCode, methodLineOfComment, methodSourceCode, bodyMethod, simpleName, type, parameterType, parameterName);
 
-                    System.out.println("========================= DEBUG LOC =========================");
-                    System.out.println("Method Name : "  + methodName);
-                    System.out.println("Source Code : \n" + methodSourceCode);
-                    System.out.println("Method type : Constructor " );
-                    System.out.println("Start Pos   : " + constructorDeclaration.getBegin().get().toString());
-                    System.out.println("End Pos     : " + constructorDeclaration.getEnd().get().toString());
-                    System.out.println("LOC         : " + methodLineOfCode);
-                    System.out.println("======================= END DEBUG LOC ========================");
                 }
             });
         }

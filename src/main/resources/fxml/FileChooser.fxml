@@ -52,7 +52,7 @@
                         <FontAwesomeIconView fx:id="statusbar_complete" fill="WHITE" glyphName="CHECK_CIRCLE" size="16" />
                      </children>
                   </StackPane>
-                  <Label fx:id="statusbar_scanning" prefHeight="35.0" text="Scanning...." textFill="WHITE">
+                  <Label fx:id="statusbar_scanning" prefHeight="35.0" text="Scanning...." textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Segoe UI" size="12.0" />
                      </font>

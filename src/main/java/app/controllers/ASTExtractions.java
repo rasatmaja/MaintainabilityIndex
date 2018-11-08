@@ -2,7 +2,6 @@ package app.controllers;
 
 import app.models.FilePath;
 import app.models.MethodProperty;
-import app.models.OperandAndOperator;
 import com.github.javaparser.*;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.stmt.BlockStmt;
@@ -54,7 +53,6 @@ public class ASTExtractions extends Task<Void> {
                 System.out.println((char)27 + "[30m");
                 System.out.println();
             }
-
         });
     }
 

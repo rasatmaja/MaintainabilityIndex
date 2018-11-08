@@ -37,7 +37,7 @@
                   <OctIconView fill="WHITE" glyphName="FILE_CODE" size="16" />
                </graphic>
             </Label>
-            <Label fx:id="statusbar_executionTime" prefHeight="29.0" text="There is no execution yet" textFill="WHITE">
+            <Label fx:id="statusbar_executionTime" prefHeight="29.0" text="There is no execution yet" textFill="WHITE" wrapText="true">
                <graphic>
                   <OctIconView fill="WHITE" glyphName="CLOCK" size="16" />
                </graphic>
