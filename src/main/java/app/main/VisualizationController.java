@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 
 import com.fxgraph.layout.AbegoTreeLayout;
 import com.fxgraph.graph.Graph;
+import org.abego.treelayout.Configuration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -163,8 +164,6 @@ public class VisualizationController implements Initializable {
             totalsNode = cell.size();
 
             ClassEdgeProperty classEdgeProperty = ClassEdgeProperty.getInstance();
-            classEdgeProperty.debug();
-
             try{
                 classEdgeProperty.get().entrySet().forEach(edge -> {
                     final String source = edge.getValue().get(0);

@@ -103,6 +103,9 @@ public class MaintainabilityIndexResultController implements Initializable {
             this.maintainabilityIndexResultStage.initModality(Modality.APPLICATION_MODAL);
             this.maintainabilityIndexResultStage.initOwner(null);
             this.maintainabilityIndexResultStage.show();
+            this.maintainabilityIndexResultStage.setOnCloseRequest(event -> {
+                clearAllDataModel();
+            });
             start();
 
         } catch (IOException e) {
@@ -120,6 +123,9 @@ public class MaintainabilityIndexResultController implements Initializable {
 
     @FXML
     private void close(ActionEvent event) {
+        clearAllDataModel();
+    }
+    private void clearAllDataModel(){
         this.maintainabilityIndexResultStage.close();
         ClearData clearData = new ClearData();
         clearData.execute();
