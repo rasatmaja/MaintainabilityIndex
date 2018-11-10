@@ -7,10 +7,7 @@ package app.main;
 
 import animatefx.animation.*;
 import app.controllers.*;
-import app.models.FilePath;
-import app.models.MaintainabilityIndexProperty;
-import app.models.MaintainabilityIndexResult;
-import app.models.MethodProperty;
+import app.models.*;
 import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 
@@ -68,13 +65,15 @@ public class MaintainabilityIndexResultController implements Initializable {
     private JFXButton btnClose;
     @FXML
     private JFXButton btnVisualization;
+    @FXML
+    private Label statusbar_errorLog;
 
     private final Stage maintainabilityIndexResultStage;
-    long start;
-    MaintainaibilityIndexCalculation maintainaibilityIndexCalculation;
-    MaintainabilityIndexResult maintainabilityIndexResult;
-    MethodProperty methodProperty;
-    FilePath filePath;
+    private long start;
+    private MaintainaibilityIndexCalculation maintainaibilityIndexCalculation;
+    private MaintainabilityIndexResult maintainabilityIndexResult;
+    private MethodProperty methodProperty;
+    private FilePath filePath;
 
     @FXML
     private TreeTableColumn<MaintainabilityIndexProperty, String> id_column;
@@ -182,6 +181,12 @@ public class MaintainabilityIndexResultController implements Initializable {
                 new FadeInRight(btnVisualization).play();
                 indicator_pane.setVisible(true);
                 new FadeInLeft(indicator_pane).play();
+
+                statusbar_errorLog.setVisible(true);
+                statusbar_errorLog.setText(ErrorLog.getInstance().get().size()+" errors found");
+                statusbar_errorLog.setOnMouseClicked(event -> {
+                    new ErrorLogController();
+                });
             });
 
             ExecutorService executorService = Executors.newFixedThreadPool(1);
@@ -283,10 +288,7 @@ public class MaintainabilityIndexResultController implements Initializable {
         AvgMaintainabilityIndexCalculations aa = new AvgMaintainabilityIndexCalculations();
         aa.calculate();
 
-        HalsteadMetricsCalculation halsteadMetricsCalculation = HalsteadMetricsCalculation.getInstance();
-        CyclomaticComplexityCalculations cyclomaticComplexityCalculations = CyclomaticComplexityCalculations.getInstance();
-
-        halsteadMetricsCalculation.calculateAvg();
-        cyclomaticComplexityCalculations.calculateAvg();
+        HalsteadMetricsCalculation.getInstance().calculateAvg();
+        CyclomaticComplexityCalculations.getInstance().calculateAvg();
     }
 }

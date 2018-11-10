@@ -31,10 +31,8 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.stage.DirectoryChooser;
 
 /**
@@ -48,8 +46,6 @@ public class FileChooserController implements Initializable {
     private Label statusbar_directoryPath;
     @FXML
     private Label statusbar_fileFound;
-    @FXML
-    private Pane pane1;
     @FXML
     private JFXButton btnBack;
     @FXML
@@ -77,11 +73,11 @@ public class FileChooserController implements Initializable {
     @FXML
     private VBox pane_home;
 
-    long start;
-    public ObservableList<Files> list_file = FXCollections.observableArrayList();
-    FilePath filePath;
-    ClassProperty classProperty;
-    MethodProperty methodProperty;
+    private long start;
+    private ObservableList<Files> list_file = FXCollections.observableArrayList();
+    private FilePath filePath;
+    private ClassProperty classProperty;
+    private MethodProperty methodProperty;
 
     /**
      * Initializes the controller class.
