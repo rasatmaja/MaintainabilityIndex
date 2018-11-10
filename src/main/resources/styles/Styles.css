@@ -1,3 +1,4 @@
+
 .button {
     -fx-font-weight: bold;
 }
@@ -157,3 +158,41 @@
 	-fx-font-size: 12.0px;
 	-fx-padding: 0 5 0 5;
 }
+
+.errorList{
+     -fx-background-color: white;
+     -fx-border-color: #E1E1E1;
+     -fx-background-radius: 4.0;
+     -fx-border-radius: 4;
+     -fx-padding: 10 10 10 10;
+}
+.errorListName{
+    -fx-font-family: 'Open Sans';
+	-fx-font-size: 14.0px;
+	-fx-text-fill: #323232;
+	-fx-font-weight: bold;
+	-fx-padding: 0 10 0 10;
+}
+.errorListLocations{
+    -fx-font-family: 'Open Sans';
+	-fx-font-size: 12.0px;
+	-fx-font-style: italic;
+	-fx-text-fill: #676767;
+	-fx-padding: 0 10 0 10;
+}
+.errorListMessage{
+    -fx-font-family: 'Open Sans';
+	-fx-font-size: 12.0px;
+	-fx-text-fill: #F44336;
+	-fx-padding: 0 10 0 10;
+}
+.jfx-list-cell:selected  {
+    -fx-background-color:  #F6F8FA;
+}
+.jfx-list-cell:odd  {
+    -fx-background-color:  #F6F8FA;
+}
+.jfx-list-cell:even  {
+    -fx-background-color:  #F6F8FA;
+}
+

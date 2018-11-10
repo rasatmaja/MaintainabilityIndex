@@ -17,9 +17,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
-      <HBox prefHeight="22.0" prefWidth="891.0" spacing="18.0" style="-fx-background-color: #007BCC;" BorderPane.alignment="CENTER">
+      <HBox maxWidth="1.7976931348623157E308" prefHeight="22.0" spacing="18.0" style="-fx-background-color: #007BCC;" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="statusbar_directoryPath" maxWidth="-Infinity" prefHeight="22.0" text="No directory open" textFill="WHITE">
                <graphic>
@@ -37,12 +37,12 @@
                   <OctIconView fill="WHITE" glyphName="FILE_CODE" size="16" />
                </graphic>
             </Label>
-            <Label fx:id="statusbar_executionTime" prefHeight="29.0" text="There is no execution yet" textFill="WHITE" wrapText="true">
+            <Label fx:id="statusbar_executionTime" maxWidth="1.7976931348623157E308" prefHeight="29.0" text="There is no execution yet" textFill="WHITE" wrapText="true">
                <graphic>
                   <OctIconView fill="WHITE" glyphName="CLOCK" size="16" />
                </graphic>
             </Label>
-            <HBox fx:id="pane_progress" prefHeight="100.0" spacing="5.0" visible="false">
+            <HBox fx:id="pane_progress" maxWidth="1.7976931348623157E308" prefHeight="22.0" spacing="5.0" visible="false">
                <children>
                   <StackPane>
                      <children>
@@ -50,13 +50,18 @@
                         <FontAwesomeIconView fx:id="statusbar_complete" fill="WHITE" glyphName="CHECK_CIRCLE" size="16" />
                      </children>
                   </StackPane>
-                  <Label fx:id="statusbar_scanning" prefHeight="35.0" text="Scanning...." textFill="WHITE">
+                  <Label fx:id="statusbar_scanning" maxWidth="1.7976931348623157E308" prefHeight="35.0" text="Scanning...." textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Segoe UI" size="12.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
+            <Label fx:id="statusbar_errorLog" prefHeight="29.0" text="There is no errors" textFill="WHITE" visible="false" wrapText="true">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="TIMES_CIRCLE" size="16" />
+               </graphic>
+            </Label>
          </children>
          <padding>
             <Insets left="10.0" />
