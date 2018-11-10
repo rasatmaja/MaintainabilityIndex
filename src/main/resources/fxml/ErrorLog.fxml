@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <AnchorPane prefHeight="400.0" prefWidth="575.0" style="-fx-background-color: #F6F8FA;">
+         <children>
+            <JFXListView fx:id="error_listview" layoutX="3.0" layoutY="30.0" prefHeight="352.0" prefWidth="575.0" style="-fx-border-color: #F6F8FA; -fx-background-color: #F6F8FA; -fx-background-insets: 0;" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <JFXButton layoutX="459.0" layoutY="365.0" prefHeight="25.0" prefWidth="105.0" styleClass="button-browse" stylesheets="@../styles/Styles.css" text="Close" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
