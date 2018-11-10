@@ -24,7 +24,6 @@ public class ClearData {
         halsteadMetricsResult = HalsteadMetricsResult.getInstance();
         cyclomaticComplexityResult = CyclomaticComplexityResult.getInstance();
         maintainabilityIndexResult = MaintainabilityIndexResult.getInstance();
-
     }
 
     public void execute(){
