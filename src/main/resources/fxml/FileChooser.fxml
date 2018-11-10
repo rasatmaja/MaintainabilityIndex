@@ -14,12 +14,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.main.FileChooserController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.main.FileChooserController">
    <bottom>
       <HBox prefHeight="22.0" prefWidth="891.0" spacing="18.0" style="-fx-background-color: #007BCC;" BorderPane.alignment="CENTER">
          <children>
@@ -39,12 +38,12 @@
                   <OctIconView fill="WHITE" glyphName="FILE_CODE" size="16" />
                </graphic>
             </Label>
-            <Label fx:id="statusbar_executionTime" prefHeight="29.0" text="There is no execution yet" textFill="WHITE">
+            <Label fx:id="statusbar_executionTime" maxWidth="1.7976931348623157E308" prefHeight="29.0" text="There is no execution yet" textFill="WHITE" wrapText="true">
                <graphic>
                   <OctIconView fill="WHITE" glyphName="CLOCK" size="16" />
                </graphic>
             </Label>
-            <HBox fx:id="pane_progress" prefHeight="100.0" spacing="5.0" visible="false">
+            <HBox fx:id="pane_progress" maxWidth="1.7976931348623157E308" prefHeight="100.0" spacing="5.0" visible="false">
                <children>
                   <StackPane>
                      <children>
@@ -52,7 +51,7 @@
                         <FontAwesomeIconView fx:id="statusbar_complete" fill="WHITE" glyphName="CHECK_CIRCLE" size="16" />
                      </children>
                   </StackPane>
-                  <Label fx:id="statusbar_scanning" prefHeight="35.0" text="Scanning...." textFill="WHITE" wrapText="true">
+                  <Label fx:id="statusbar_scanning" maxWidth="1.7976931348623157E308" prefHeight="35.0" text="Scanning...." textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Segoe UI" size="12.0" />
                      </font>
@@ -69,7 +68,7 @@
       </HBox>
    </bottom>
    <center>
-      <StackPane BorderPane.alignment="CENTER">
+      <StackPane fx:id="sp" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
@@ -96,27 +95,27 @@
                   </TableView>
                </children>
             </AnchorPane>
-            <VBox fx:id="pane_home" alignment="CENTER_RIGHT" style="-fx-background-color: #F6F8FA;">
+            <VBox fx:id="pane_home" alignment="CENTER" style="-fx-background-color: #F6F8FA;">
                <children>
-                  <HBox alignment="CENTER" prefHeight="535.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;">
-                     <children>
-                        <Pane fx:id="pane1" prefHeight="502.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;">
-                           <children>
-                              <ImageView fitHeight="440.0" fitWidth="902.0" layoutX="-10.0" layoutY="12.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../img/bakcground.png" />
-                                 </image>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                              <Label layoutX="388.0" layoutY="441.0" text="No Java project open " textFill="#90a4ae" />
-                              <Label layoutX="324.0" layoutY="458.0" text="Would you to open your java project in here ?" textFill="#90a4ae" />
-                              <JFXButton focusTraversable="false" layoutX="305.0" layoutY="487.0" onAction="#openDirectoryChooser" prefHeight="25.0" prefWidth="281.0" styleClass="button-browse" text="Browse" />
-                           </children>
-                        </Pane>
-                     </children>
-                  </HBox>
+                  <ImageView fx:id="img_backgorund" fitHeight="442.0" fitWidth="893.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                     <image>
+                        <Image url="@../img/bakcground.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+                  <Label text="No Java project open " textFill="#90a4ae">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Would you to open your java project in here ?" textFill="#90a4ae" />
+                  <JFXButton focusTraversable="false" onAction="#openDirectoryChooser" prefHeight="25.0" prefWidth="281.0" styleClass="button-browse" text="Browse">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </JFXButton>
                </children>
             </VBox>
          </children>
