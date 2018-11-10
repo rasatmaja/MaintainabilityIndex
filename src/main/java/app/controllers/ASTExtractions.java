@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.models.ErrorLog;
 import app.models.FilePath;
 import app.models.MethodProperty;
 import com.github.javaparser.*;
@@ -9,6 +10,8 @@ import javafx.concurrent.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.github.javaparser.JavaParser.parse;
@@ -52,6 +55,11 @@ public class ASTExtractions extends Task<Void> {
                 System.out.println(FILE_PATH + " : The identifier doesn't represent a java file");
                 System.out.println((char)27 + "[30m");
                 System.out.println();
+                ErrorLog.getInstance().set(new ArrayList<>(Arrays.asList(
+                        values.get(0),
+                        values.get(1),
+                        "The identifier doesn't represent a java file"
+                )));
             }
         });
     }
