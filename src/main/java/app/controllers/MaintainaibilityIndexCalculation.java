@@ -9,18 +9,12 @@ import javafx.concurrent.Task;
 public class MaintainaibilityIndexCalculation extends Task<Void> {
 
     MethodProperty methodProperty;
-    OperandAndOperator operandAndOperator;
-    PredicateNode predicateNode;
-
     HalsteadMetricsCalculation halsteadMetricsCalculation;
     CyclomaticComplexityCalculations cyclomaticComplexityCalculations;
     MaintainabilityIndexResult maintainabilityIndexResult;
 
     public MaintainaibilityIndexCalculation (){
         methodProperty = MethodProperty.getInstance();
-        operandAndOperator = OperandAndOperator.getInstance();
-        predicateNode = PredicateNode.getInstance();
-
         halsteadMetricsCalculation = HalsteadMetricsCalculation.getInstance();
         cyclomaticComplexityCalculations = CyclomaticComplexityCalculations.getInstance();
         maintainabilityIndexResult = MaintainabilityIndexResult.getInstance();
@@ -44,11 +38,11 @@ public class MaintainaibilityIndexCalculation extends Task<Void> {
             int loc = Integer.valueOf(method.getValue().get(2));
             System.out.println("LOC: " + loc);
 
-            double perCM = (loc != 0) ? Integer.valueOf(method.getValue().get(3)) / Integer.valueOf(method.getValue().get(2)) : 0;
-            System.out.println("perCM: " + perCM);
+            //double perCM = (loc != 0) ? Integer.valueOf(method.getValue().get(3)) / Integer.valueOf(method.getValue().get(2)) : 0;
+            double perCM = (loc != 0) ? (Double.valueOf(method.getValue().get(3)) / Double.valueOf(method.getValue().get(2))) * 100 : 0;
 
             double maintainabilityIndex = (loc != 0 && halsteadValume != 0) ?
-                                          171 - 5.2 * (Math.log(halsteadValume)) - (0.23 * cyclomaticComplexity) - (16.2 * Math.log(loc)) + (50 * Math.sin(Math.sqrt(2.46 * perCM)))
+                                          171 - 5.2 * Math.log(halsteadValume) - 0.23 * cyclomaticComplexity - 16.2 * Math.log(loc) + 50 * Math.sin(Math.toRadians(Math.sqrt(2.46 * perCM)))
                                           : 0;
             System.out.println("MI: " + maintainabilityIndex);
 
