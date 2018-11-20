@@ -1,13 +1,11 @@
 package app.controllers;
 
 import app.models.ClassEdgeProperty;
-import app.models.ClassProperty;
 import app.models.OperandAndOperator;
 import app.models.PredicateNode;
-import com.github.javaparser.ast.body.ConstructorDeclaration;
-import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.stmt.*;
+import com.github.javaparser.ast.type.ArrayType;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.PrimitiveType;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
@@ -45,6 +43,40 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
             System.out.println("nilai predicate node " + countPredicaeNode);
         }
     }
+    /* BLOCK UNTUK MENCARI DEKLARASI ARRAY */
+    public void visit(ArrayType at, Void arg){
+        super.visit(at, arg);
+        System.out.println("OPERAND: "+at.asArrayType()+ "-> [" + at.getBegin().get() + "]-[ArrayType]");
+        //array type masih ada dupikat ketika dimensi aaray lebhh dari 1
+        insertIntoHasMaps("OPERAND", at.asArrayType().asString());
+
+    }
+    public void visit(ArrayCreationExpr ace, Void arg) {
+        super.visit(ace, arg);
+        System.out.println("OPERATOR:  new -> [" + ace.getBegin().get() + "]-[ArrayCreationExpr]");
+        insertIntoHasMaps("OPERATOR", "new");
+        listOfOperator.remove(ace.getElementType());
+        int arrayLevel = ace.getLevels().toArray().length;
+        String arrayDataType = ace.getElementType().asString();
+        for (int i = 0; i< arrayLevel; i++ ) {
+            arrayDataType+="[]";
+        }
+        System.out.println("OPERAND: "+arrayDataType+" -> [" + ace.getBegin().get() + "]-[ArrayCreationExpr]");
+        insertIntoHasMaps("OPERAND", arrayDataType);
+    }
+    public void visit(ArrayInitializerExpr aie, Void arg) {
+        super.visit(aie, arg);
+        System.out.println("OPERATOR : = " + " -> ["+aie.getBegin().get()+"]-[AssignExpr]");
+        insertIntoHasMaps("OPERATOR", "=");
+        insertIntoHasMaps("OPERATOR", "{");
+        insertIntoHasMaps("OPERATOR", "}");
+    }
+    public void visit (ArrayAccessExpr aae, Void arg) {
+        super.visit(aae, arg);
+        System.out.println("OPERAND: "+aae.toString()+" -> [" + aae.getBegin().get() + "]-[ArrayAccessExpr]");
+        insertIntoHasMaps("OPERAND", aae.toString());
+    }
+    /* END BLOCK UNTUK MENCARI DEKLARASI ARRAY */
 
     /* BLOCK UNTUK MENCARI SEBUAH OPERAND */
     public void visit(PrimitiveType pt, Void arg) {
@@ -139,7 +171,25 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         System.out.println("OPERATOR : if" + " -> ["+is.getBegin().get()+"]-[IfStmt]");
         countPredicaeNode++;
         insertIntoHasMaps("OPERATOR", "if");
+        insertIntoHasMaps("OPERATOR", "(");
+        insertIntoHasMaps("OPERATOR", ")");
+        insertIntoHasMaps("OPERATOR", "{");
+        insertIntoHasMaps("OPERATOR", "}");
 
+        /* Menemukan compound condition */
+        String[] compoundConditions = {"||", "&&"};
+        for (String compoundCondition : compoundConditions) {
+            if (is.getCondition().toString().contains(compoundCondition)) {
+                System.out.println("ada compound: " + compoundCondition);
+                countPredicaeNode++;
+            }
+        }
+
+        /* Menemukan else block*/
+        if (is.hasElseBlock()){
+            insertIntoHasMaps("OPERATOR", "{");
+            insertIntoHasMaps("OPERATOR", "}");
+        }
     }
 
     public void visit(SwitchStmt ss, Void arg) {
@@ -147,6 +197,10 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         System.out.println("OPERATOR : switch" + " -> ["+ss.getBegin().get()+"]-[SwitchStmt]");
         countPredicaeNode++;
         insertIntoHasMaps("OPERATOR", "switch");
+        insertIntoHasMaps("OPERATOR", "(");
+        insertIntoHasMaps("OPERATOR", ")");
+        insertIntoHasMaps("OPERATOR", "{");
+        insertIntoHasMaps("OPERATOR", "}");
     }
 
     public void visit(DoStmt ds, Void arg) {
@@ -154,6 +208,10 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         System.out.println("OPERATOR : do" + " -> ["+ds.getBegin().get()+"]-[DoStmt]");
         countPredicaeNode++;
         insertIntoHasMaps("OPERATOR", "do");
+        insertIntoHasMaps("OPERATOR", "(");
+        insertIntoHasMaps("OPERATOR", ")");
+        insertIntoHasMaps("OPERATOR", "{");
+        insertIntoHasMaps("OPERATOR", "}");
     }
 
     public void visit(WhileStmt ws, Void arg) {
@@ -161,6 +219,10 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         System.out.println("OPERATOR : while" + " -> ["+ws.getBegin().get()+"]-[WhileStmt]");
         countPredicaeNode++;
         insertIntoHasMaps("OPERATOR", "while");
+        insertIntoHasMaps("OPERATOR", "(");
+        insertIntoHasMaps("OPERATOR", ")");
+        insertIntoHasMaps("OPERATOR", "{");
+        insertIntoHasMaps("OPERATOR", "}");
     }
 
     public void visit(ForStmt fs, Void arg) {
@@ -168,6 +230,10 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         System.out.println("OPERATOR : for" + " -> ["+fs.getBegin().get()+"]-[ForStmt]");
         countPredicaeNode++;
         insertIntoHasMaps("OPERATOR", "for");
+        insertIntoHasMaps("OPERATOR", "(");
+        insertIntoHasMaps("OPERATOR", ")");
+        insertIntoHasMaps("OPERATOR", "{");
+        insertIntoHasMaps("OPERATOR", "}");
     }
 
     public void visit(ForeachStmt fes, Void arg) {
@@ -175,6 +241,10 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         System.out.println("OPERATOR : foreach" + " -> ["+fes.getBegin().get()+"]-[ForeachStmt]");
         countPredicaeNode++;
         insertIntoHasMaps("OPERATOR", "foreach");
+        insertIntoHasMaps("OPERATOR", "(");
+        insertIntoHasMaps("OPERATOR", ")");
+        insertIntoHasMaps("OPERATOR", "{");
+        insertIntoHasMaps("OPERATOR", "}");
     }
     /* END BLOCK UNTUK MENCARI OPERATOR PEDICATE NODE */
 
@@ -182,12 +252,18 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         super.visit(ts, arg);
         System.out.println("OPERATOR : try" + " -> ["+ts.getBegin().get()+"]-[TryStmt]");
         insertIntoHasMaps("OPERATOR", "try");
+        insertIntoHasMaps("OPERATOR", "{");
+        insertIntoHasMaps("OPERATOR", "}");
     }
 
     public void visit(CatchClause ts, Void arg) {
         super.visit(ts, arg);
         System.out.println("OPERATOR : catch" + " -> ["+ts.getBegin().get()+"]-[CatchClause]");
         insertIntoHasMaps("OPERATOR", "catch");
+        insertIntoHasMaps("OPERATOR", "(");
+        insertIntoHasMaps("OPERATOR", ")");
+        insertIntoHasMaps("OPERATOR", "{");
+        insertIntoHasMaps("OPERATOR", "}");
     }
 
     public void visit(ThisExpr te, Void arg) {
@@ -241,7 +317,6 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
 
     public void insertIntoHasMaps(String category, String node){
         if (category.equalsIgnoreCase("OPERATOR")){
-
             if(!listOfOperator.containsKey(node)){
                 listOfOperator.put(node, 1);
                 System.out.println("OPERATOR: " + node + " = 1");
@@ -270,8 +345,4 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         predicateNode.setPredicateNode(countPredicaeNode);
         System.out.println("Operator and Operand's Data has been saved");
     }
-
-
-
-
 }
