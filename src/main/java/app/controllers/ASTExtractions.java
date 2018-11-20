@@ -73,7 +73,7 @@ public class ASTExtractions extends Task<Void> {
             System.out.println("Class name  : " + dataMethodProperty.getValue().get(0));
             System.out.println("Method name : " + dataMethodProperty.getValue().get(1));
             System.out.println("Body Method : \n" + dataMethodProperty.getValue().get(5));
-            updateMessage("Extracting Operator and Operand from: " + dataMethodProperty.getValue().get(1));
+            updateMessage("Extracting: " + dataMethodProperty.getValue().get(1));
 
             try {
                 String sourceCode = dataMethodProperty.getValue().get(5)
