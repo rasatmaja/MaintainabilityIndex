@@ -37,7 +37,7 @@
                         <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Programs Length" textFill="#324c5b" />
                         <Label fx:id="label_HL" layoutX="11.0" layoutY="25.0" text="13" textFill="#324c5b">
                            <font>
-                              <Font name="Roboto Bold" size="35.0" />
+                              <Font name="Roboto Bold" size="30.0" />
                            </font>
                         </Label>
                      </children>
@@ -47,7 +47,7 @@
                         <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Programs Vocabulary" textFill="#324c5b" />
                         <Label fx:id="label_HVc" layoutX="11.0" layoutY="25.0" text="3" textFill="#324c5b">
                            <font>
-                              <Font name="Roboto Bold" size="35.0" />
+                              <Font name="Roboto Bold" size="30.0" />
                            </font>
                         </Label>
                      </children>
@@ -55,9 +55,9 @@
                   <Pane layoutX="564.0" layoutY="329.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="179.0">
                      <children>
                         <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Programs Volume" textFill="#324c5b" />
-                        <Label fx:id="label_HV" layoutX="11.0" layoutY="25.0" text="78.35" textFill="#324c5b">
+                        <Label fx:id="label_HV" layoutX="11.0" layoutY="25.0" text="78.35" textFill="#324c5b" wrapText="true">
                            <font>
-                              <Font name="Roboto Bold" size="35.0" />
+                              <Font name="Roboto Bold" size="30.0" />
                            </font>
                         </Label>
                      </children>
@@ -65,9 +65,9 @@
                   <Pane layoutX="721.0" layoutY="329.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="22.0">
                      <children>
                         <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Programs Difficulties" textFill="#324c5b" />
-                        <Label fx:id="label_HD" layoutX="11.0" layoutY="25.0" text="98.76" textFill="#324c5b">
+                        <Label fx:id="label_HD" layoutX="11.0" layoutY="25.0" text="98.76" textFill="#324c5b" wrapText="true">
                            <font>
-                              <Font name="Roboto Bold" size="35.0" />
+                              <Font name="Roboto Bold" size="30.0" />
                            </font>
                         </Label>
                      </children>
@@ -77,7 +77,7 @@
                         <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Programs Effots" textFill="#324c5b" />
                         <Label fx:id="label_HE" layoutX="11.0" layoutY="25.0" maxWidth="-Infinity" prefHeight="43.0" prefWidth="131.0" text="46.9" textFill="#324c5b" wrapText="true">
                            <font>
-                              <Font name="Roboto Bold" size="35.0" />
+                              <Font name="Roboto Bold" size="30.0" />
                            </font>
                         </Label>
                      </children>
@@ -85,9 +85,9 @@
                   <Pane layoutX="721.0" layoutY="414.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="22.0">
                      <children>
                         <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Bug Expected" textFill="#324c5b" />
-                        <Label fx:id="label_HB" layoutX="11.0" layoutY="25.0" text="43.6" textFill="#324c5b">
+                        <Label fx:id="label_HB" layoutX="11.0" layoutY="25.0" text="43.6" textFill="#324c5b" wrapText="true">
                            <font>
-                              <Font name="Roboto Bold" size="35.0" />
+                              <Font name="Roboto Bold" size="30.0" />
                            </font>
                         </Label>
                      </children>
@@ -95,39 +95,39 @@
                   <Pane layoutX="564.0" layoutY="499.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="179.0">
                      <children>
                         <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Cyclomatic Complexity" textFill="#324c5b" />
-                        <Label fx:id="label_CC" layoutX="11.0" layoutY="25.0" text="9" textFill="#324c5b">
+                        <Label fx:id="label_CC" layoutX="11.0" layoutY="25.0" text="9" textFill="#324c5b" wrapText="true">
                            <font>
-                              <Font name="Roboto Bold" size="35.0" />
+                              <Font name="Roboto Bold" size="30.0" />
                            </font>
                         </Label>
                      </children>
                   </Pane>
                   <Pane layoutX="721.0" layoutY="499.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="22.0">
                      <children>
-                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Line of Code" textFill="#2d2d2d" />
-                        <Label fx:id="label_LOC" layoutX="11.0" layoutY="25.0" text="119" textFill="#324c5b">
+                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Line of Code/ perCM" textFill="#2d2d2d" />
+                        <Label fx:id="label_LOC" layoutX="11.0" layoutY="25.0" text="119" textFill="#324c5b" wrapText="true">
                            <font>
-                              <Font name="Roboto Bold" size="35.0" />
+                              <Font name="Roboto Bold" size="30.0" />
                            </font>
                         </Label>
                      </children>
                   </Pane>
                   <Pane layoutX="564.0" layoutY="159.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="179.0">
                      <children>
-                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Operands" textFill="#324c5b" />
+                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Distinct/ Total Operand" textFill="#324c5b" />
                         <Label fx:id="label_operand" layoutX="11.0" layoutY="25.0" text="3/10" textFill="#324c5b">
                            <font>
-                              <Font name="Roboto Bold" size="35.0" />
+                              <Font name="Roboto Bold" size="30.0" />
                            </font>
                         </Label>
                      </children>
                   </Pane>
                   <Pane layoutX="721.0" layoutY="159.0" prefHeight="74.0" prefWidth="148.0" styleClass="card" AnchorPane.rightAnchor="23.0">
                      <children>
-                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Operators" textFill="#324c5b" />
+                        <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Distinct/ Total Operator" textFill="#324c5b" />
                         <Label fx:id="label_operator" layoutX="11.0" layoutY="25.0" text="5/39" textFill="#324c5b">
                            <font>
-                              <Font name="Roboto Bold" size="35.0" />
+                              <Font name="Roboto Bold" size="30.0" />
                            </font>
                         </Label>
                      </children>
