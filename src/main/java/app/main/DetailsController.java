@@ -194,7 +194,11 @@ public class DetailsController implements Initializable {
         }
 
         label_CC.setText(cyclomaticComplexityResult.get().get(methodKey).toString());
-        label_LOC.setText(methodProperty.get().get(methodKey).get(2));
+        int loc = Integer.valueOf(methodProperty.get().get(methodKey).get(2));
+        double comment = Double.valueOf(methodProperty.get().get(methodKey).get(3));
+        double perCM = 100 * comment / loc;
+        System.out.println("perCM: " + methodProperty.get().get(methodKey).get(3));
+        label_LOC.setText(loc+"/ "+numberFormat.format(perCM));
 
         int distinctOperand = operandAndOperator.getDistinctOperand(methodKey);
         int distinctOperator = operandAndOperator.getDistinctOperator(methodKey);
