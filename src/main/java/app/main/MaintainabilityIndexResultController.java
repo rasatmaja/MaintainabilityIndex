@@ -9,16 +9,26 @@ import animatefx.animation.*;
 import app.controllers.*;
 import app.models.*;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +44,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  * FXML Controller class
@@ -67,6 +82,10 @@ public class MaintainabilityIndexResultController implements Initializable {
     private JFXButton btnVisualization;
     @FXML
     private Label statusbar_errorLog;
+    @FXML
+    private JFXTextField input_filter;
+    @FXML
+    private Label export;
 
     private final Stage maintainabilityIndexResultStage;
     private long start;
@@ -74,6 +93,7 @@ public class MaintainabilityIndexResultController implements Initializable {
     private MaintainabilityIndexResult maintainabilityIndexResult;
     private MethodProperty methodProperty;
     private FilePath filePath;
+    private int totolRow;
 
     @FXML
     private TreeTableColumn<MaintainabilityIndexProperty, String> id_column;
@@ -87,6 +107,9 @@ public class MaintainabilityIndexResultController implements Initializable {
     private final Image ICON_HIGH = new Image(getClass().getResourceAsStream("/img/high.png"), 13, 13, false, true);
     private final Image ICON_MODERATE = new Image(getClass().getResourceAsStream("/img/moderate.png"), 13, 13, false, true);
     private final Image ICON_LOW = new Image(getClass().getResourceAsStream("/img/low.png"), 13, 13, false, true);
+
+
+    TreeItem<MaintainabilityIndexProperty> root = new TreeItem<>(new MaintainabilityIndexProperty("","",0.0));
 
     public MaintainabilityIndexResultController(){
         this.maintainabilityIndexResultStage = new Stage();
@@ -140,6 +163,7 @@ public class MaintainabilityIndexResultController implements Initializable {
         btnClose.setVisible(false);
         btnVisualization.setVisible(false);
         indicator_pane.setVisible(false);
+        input_filter.setVisible(false);
 
 
         this.maintainabilityIndexResult = MaintainabilityIndexResult.getInstance();
@@ -169,10 +193,12 @@ public class MaintainabilityIndexResultController implements Initializable {
 
                 long time = (System.currentTimeMillis() - start);
                 statusbar_executionTime.setText("Time to calculations: " + time + "ms");
-                statusbar_fileFound.setText(methodProperty.get().size()+" method has been calculated");
+                //statusbar_fileFound.setText(methodProperty.get().size()+" method has been calculated");
+                statusbar_fileFound.setText(methodProperty.get().size()+" method");
 
                 populateTreeTable();
-
+                input_filter.setVisible(true);
+                new FadeInDown(input_filter).play();
                 MI_TreeTableView.setVisible(true);
                 new FadeInDown(MI_TreeTableView).play();
                 btnClose.setVisible(true);
@@ -183,10 +209,23 @@ public class MaintainabilityIndexResultController implements Initializable {
                 new FadeInLeft(indicator_pane).play();
 
                 statusbar_errorLog.setVisible(true);
-                statusbar_errorLog.setText(ErrorLog.getInstance().get().size()+" errors found");
+                statusbar_errorLog.setText(ErrorLog.getInstance().get().size()+" error(s) found");
                 statusbar_errorLog.setOnMouseClicked(event -> {
                     new ErrorLogController();
                 });
+
+                export.setVisible(true);
+                export.setText("Export...");
+                export.setOnMouseClicked(event -> {
+                    try {
+                        exportToExcel();
+                        export.setText("Export complete");
+                    } catch (IOException ex) {
+                        Logger.getLogger(MaintainabilityIndexResultController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+
+
             });
 
             ExecutorService executorService = Executors.newFixedThreadPool(1);
@@ -202,14 +241,14 @@ public class MaintainabilityIndexResultController implements Initializable {
 
         String tempClassName ="";
         TreeItem<MaintainabilityIndexProperty> className = null;
-        TreeItem<MaintainabilityIndexProperty> root = new TreeItem<>(new MaintainabilityIndexProperty("","",0.0));
+
         for (Map.Entry<Integer, List<String>> property : methodProperty.get().entrySet()) {
             int key = property.getKey();
-            System.out.println("ID         : " + key);
-            System.out.println("Class Name : " + property.getValue().get(0));
+            //System.out.println("ID         : " + key);
+            //System.out.println("Class Name : " + property.getValue().get(0));
 
-            System.out.println("Method Name: " + property.getValue().get(1));
-            System.out.println("MI Value   : " + maintainabilityIndexResult.get().get(key));
+            //System.out.println("Method Name: " + property.getValue().get(1));
+            //System.out.println("MI Value   : " + maintainabilityIndexResult.get().get(key));
 
             String classNameProperty = property.getValue().get(0);
             String methodNameProperty = property.getValue().get(1);
@@ -254,7 +293,7 @@ public class MaintainabilityIndexResultController implements Initializable {
 
 
         id_column.setCellValueFactory((TreeTableColumn.CellDataFeatures<MaintainabilityIndexProperty, String> param) -> param.getValue().getValue().idProperty());
-        id_column.setVisible(false);
+        id_column.setVisible(true);
         name_column.setCellValueFactory((TreeTableColumn.CellDataFeatures<MaintainabilityIndexProperty, String> param) -> param.getValue().getValue().nameProperty());
         maintainabiliiti_index_column.setCellValueFactory((TreeTableColumn.CellDataFeatures<MaintainabilityIndexProperty, String> param) -> param.getValue().getValue().maintainability_indexProperty());
         status_column.setCellValueFactory((TreeTableColumn.CellDataFeatures<MaintainabilityIndexProperty, String> param) -> param.getValue().getValue().statusProperty());
@@ -265,8 +304,41 @@ public class MaintainabilityIndexResultController implements Initializable {
         root.setExpanded(true);
         MI_TreeTableView.setRoot(root);
         MI_TreeTableView.setShowRoot(false);
+        totolRow = root.getChildren().size()+ methodProperty.get().size();
+
+        input_filter.textProperty().addListener((observable, oldValue, newValue) -> filterChanged(newValue));
 
     }
+
+    private void filterChanged(String filter) {
+        if (filter.isEmpty()) {
+            MI_TreeTableView.setRoot(root);
+        }
+        else {
+            TreeItem<MaintainabilityIndexProperty> filteredRoot = new TreeItem<>();
+            filter(root, filter, filteredRoot);
+            MI_TreeTableView.setRoot(filteredRoot);
+        }
+    }
+
+
+    private void filter(TreeItem<MaintainabilityIndexProperty> root, String filter, TreeItem<MaintainabilityIndexProperty> filteredRoot) {
+        for (TreeItem<MaintainabilityIndexProperty> child : root.getChildren()) {
+            TreeItem<MaintainabilityIndexProperty> filteredChild = new TreeItem<>();
+            filteredChild.setValue(child.getValue());
+            filteredChild.setExpanded(true);
+            filter(child, filter, filteredChild );
+            if (!filteredChild.getChildren().isEmpty() || isMatch(filteredChild.getValue(), filter)) {
+                filteredRoot.getChildren().add(filteredChild);
+            }
+        }
+    }
+
+    private boolean isMatch(MaintainabilityIndexProperty value, String filter) {
+        return value.getName().toLowerCase().contains(filter.toLowerCase()) ||
+                value.getMaintainability_index().contains(filter.toLowerCase());
+    }
+
 
     @FXML
     public void treeTableClick (MouseEvent event){
@@ -290,5 +362,32 @@ public class MaintainabilityIndexResultController implements Initializable {
 
         HalsteadMetricsCalculation.getInstance().calculateAvg();
         CyclomaticComplexityCalculations.getInstance().calculateAvg();
+    }
+
+    private void exportToExcel() throws IOException{
+        Workbook workbook = new HSSFWorkbook();
+        Sheet spreadsheet = workbook.createSheet("sample");
+
+        Row row = spreadsheet.createRow(0);
+
+        for (int j = 0; j < MI_TreeTableView.getColumns().size(); j++) {
+            row.createCell(j).setCellValue(MI_TreeTableView.getColumns().get(j).getText());
+        }
+
+        for (int i = 0; i < totolRow; i++) {
+            row = spreadsheet.createRow(i + 1);
+            for (int j = 0; j < MI_TreeTableView.getColumns().size(); j++) {
+                if(MI_TreeTableView.getColumns().get(j).getCellData(i) != null) {
+                    row.createCell(j).setCellValue(MI_TreeTableView.getColumns().get(j).getCellData(i).toString());
+                }
+                else {
+                    row.createCell(j).setCellValue("");
+                }
+            }
+        }
+
+        try (FileOutputStream fileOut = new FileOutputStream("workbook.xls")) {
+            workbook.write(fileOut);
+        }
     }
 }
