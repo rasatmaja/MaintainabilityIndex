@@ -5,6 +5,7 @@ import app.models.HalsteadMetricsResult;
 import app.models.MethodProperty;
 import app.models.OperandAndOperator;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,26 +50,26 @@ public class HalsteadMetricsCalculation {
         double distinctOperand = operandAndOperator.getDistinctOperand(this.methodKey);
 
         this.lengthOfProgram = totalOperand + totalOperator;
-        System.out.println(methodKey + ": " + lengthOfProgram);
+        //System.out.println(methodKey + ": " + lengthOfProgram);
 
         this.vocabularyOfProgram = distinctOperand + distinctOperator;
-        System.out.println(methodKey + ": " + vocabularyOfProgram);
+        //System.out.println(methodKey + ": " + vocabularyOfProgram);
 
         this.volumeOfProgram = (this.lengthOfProgram != 0)? this.lengthOfProgram  * (Math.log(this.vocabularyOfProgram)/Math.log(2)) : 0;
-        System.out.println(methodKey + ": " + volumeOfProgram);
+        //System.out.println(methodKey + ": " + volumeOfProgram);
 
         this.difficulty = (distinctOperand != 0 && distinctOperator != 0)? (distinctOperator/2.0) * (totalOperand/distinctOperand) : 0;
-        System.out.println(methodKey + ": " + difficulty);
+        //System.out.println(methodKey + ": " + difficulty);
 
         this.effort = this.difficulty * this.volumeOfProgram;
-        System.out.println(methodKey + ": " + effort);
+        //System.out.println(methodKey + ": " + effort);
 
         this.bugExpected = this.volumeOfProgram / 3000;
-        System.out.println(methodKey + ": " + bugExpected);
+        //System.out.println(methodKey + ": " + bugExpected);
 
         save();
 
-        return this.volumeOfProgram;
+        return Double.parseDouble(new DecimalFormat("0.##").format(this.volumeOfProgram));
     }
 
     public void calculateAvg(){
@@ -101,15 +102,15 @@ public class HalsteadMetricsCalculation {
                     effort += halsteadMetricsResult.get().get(methodKey).get(4);
                     bugExpected += halsteadMetricsResult.get().get(methodKey).get(5);
 
-                    System.out.println("Method Class Name : " + methodClassName);
-                    System.out.println("Method Name       : " + methodData.getValue().get(1));
-                    System.out.println("AVG Length        : " + lengthOfProgram);
-                    System.out.println("AVG Vocab         : " + vocabularyOfProgram);
-                    System.out.println("AVG Volume        : " + volumeOfProgram);
-                    System.out.println("AVG Diffi         : " + difficulty);
-                    System.out.println("AVG Effort        : " + effort);
-                    System.out.println("AVG Bug           : " + bugExpected);
-                    System.out.println();
+                    //System.out.println("Method Class Name : " + methodClassName);
+                    //System.out.println("Method Name       : " + methodData.getValue().get(1));
+                    //System.out.println("AVG Length        : " + lengthOfProgram);
+                    //System.out.println("AVG Vocab         : " + vocabularyOfProgram);
+                    //System.out.println("AVG Volume        : " + volumeOfProgram);
+                    //System.out.println("AVG Diffi         : " + difficulty);
+                    //System.out.println("AVG Effort        : " + effort);
+                    //System.out.println("AVG Bug           : " + bugExpected);
+                    //System.out.println();
 
                 }
             }
@@ -121,15 +122,15 @@ public class HalsteadMetricsCalculation {
             double avgEffort = effort / count;
             double avgBugExpected = bugExpected / count;
 
-            System.out.println("========================== DEBUG AVG HALSTEAD ==========================");
-            System.out.println("Class Name : " + className);
-            System.out.println("AVG Length : " + avgLengthOfProgram);
-            System.out.println("AVG Vocab  : " + avgVocabularyOfProgram);
-            System.out.println("AVG Volume : " + avgVolumeOfProgram);
-            System.out.println("AVG Diffi  : " + avgDifficulty);
-            System.out.println("AVG Effort : " + avgEffort);
-            System.out.println("AVG Bug    : " + avgBugExpected);
-            System.out.println("======================== END DEBUG AVG HALSTEAD ========================");
+            //System.out.println("========================== DEBUG AVG HALSTEAD ==========================");
+            //System.out.println("Class Name : " + className);
+            //System.out.println("AVG Length : " + avgLengthOfProgram);
+            //System.out.println("AVG Vocab  : " + avgVocabularyOfProgram);
+            //System.out.println("AVG Volume : " + avgVolumeOfProgram);
+            //System.out.println("AVG Diffi  : " + avgDifficulty);
+            //System.out.println("AVG Effort : " + avgEffort);
+            //System.out.println("AVG Bug    : " + avgBugExpected);
+            //System.out.println("======================== END DEBUG AVG HALSTEAD ========================");
 
             halsteadMetricsResult.setListOfAvgHalsteadMetric(className, new ArrayList<>(Arrays.asList(
                     avgLengthOfProgram,

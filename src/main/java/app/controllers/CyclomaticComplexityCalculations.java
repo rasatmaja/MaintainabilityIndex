@@ -33,7 +33,6 @@ public class CyclomaticComplexityCalculations {
         this.methodKey = key;
         predicateNode = PredicateNode.getInstance();
         this.cyclomaticComplexity = predicateNode.getPredicateNode(this.methodKey) + 1;
-
         save();
         return this.cyclomaticComplexity;
     }
@@ -57,21 +56,21 @@ public class CyclomaticComplexityCalculations {
 
                     cyclomaticComplexity = cyclomaticComplexityResult.get().get(methodKey);
 
-                    System.out.println("Method Class Name : " + methodClassName);
-                    System.out.println("Method Name       : " + methodData.getValue().get(1));
-                    System.out.println("Cyclomatoc        : " + cyclomaticComplexity);
-                    System.out.println();
+                    //System.out.println("Method Class Name : " + methodClassName);
+                    //System.out.println("Method Name       : " + methodData.getValue().get(1));
+                    //System.out.println("Cyclomatoc        : " + cyclomaticComplexity);
+                    //System.out.println();
 
                 }
             }
 
             double avgCyclomaticComplexity = cyclomaticComplexity / count;
 
-            System.out.println("========================== DEBUG AVG CC ==========================");
-            System.out.println("Class Name : " + className);
-            System.out.println("AVG Length : " + avgCyclomaticComplexity);
+            //System.out.println("========================== DEBUG AVG CC ==========================");
+            //System.out.println("Class Name : " + className);
+            //System.out.println("AVG Length : " + avgCyclomaticComplexity);
 
-            System.out.println("======================== END DEBUG AVG CC ========================");
+            //System.out.println("======================== END DEBUG AVG CC ========================");
 
             cyclomaticComplexityResult.setListOfAvgCyclomaticComplexity(className, avgCyclomaticComplexity);
 

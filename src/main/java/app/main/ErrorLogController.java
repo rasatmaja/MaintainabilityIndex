@@ -38,6 +38,9 @@ public class ErrorLogController {
             this.errorLogStage.initOwner(null);
             this.errorLogStage.show();
             populateErrorLogs();
+            this.errorLogStage.setOnCloseRequest(event -> {
+                error_listview.getItems().clear();
+            });
 
         } catch (IOException e) {
             e.printStackTrace();

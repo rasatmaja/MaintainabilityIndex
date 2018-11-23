@@ -3,6 +3,8 @@
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -17,6 +19,26 @@
          <children>
             <AnchorPane prefHeight="600.0" prefWidth="891.0" style="-fx-background-color: #F4F7FA;" stylesheets="@../styles/Styles.css">
                <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0">
+                     <image>
+                        <Image url="@../img/img2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <image>
+                        <Image url="@../img/img2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+                     <image>
+                        <Image url="@../img/img2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="691.0" layoutY="8.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+                     <image>
+                        <Image url="@../img/img2.png" />
+                     </image>
+                  </ImageView>
                   <Pane layoutX="564.0" layoutY="74.0" prefHeight="74.0" prefWidth="304.0" styleClass="card" AnchorPane.rightAnchor="23.0">
                      <children>
                         <Label layoutX="10.0" layoutY="5.0" styleClass="card-title" text="Maintainability Index" textFill="#324c5b" />
@@ -142,12 +164,12 @@
                         <CodeArea fx:id="code_area" editable="false" layoutX="2.0" layoutY="31.0" prefHeight="469.0" prefWidth="525.0" stylesheets="@../styles/java-keywords.css" wrapText="true" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
                      </children>
                   </AnchorPane>
-                  <Label layoutX="38.0" layoutY="41.0" text="Name : " textFill="#314b599c">
+                  <Label layoutX="38.0" layoutY="41.0" text="Name : " textFill="#0000009c">
                      <font>
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="label_name" alignment="TOP_LEFT" layoutX="94.0" layoutY="41.0" maxWidth="774.0" prefHeight="23.0" prefWidth="773.0" text="void populateTreeTable()" textFill="#324c5b">
+                  <Label fx:id="label_name" alignment="TOP_LEFT" layoutX="94.0" layoutY="41.0" maxWidth="774.0" prefHeight="23.0" prefWidth="773.0" text="void populateTreeTable()" textFill="#324c5b" AnchorPane.topAnchor="41.0">
                      <font>
                         <Font name="Roboto Bold" size="16.0" />
                      </font>

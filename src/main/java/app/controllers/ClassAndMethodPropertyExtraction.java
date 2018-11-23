@@ -59,7 +59,8 @@ public class ClassAndMethodPropertyExtraction extends VoidVisitorAdapter<Void> {
                     String methodName = methodDeclaration.getDeclarationAsString(false, true, false);
 
                     String simpleName = methodDeclaration.getName().asString();
-                    String type = methodDeclaration.getType().asString();
+                    //String type = methodDeclaration.getType().asString();
+                    String type = "method";
                     String parameterType = methodDeclaration.getTypeParameters().toString();
                     String parameterName = methodDeclaration.getParameters().toString();
 
@@ -80,7 +81,8 @@ public class ClassAndMethodPropertyExtraction extends VoidVisitorAdapter<Void> {
                     String methodName = constructorDeclaration.getDeclarationAsString(false, true, false);
 
                     String simpleName = constructorDeclaration.getName().asString();
-                    String type = className;
+                    //String type = className;
+                    String type = "constructor";
                     String parameterType = constructorDeclaration.getTypeParameters().toString();
                     String parameterName = constructorDeclaration.getParameters().toString();
 
@@ -90,9 +92,12 @@ public class ClassAndMethodPropertyExtraction extends VoidVisitorAdapter<Void> {
 
                     String methodSourceCode = constructorDeclaration.toString();
                     String bodyMethod = constructorDeclaration.getBody().toString();
-
                     bodyMethod.replaceAll("(?m)^\\s", "");
                     int methodLineOfCode = bodyMethod.split(System.getProperty("line.separator")).length - 2;
+
+                    methodSourceCode.replaceAll("(?m)^\\s", "");
+                    bodyMethod = "class "+className+" {\n " + className +"()"+ bodyMethod + "\n }";
+
 
                     methodProperty.set(className, methodName, methodLineOfCode, methodLineOfComment, methodSourceCode, bodyMethod, simpleName, type, parameterType, parameterName);
 

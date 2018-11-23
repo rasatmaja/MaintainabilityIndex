@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.geometry.Insets?>
@@ -17,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="891.0" style="-fx-background-color: #F6F8FA;" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
       <HBox maxWidth="1.7976931348623157E308" prefHeight="22.0" spacing="18.0" style="-fx-background-color: #007BCC;" BorderPane.alignment="CENTER">
          <children>
@@ -62,6 +63,14 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="TIMES_CIRCLE" size="16" />
                </graphic>
             </Label>
+            <Label fx:id="export" layoutX="153.0" layoutY="10.0" prefHeight="35.0" text="Export to spersheets" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+               <graphic>
+                  <OctIconView fill="WHITE" glyphName="FILE_SYMLINK_DIRECTORY" size="16" />
+               </graphic>
+            </Label>
          </children>
          <padding>
             <Insets left="10.0" />
@@ -79,9 +88,33 @@
          <children>
             <AnchorPane fx:id="pane_listFile" prefHeight="578.0" prefWidth="553.0" style="-fx-background-color: #F6F8FA;">
                <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <image>
+                        <Image url="@../img/img2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="691.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <image>
+                        <Image url="@../img/img2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutY="460.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+                     <image>
+                        <Image url="@../img/img2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="691.0" layoutY="470.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <image>
+                        <Image url="@../img/img2.png" />
+                     </image>
+                  </ImageView>
+                  <JFXTextField fx:id="input_filter" focusColor="#007bcc" labelFloat="true" layoutX="49.0" layoutY="30.0" prefHeight="25.0" prefWidth="391.0" promptText="Filter" AnchorPane.leftAnchor="49.0" AnchorPane.topAnchor="30.0">
+                     <font>
+                        <Font size="13.0" />
+                     </font></JFXTextField>
                   <JFXButton fx:id="btnClose" focusTraversable="false" layoutX="575.0" layoutY="531.0" onAction="#close" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Close" AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="186.0" />
                   <JFXButton fx:id="btnVisualization" focusTraversable="false" layoutX="714.0" layoutY="530.0" onAction="#Visualization" prefHeight="25.0" prefWidth="130.0" styleClass="button-browse" text="Visualization" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="47.0" />
-                  <TreeTableView fx:id="MI_TreeTableView" layoutX="46.0" layoutY="48.0" onMouseClicked="#treeTableClick" prefHeight="457.0" prefWidth="799.0" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="48.0">
+                  <TreeTableView fx:id="MI_TreeTableView" layoutX="46.0" layoutY="64.0" onMouseClicked="#treeTableClick" prefHeight="441.0" prefWidth="799.0" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="64.0">
                     <columns>
                       <TreeTableColumn fx:id="name_column" maxWidth="1.7976931348623157E308" prefWidth="454.0" text="Name" />
                       <TreeTableColumn fx:id="maintainabiliiti_index_column" prefWidth="176.0" text="Maintainability Index" />

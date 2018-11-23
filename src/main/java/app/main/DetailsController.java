@@ -122,7 +122,6 @@ public class DetailsController implements Initializable {
         this.detailStage = new Stage();
         Parent root;
         try {
-            //root = FXMLLoader.load(getClass().getResource("/fxml/Details.fxml"));
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Details.fxml"));
             loader.setController(this);
             root = loader.load();
@@ -197,7 +196,7 @@ public class DetailsController implements Initializable {
         int loc = Integer.valueOf(methodProperty.get().get(methodKey).get(2));
         double comment = Double.valueOf(methodProperty.get().get(methodKey).get(3));
         double perCM = 100 * comment / loc;
-        System.out.println("perCM: " + methodProperty.get().get(methodKey).get(3));
+        //System.out.println("perCM: " + methodProperty.get().get(methodKey).get(3));
         label_LOC.setText(loc+"/ "+numberFormat.format(perCM));
 
         int distinctOperand = operandAndOperator.getDistinctOperand(methodKey);

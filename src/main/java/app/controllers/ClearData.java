@@ -35,5 +35,6 @@ public class ClearData {
         halsteadMetricsResult.clear();
         cyclomaticComplexityResult.clear();
         maintainabilityIndexResult.clear();
+        ErrorLog.getInstance().clear();
     }
 }

@@ -20,7 +20,7 @@ public class ClassEdgeProperty {
         if (!source.equalsIgnoreCase(target) && source != null && target != null){
             classProperty.get().entrySet().forEach(classData -> {
                 if (target.equalsIgnoreCase(classData.getValue().get(0))){
-                    System.out.println("Size : " + listOfClassEdgeProperty.size());
+                    //System.out.println("Size : " + listOfClassEdgeProperty.size());
                     if(listOfClassEdgeProperty.size() > 0){
                         if(!isExist(source, target)){
                             listOfClassEdgeProperty.put(listOfClassEdgeProperty.size(), new ArrayList<>(Arrays.asList(source, target)));

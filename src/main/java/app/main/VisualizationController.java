@@ -88,7 +88,6 @@ public class VisualizationController implements Initializable {
             graph = new Graph();
             graph_area.setCenter(graph.getCanvas());
 
-            //add();
             ExecutorService service = Executors.newFixedThreadPool(1);
 
             addGraphComponents.setOnRunning(task -> {
