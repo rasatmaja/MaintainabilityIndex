@@ -14,6 +14,7 @@ public class RandomLayout implements Layout {
 	public void execute(Graph graph) {
 		final List<ICell> cells = graph.getModel().getAllCells();
 
+
 		for (final ICell cell : cells) {
 			final double x = rnd.nextDouble() * 500;
 			final double y = rnd.nextDouble() * 500;

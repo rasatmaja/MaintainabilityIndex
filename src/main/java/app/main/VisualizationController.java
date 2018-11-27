@@ -67,10 +67,10 @@ public class VisualizationController implements Initializable {
 
     private final Stage visualizationStage;
 
-    FilePath filePath;
-    long start;
-    Graph graph;
-    int totalsNode;
+    private FilePath filePath;
+    private long start;
+    private Graph graph;
+    private int totalsNode;
 
     public VisualizationController(){
         this.filePath = FilePath.getInstance();
@@ -156,7 +156,8 @@ public class VisualizationController implements Initializable {
                 final String className = classData.getValue().get(0);
                 updateMessage("add graph: "+className);
                 final String classType = classData.getValue().get(4);
-                final ICell classUML = new ClassDiagramCell(className, classType, label_MI_value, label_status_MI);
+                ClassDiagramCell a= new ClassDiagramCell(className, classType, label_MI_value, label_status_MI);;
+                final ICell classUML = a;
                 cell.put(className, classUML);
                 model.addCell(classUML);
             });
@@ -169,8 +170,8 @@ public class VisualizationController implements Initializable {
                     final String target = edge.getValue().get(1);
                     updateMessage("add edge: "+source + " -> " + target);
                     if (cell.get(source) == null || cell.get(target) == null){
-                        System.out.println("source "+cell.get(source));
-                        System.out.println("target "+target);
+                        //System.out.println("source "+cell.get(source));
+                        //System.out.println("target "+target);
                     } else {
                         ICell sourceCell = cell.get(source);
                         ICell targetCell = cell.get(target);
