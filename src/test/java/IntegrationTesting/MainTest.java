@@ -22,6 +22,7 @@ public class MainTest {
     private OperandAndOperatorExtraction operandAndOperatorExtraction;
     private StubInsertIntoHashMaps stubInsertIntoHashMaps;
     private ArrayList<String> expectedResult = new ArrayList<>();
+
     @Before
     public void setUp() {
         sourceCode = "{\n"
