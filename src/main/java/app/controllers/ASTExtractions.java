@@ -56,6 +56,7 @@ public class ASTExtractions extends Task<Void> {
                 //System.out.println(FILE_PATH + " : The identifier doesn't represent a java file");
                 //System.out.println((char)27 + "[30m");
                 //System.out.println();
+                System.out.println(e.getMessage());
                 ErrorLog.getInstance().set(new ArrayList<>(Arrays.asList(
                         values.get(0),
                         values.get(1),

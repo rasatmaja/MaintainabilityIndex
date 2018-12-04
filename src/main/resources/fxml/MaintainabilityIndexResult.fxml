@@ -108,7 +108,7 @@
                         <Image url="@../img/img2.png" />
                      </image>
                   </ImageView>
-                  <JFXTextField fx:id="input_filter" focusColor="#007bcc" labelFloat="true" layoutX="49.0" layoutY="30.0" prefHeight="25.0" prefWidth="391.0" promptText="Filter" AnchorPane.leftAnchor="49.0" AnchorPane.topAnchor="30.0">
+                  <JFXTextField fx:id="input_filter" focusColor="#007ecc" labelFloat="true" layoutX="49.0" layoutY="26.0" prefHeight="25.0" prefWidth="391.0" promptText="Filter" style="-fx-prompt-text-fill: #007ecc;" unFocusColor="#007ecc" AnchorPane.leftAnchor="49.0" AnchorPane.topAnchor="26.0">
                      <font>
                         <Font size="13.0" />
                      </font></JFXTextField>
