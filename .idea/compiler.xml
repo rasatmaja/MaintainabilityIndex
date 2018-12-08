@@ -13,4 +13,9 @@
       <module name="MaintainabilityIndex" target="1.8" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="MaintainabilityIndex" options="-bootclasspath &quot;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.2.4\jre64\lib\resources.jar;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.2.4\jre64\lib\rt.jar;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.2.4\jre64\lib\sunrsasign.jar;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.2.4\jre64\lib\jsse.jar;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.2.4\jre64\lib\jce.jar;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.2.4\jre64\lib\charsets.jar;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.2.4\jre64\lib\jfr.jar;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.2.4\jre64\classes;C:/Program Files/Java/jdk1.8.0_181/jre/lib/jfxrt.jar&quot;" />
+    </option>
+  </component>
 </project>
