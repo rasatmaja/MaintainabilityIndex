@@ -33,6 +33,9 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         operandAndOperator.setMethodPropertyKey(key);
     }
 
+    //untuk tujuan pengujian
+    public OperandAndOperatorExtraction(){}
+
     /* BLOCK UNTUK MENCARI DEKLARASI ARRAY */
     public void visit(ArrayType at, Void arg){
         super.visit(at, arg);
@@ -339,22 +342,22 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         if (category.equalsIgnoreCase("OPERATOR")){
             if(!listOfOperator.containsKey(node)){
                 listOfOperator.put(node, 1);
-                System.out.println("OPERATOR: " + node + " = 1");
+                //System.out.println("OPERATOR: " + node + " = 1");
             } else {
                 int numberOfValueOfKey = listOfOperator.get(node) + 1;
                 listOfOperator.remove(node);
                 listOfOperator.put(node, numberOfValueOfKey);
-                System.out.println("Update OPERATOR: " + node + " = " + numberOfValueOfKey);
+                //System.out.println("Update OPERATOR: " + node + " = " + numberOfValueOfKey);
             }
         } else if (category.equalsIgnoreCase("OPERAND")){
             if(!listOfOperand.containsKey(node)){
                 listOfOperand.put(node, 1);
-                System.out.println("OPERAND: " + node + " = 1");
+                //System.out.println("OPERAND: " + node + " = 1");
             } else {
                 int numberOfValueOfKey = listOfOperand.get(node) + 1;
                 listOfOperand.remove(node);
                 listOfOperand.put(node, numberOfValueOfKey);
-                System.out.println("Update OPERAND: " + node + " = " + numberOfValueOfKey);
+                //System.out.println("Update OPERAND: " + node + " = " + numberOfValueOfKey);
             }
         }
     }
@@ -371,5 +374,15 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         }
         predicateNode.setPredicateNode(countPredicaeNode);
         System.out.println("Operator and Operand's Data has been saved");
+    }
+
+    // untuk percobaan pengujian unit
+    public Map<String, Integer> getListOfOperator(){
+        return this.listOfOperator;
+    }
+
+    // untuk percobaan pengujian unit
+    public Map<String, Integer> getListOfOperand(){
+        return this.listOfOperand;
     }
 }
