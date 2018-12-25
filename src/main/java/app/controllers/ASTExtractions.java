@@ -18,10 +18,10 @@ import static com.github.javaparser.JavaParser.parse;
 import static com.github.javaparser.JavaParser.parseJavadoc;
 
 public class ASTExtractions extends Task<Void> {
-    private  String FILE_PATH;
-    CompilationUnit cu;
-    FilePath filePath;
-    MethodProperty methodProperty;
+    private String FILE_PATH;
+    private CompilationUnit cu;
+    private FilePath filePath;
+    private MethodProperty methodProperty;
 
     public ASTExtractions () {
         filePath = FilePath.getInstance();
@@ -61,6 +61,7 @@ public class ASTExtractions extends Task<Void> {
                         values.get(0),
                         values.get(1),
                         "The identifier doesn't represent a java file"
+                        //e.getMessage()
                 )));
             }
         });
@@ -105,8 +106,5 @@ public class ASTExtractions extends Task<Void> {
                 e.printStackTrace();
             }
         });
-
     }
-
-
 }
