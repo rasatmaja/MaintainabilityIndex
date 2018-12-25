@@ -353,7 +353,7 @@ public class MaintainabilityIndexResultController implements Initializable {
                 detailsController.setMethodKey(methodKey);
 
                 OperandAndOperator.getInstance().getlistMethodOperator(methodKey).entrySet().forEach(op ->{
-                    System.out.println(op.getKey() +" = "+ op.getValue());
+                    System.out.println(op.getKey() +" <=> "+ op.getValue());
                 });
             }
             detailsController.showStage();
