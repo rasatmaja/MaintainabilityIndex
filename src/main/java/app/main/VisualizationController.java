@@ -64,9 +64,7 @@ public class VisualizationController implements Initializable {
     @FXML
     private Label statusbar_fileFound;
 
-
     private final Stage visualizationStage;
-
     private FilePath filePath;
     private long start;
     private Graph graph;
