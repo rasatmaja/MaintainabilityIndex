@@ -36,7 +36,6 @@ public class MaintainaibilityIndexCalculation extends Task<Void> {
         updateMessage("Start caculating... ");
         methodProperty.get().entrySet().forEach(method ->{
             int methodKey = method.getKey();
-            System.out.println(methodKey);
 
             updateMessage("calculating method: " + method.getValue().get(6));
 
