@@ -98,18 +98,19 @@ public class DetailsController implements Initializable {
     private String className = "";
     private String code;
 
-    MaintainabilityIndexResult maintainabilityIndexResult;
-    HalsteadMetricsResult halsteadMetricsResult;
-    CyclomaticComplexityResult cyclomaticComplexityResult;
-    ClassProperty classProperty;
-    MethodProperty methodProperty;
-    OperandAndOperator operandAndOperator;
-    CodeAreaController codeAreaController;
-    FilePath filePath;
-    long start;
-    DecimalFormat numberFormat = new DecimalFormat("0.##");
+    private MaintainabilityIndexResult maintainabilityIndexResult;
+    private HalsteadMetricsResult halsteadMetricsResult;
+    private CyclomaticComplexityResult cyclomaticComplexityResult;
+    private ClassProperty classProperty;
+    private MethodProperty methodProperty;
+    private OperandAndOperator operandAndOperator;
+    private CodeAreaController codeAreaController;
+    private FilePath filePath;
+    private long start;
+    private DecimalFormat numberFormat = new DecimalFormat("0.##");
 
     public DetailsController(){
+        start = System.currentTimeMillis();
         operandAndOperator = OperandAndOperator.getInstance();
         classProperty = ClassProperty.getInstance();
         methodProperty = MethodProperty.getInstance();
@@ -117,7 +118,7 @@ public class DetailsController implements Initializable {
         cyclomaticComplexityResult = CyclomaticComplexityResult.getInstance();
         maintainabilityIndexResult = MaintainabilityIndexResult.getInstance();
         this.filePath = FilePath.getInstance();
-        start = System.currentTimeMillis();
+
 
         this.detailStage = new Stage();
         Parent root;
@@ -132,14 +133,13 @@ public class DetailsController implements Initializable {
             this.detailStage.initModality(Modality.APPLICATION_MODAL);
             this.detailStage.initOwner(null);
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void showStage() {
-        System.out.println(methodKey);
+        //System.out.println(methodKey);
         this.detailStage.show();
         statusbar_directoryPath.setText(filePath.getRootDorectory());
         if(!this.className.equalsIgnoreCase("")){
@@ -219,7 +219,6 @@ public class DetailsController implements Initializable {
 
     public void populateClassData(){
 
-
         classProperty.get().entrySet().forEach(classData -> {
             if(classData.getValue().get(0).equalsIgnoreCase(this.className)){
                 label_LOC.setText(classData.getValue().get(1));
@@ -244,7 +243,7 @@ public class DetailsController implements Initializable {
             label_MI_value.setTextFill(Color.web("#DA3B29"));
         }
 
-        label_CC.setText(cyclomaticComplexityResult.getListOfAvgCyclomaticComplexity().get(this.className).toString());
+        label_CC.setText(numberFormat.format(cyclomaticComplexityResult.getListOfAvgCyclomaticComplexity().get(this.className)));
 
         label_operand.setText("~");
         label_operator.setText("~");
