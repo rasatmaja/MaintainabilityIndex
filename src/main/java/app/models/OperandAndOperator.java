@@ -44,6 +44,10 @@ public class OperandAndOperator {
         return listMethodOperator.get(key).entrySet().stream().mapToInt(Map.Entry::getValue).sum();
     }
 
+    public Map<String, Integer> getlistMethodOperator(int key){
+        return this.listMethodOperator.get(key);
+    }
+
     public void clear(){
         this.listMethodOperator.clear();
         this.listMethodOperand.clear();

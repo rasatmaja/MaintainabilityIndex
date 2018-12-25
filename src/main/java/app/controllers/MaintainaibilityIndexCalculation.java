@@ -10,10 +10,11 @@ import java.text.DecimalFormat;
 
 public class MaintainaibilityIndexCalculation extends Task<Void> {
 
-    MethodProperty methodProperty;
-    HalsteadMetricsCalculation halsteadMetricsCalculation;
-    CyclomaticComplexityCalculations cyclomaticComplexityCalculations;
-    MaintainabilityIndexResult maintainabilityIndexResult;
+    private MethodProperty methodProperty;
+    private HalsteadMetricsCalculation halsteadMetricsCalculation;
+    private CyclomaticComplexityCalculations cyclomaticComplexityCalculations;
+    private MaintainabilityIndexResult maintainabilityIndexResult;
+    private double resultMI;
 
     public MaintainaibilityIndexCalculation (){
         methodProperty = MethodProperty.getInstance();
@@ -23,17 +24,16 @@ public class MaintainaibilityIndexCalculation extends Task<Void> {
     }
 
     public MaintainaibilityIndexCalculation(MethodProperty mp, HalsteadMetricsCalculation hmc,
-            CyclomaticComplexityCalculations ccc){
+            CyclomaticComplexityCalculations ccc, MaintainabilityIndexResult mir){
         methodProperty = mp;
         halsteadMetricsCalculation = hmc;
         cyclomaticComplexityCalculations = ccc;
-        maintainabilityIndexResult = MaintainabilityIndexResult.getInstance();
+        maintainabilityIndexResult = mir;
     }
 
     @Override
     protected Void call() {
         updateMessage("Start caculating... ");
-        System.out.println("call method is running");
         methodProperty.get().entrySet().forEach(method ->{
             int methodKey = method.getKey();
             System.out.println(methodKey);
@@ -95,6 +95,12 @@ public class MaintainaibilityIndexCalculation extends Task<Void> {
             maintainabilityIndexResult.setMethodPropertyKey(methodKey);
             maintainabilityIndexResult.set(maintainabilityIndex);
 
+            this.resultMI = maintainabilityIndex;
+
         });
+    }
+
+    public double getResultMI() {
+        return this.resultMI;
     }
 }

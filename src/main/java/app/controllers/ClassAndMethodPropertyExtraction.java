@@ -24,6 +24,15 @@ public class ClassAndMethodPropertyExtraction extends VoidVisitorAdapter<Void> {
         classEdgeProperty = ClassEdgeProperty.getInstance();
     }
 
+    /*
+    * Contructor ini digunakan untuk keperluan pengugjian
+    * */
+    public ClassAndMethodPropertyExtraction(ClassProperty cp, MethodProperty mp){
+        classProperty = cp;
+        methodProperty = mp;
+        classEdgeProperty = ClassEdgeProperty.getInstance();
+    }
+
     @Override
     public void visit(ClassOrInterfaceDeclaration classOrInterfaceDeclaration, Void arg) {
         super.visit(classOrInterfaceDeclaration, arg);

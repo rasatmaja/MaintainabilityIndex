@@ -6,8 +6,17 @@ import app.models.MethodProperty;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 
 //TODO: perlu dibuatkan mock untuk ClassPropert dan Methodroperty
 
@@ -22,34 +31,22 @@ public class Method_visit_Test {
     public void jalur1() {
         sourceCode = "abstract class Shape{\n" +
                 "    abstract void draw();  \n" +
-                "} ";
-        expectedResult.add("Shape");
-        expectedResult.add("1");
-        expectedResult.add("0");
-        expectedResult.add(sourceCode);
-        expectedResult.add("Abstract");
+                "}";
 
-        cmpe = new ClassAndMethodPropertyExtraction();
-        cp = ClassProperty.getInstance();
+        cp = Mockito.mock(ClassProperty.class);
+        mp = Mockito.mock(MethodProperty.class);
+        cmpe = new ClassAndMethodPropertyExtraction(cp, mp);
 
         CompilationUnit cu = JavaParser.parse(sourceCode);
         cmpe.visit(cu, null);
 
         System.out.println("Hasil Pengujian Jalur 1:");
-        cp.get().entrySet().forEach(classProperty -> {
-            assertEquals(expectedResult.get(0), classProperty.getValue().get(0));
-            assertEquals(expectedResult.get(1), classProperty.getValue().get(1));
-            assertEquals(expectedResult.get(2), classProperty.getValue().get(2));
-            //assertEquals(expectedResult.get(3), classProperty.getValue().get(3));
-            assertEquals(expectedResult.get(4), classProperty.getValue().get(4));
-
-            System.out.println("Data Class " + classProperty.getValue().get(0) +
-                    " dengan tipe " + classProperty.getValue().get(4) +" berhasil disimpan");
-        });
+        Mockito.verify(cp, times( 1 ) ).set(anyString(), anyInt(),
+                anyInt(), anyString(),  eq("Abstract"));
+        System.out.println("Data Class dengan tipe Abstract berhasil disimpan ");
         System.out.println();
 
         cp.clear();
-        expectedResult.clear();
     }
 
     @Test
@@ -59,41 +56,30 @@ public class Method_visit_Test {
                 "    void speedUp(int a); \n" +
                 "    void applyBrakes(int a); \n" +
                 "}";
-        expectedResult.add("Vehicle");
-        expectedResult.add("3");
-        expectedResult.add("0");
-        expectedResult.add(sourceCode);
-        expectedResult.add("Interface");
-
-        cmpe = new ClassAndMethodPropertyExtraction();
-        cp = ClassProperty.getInstance();
+        cp = Mockito.mock(ClassProperty.class);
+        mp = Mockito.mock(MethodProperty.class);
+        cmpe = new ClassAndMethodPropertyExtraction(cp, mp);
 
         CompilationUnit cu = JavaParser.parse(sourceCode);
         cmpe.visit(cu, null);
 
         System.out.println("Hasil Pengujian Jalur 2:");
-        cp.get().entrySet().forEach(classProperty -> {
-            assertEquals(expectedResult.get(0), classProperty.getValue().get(0));
-            assertEquals(expectedResult.get(1), classProperty.getValue().get(1));
-            assertEquals(expectedResult.get(2), classProperty.getValue().get(2));
-            //assertEquals(expectedResult.get(3), classProperty.getValue().get(3));
-            assertEquals(expectedResult.get(4), classProperty.getValue().get(4));
+        Mockito.verify(cp, times( 1 ) ).set(anyString(), anyInt(),
+                anyInt(), anyString(),  eq("Interface"));
 
-            System.out.println("Data Class " + classProperty.getValue().get(0) +
-                    " dengan tipe " + classProperty.getValue().get(4) +" berhasil disimpan");
-        });
+        System.out.println("Data Class dengan tipe Interface berhasil disimpan ");
         System.out.println();
 
         cp.clear();
-        expectedResult.clear();
     }
 
     @Test
     public void jalur3() {
         sourceCode = "bukan bahasa pemrograman java";
+        cp = Mockito.mock(ClassProperty.class);
+        mp = Mockito.mock(MethodProperty.class);
+        cmpe = new ClassAndMethodPropertyExtraction(cp, mp);
 
-        cmpe = new ClassAndMethodPropertyExtraction();
-        cp = ClassProperty.getInstance();
         try{
             CompilationUnit cu = JavaParser.parse(sourceCode);
             cmpe.visit(cu, null);
@@ -101,53 +87,36 @@ public class Method_visit_Test {
         }
 
         System.out.println("Hasil Pengujian Jalur 3:");
-        assertEquals(0, cp.get().size());
-        if (cp.get().size()==0){
-            System.out.println("Tidak ada data tersimpan dalam list");
-        }
-        System.out.println();
+        Mockito.verify(cp, times( 0 ) ).set(anyString(), anyInt(),
+                anyInt(), anyString(),  anyString());
 
+        System.out.println("Tidak ada data tersimpan dalam list");
+        System.out.println();
         cp.clear();
-        expectedResult.clear();
     }
 
     @Test
     public void jalur4() {
         sourceCode = "class Mobil{" +"\n" + "} ";
+        cp = Mockito.mock(ClassProperty.class);
+        mp = Mockito.mock(MethodProperty.class);
+        cmpe = new ClassAndMethodPropertyExtraction(cp, mp);
 
-        expectedResult.add("Mobil");
-        expectedResult.add("0");
-        expectedResult.add("0");
-        expectedResult.add(sourceCode);
-        expectedResult.add("Concrete");
-
-        cmpe = new ClassAndMethodPropertyExtraction();
-        cp = ClassProperty.getInstance();
         try{
             CompilationUnit cu = JavaParser.parse(sourceCode);
             cmpe.visit(cu, null);
         } catch (Exception e){
         }
 
-        assertEquals(1, cp.get().size());
         System.out.println("Hasil Pengujian Jalur 4:");
-        cp.get().entrySet().forEach(classProperty -> {
-            assertEquals(expectedResult.get(0), classProperty.getValue().get(0));
-            assertEquals(expectedResult.get(1), classProperty.getValue().get(1));
-            assertEquals(expectedResult.get(2), classProperty.getValue().get(2));
-            //assertEquals(expectedResult.get(3), classProperty.getValue().get(3));
-            assertEquals(expectedResult.get(4), classProperty.getValue().get(4));
+        Mockito.verify(cp, times( 1 ) ).set(anyString(), anyInt(),
+                anyInt(), anyString(),  eq("Concrete"));
 
-            System.out.println("Data Class " + classProperty.getValue().get(0) +
-                    " dengan tipe " + classProperty.getValue().get(4) +" berhasil disimpan");
-        });
+        System.out.println("Data Class dengan tipe Concrete berhasil disimpan ");
         System.out.println();
-
         cp.clear();
-        expectedResult.clear();
     }
 
-    //TODO: membuat jalur 5 dan 6
     @Test
     public void jalur5() {
         sourceCode = "public class Files {\n" +
@@ -156,15 +125,9 @@ public class Method_visit_Test {
                 "    }\n" +
                 "}";
 
-        expectedResult.add("Files");
-        expectedResult.add("3");
-        expectedResult.add("0");
-        expectedResult.add(sourceCode);
-        expectedResult.add("Concrete");
-
-        cmpe = new ClassAndMethodPropertyExtraction();
-        cp = ClassProperty.getInstance();
-        mp = MethodProperty.getInstance();
+        cp = Mockito.mock(ClassProperty.class);
+        mp = Mockito.mock(MethodProperty.class);
+        cmpe = new ClassAndMethodPropertyExtraction(cp, mp);
 
         try{
             CompilationUnit cu = JavaParser.parse(sourceCode);
@@ -172,30 +135,18 @@ public class Method_visit_Test {
         } catch (Exception e){
         }
 
-        assertEquals(1, cp.get().size());
         System.out.println("Hasil Pengujian Jalur 5:");
-        cp.get().entrySet().forEach(classProperty -> {
-            assertEquals(expectedResult.get(0), classProperty.getValue().get(0));
-            assertEquals(expectedResult.get(1), classProperty.getValue().get(1));
-            assertEquals(expectedResult.get(2), classProperty.getValue().get(2));
-            //assertEquals(expectedResult.get(3), classProperty.getValue().get(3));
-            assertEquals(expectedResult.get(4), classProperty.getValue().get(4));
+        Mockito.verify(cp, times( 1 ) ).set(anyString(), anyInt(),
+                anyInt(), anyString(),  eq("Concrete"));
+        System.out.println("Data Class dengan tipe Concrete berhasil disimpan ");
 
-            System.out.println("Data Class " + classProperty.getValue().get(0) +
-                    " dengan tipe " + classProperty.getValue().get(4) +" berhasil disimpan");
-        });
+        Mockito.verify(mp, times(1)).set(anyString(), anyString(),
+                anyInt(), anyInt(), anyString(), anyString(),
+                anyString(), eq("method"), anyString(), anyString());
+        System.out.println("Data Method berhasil disimpan");
 
-        mp.get().entrySet().forEach(methodProperty -> {
-            assertEquals("Files", methodProperty.getValue().get(0));
-            assertEquals("String getFile_name()", methodProperty.getValue().get(1));
-            assertEquals("1", methodProperty.getValue().get(2));
-            assertEquals("0", methodProperty.getValue().get(3));
-            System.out.println("Data Method " + methodProperty.getValue().get(1) + " berhasil disimpan");
-        });
         System.out.println();
-
         cp.clear();
-        expectedResult.clear();
     }
 
     @Test
@@ -208,9 +159,9 @@ public class Method_visit_Test {
                 "    }\n" +
                 "}";
 
-        cmpe = new ClassAndMethodPropertyExtraction();
-        cp = ClassProperty.getInstance();
-        mp = MethodProperty.getInstance();
+        cp = Mockito.mock(ClassProperty.class);
+        mp = Mockito.mock(MethodProperty.class);
+        cmpe = new ClassAndMethodPropertyExtraction(cp, mp);
 
         try{
             CompilationUnit cu = JavaParser.parse(sourceCode);
@@ -218,29 +169,17 @@ public class Method_visit_Test {
         } catch (Exception e){
         }
 
-        assertEquals(1, cp.get().size());
         System.out.println("Hasil Pengujian Jalur 6:");
-        cp.get().entrySet().forEach(classProperty -> {
-            assertEquals("Files", classProperty.getValue().get(0));
-            assertEquals("5", classProperty.getValue().get(1));
-            assertEquals("0", classProperty.getValue().get(2));
-            //assertEquals(expectedResult.get(3), classProperty.getValue().get(3));
-            assertEquals("Concrete", classProperty.getValue().get(4));
+        Mockito.verify(cp, times( 1 ) ).set(anyString(), anyInt(),
+                anyInt(), anyString(),  eq("Concrete"));
+        System.out.println("Data Class dengan tipe Concrete berhasil disimpan ");
 
-            System.out.println("Data Class " + classProperty.getValue().get(0) +
-                    " dengan tipe " + classProperty.getValue().get(4) +" berhasil disimpan");
-        });
+        Mockito.verify(mp, times(1)).set(anyString(), anyString(),
+                anyInt(), anyInt(), anyString(), anyString(),
+                anyString(), eq("constructor"), anyString(), anyString());
+        System.out.println("Data Constructor berhasil disimpan");
 
-        mp.get().entrySet().forEach(methodProperty -> {
-            assertEquals("Files", methodProperty.getValue().get(0));
-            assertEquals("Files(String, String, String)", methodProperty.getValue().get(1));
-            assertEquals("3", methodProperty.getValue().get(2));
-            assertEquals("0", methodProperty.getValue().get(3));
-            System.out.println("Data Contructor " + methodProperty.getValue().get(1) + " berhasil disimpan");
-        });
         System.out.println();
-
         cp.clear();
-        expectedResult.clear();
     }
 }

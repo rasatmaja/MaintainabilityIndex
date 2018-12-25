@@ -16,13 +16,13 @@ import java.util.Map;
 
 public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
 
-    Map<String, Integer> listOfOperator = new HashMap<>();
-    Map<String, Integer> listOfOperand = new HashMap<>();
-    int countPredicaeNode = 0;
-    OperandAndOperator operandAndOperator;
-    PredicateNode predicateNode;
-    ClassEdgeProperty classEdgeProperty;
-    String className;
+    private Map<String, Integer> listOfOperator = new HashMap<>();
+    private Map<String, Integer> listOfOperand = new HashMap<>();
+    private int countPredicaeNode = 0;
+    private OperandAndOperator operandAndOperator;
+    private PredicateNode predicateNode;
+    private ClassEdgeProperty classEdgeProperty;
+    private String className;
 
     public OperandAndOperatorExtraction(String className, int key){
         this.className = className;
@@ -84,7 +84,8 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         vde.getVariables().forEach(variable -> {
             System.out.println("OPERAND  : " + variable.getNameAsString() + " -> ["+vde.getBegin().get()+"]-[VariableDeclarationExpr]");
             insertIntoHasMaps("OPERAND", variable.getNameAsString());
-            if(variable.toString().equalsIgnoreCase("=")){
+            //if(variable.toString().equalsIgnoreCase("=")){
+            if(variable.toString().contains("=")){
                 //menunjukan bahwa ini merupakan deklarasi inisiaalisasi seperti int a = 1;
                 //merupakan operator
                 System.out.println("OPERATOR : = " + " -> ["+vde.getBegin().get()+"]-[AssignExpr]");
@@ -342,22 +343,22 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         if (category.equalsIgnoreCase("OPERATOR")){
             if(!listOfOperator.containsKey(node)){
                 listOfOperator.put(node, 1);
-                //System.out.println("OPERATOR: " + node + " = 1");
+                System.out.println("OPERATOR: " + node + " = 1");
             } else {
                 int numberOfValueOfKey = listOfOperator.get(node) + 1;
                 listOfOperator.remove(node);
                 listOfOperator.put(node, numberOfValueOfKey);
-                //System.out.println("Update OPERATOR: " + node + " = " + numberOfValueOfKey);
+                System.out.println("Update OPERATOR: " + node + " = " + numberOfValueOfKey);
             }
         } else if (category.equalsIgnoreCase("OPERAND")){
             if(!listOfOperand.containsKey(node)){
                 listOfOperand.put(node, 1);
-                //System.out.println("OPERAND: " + node + " = 1");
+                System.out.println("OPERAND: " + node + " = 1");
             } else {
                 int numberOfValueOfKey = listOfOperand.get(node) + 1;
                 listOfOperand.remove(node);
                 listOfOperand.put(node, numberOfValueOfKey);
-                //System.out.println("Update OPERAND: " + node + " = " + numberOfValueOfKey);
+                System.out.println("Update OPERAND: " + node + " = " + numberOfValueOfKey);
             }
         }
     }
