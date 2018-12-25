@@ -339,6 +339,26 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         insertIntoHasMaps("OPERATOR", ")");
     }
 
+    public void visit(CastExpr md, Void arg) {
+        super.visit(md, arg);
+        System.out.println("OPERATOR : () " + " -> [" + md.getBegin().get() + "]-[CastExpr]");
+        insertIntoHasMaps("OPERATOR", "(");
+        insertIntoHasMaps("OPERATOR", ")");
+    }
+
+    public void visit(EnclosedExpr md, Void arg) {
+        super.visit(md, arg);
+        System.out.println("OPERATOR : () " + " -> [" + md.getBegin().get() + "]-[EnclosedExpr]");
+        insertIntoHasMaps("OPERATOR", "(");
+        insertIntoHasMaps("OPERATOR", ")");
+    }
+
+    public void visit(ThrowStmt md, Void arg) {
+        super.visit(md, arg);
+        System.out.println("OPERATOR : throw " + " -> [" + md.getBegin().get() + "]-[ThrowStmt]");
+        insertIntoHasMaps("OPERATOR", "throw");
+    }
+
     public void insertIntoHasMaps(String category, String node){
         if (category.equalsIgnoreCase("OPERATOR")){
             if(!listOfOperator.containsKey(node)){
