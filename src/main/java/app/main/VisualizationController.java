@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -120,6 +121,7 @@ public class VisualizationController implements Initializable {
 
             this.visualizationStage.setScene(scene);
             this.visualizationStage.setTitle("Visualizations");
+            this.visualizationStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/app_icon.png")));
             this.visualizationStage.initModality(Modality.APPLICATION_MODAL);
             this.visualizationStage.initOwner(null);
 
