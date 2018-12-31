@@ -47,6 +47,9 @@ public class OperandAndOperator {
     public Map<String, Integer> getlistMethodOperator(int key){
         return this.listMethodOperator.get(key);
     }
+    public Map<String, Integer> getlistMethodOperand(int key){
+        return this.listMethodOperand.get(key);
+    }
 
     public void clear(){
         this.listMethodOperator.clear();
