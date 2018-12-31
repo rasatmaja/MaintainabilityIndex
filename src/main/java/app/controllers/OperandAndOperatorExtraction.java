@@ -402,7 +402,7 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
     public void save(){
         operandAndOperator.setlistMethodOperand(listOfOperand);
         operandAndOperator.setlistMethodOperator(listOfOperator);
-        if(listOfOperator.size()==0 || listOfOperand.size()==0){
+        if(listOfOperator.isEmpty() || listOfOperand.isEmpty()){
             System.out.println("There is no body method");
             System.out.println("nilai distinc opeator " + listOfOperator.size());
             System.out.println("nilai distinc operand " + listOfOperand.size());
