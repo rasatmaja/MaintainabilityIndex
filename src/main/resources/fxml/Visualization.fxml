@@ -25,12 +25,12 @@
                   <Pane layoutX="635.0" layoutY="524.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="68.0" prefWidth="249.0" style="-fx-background-color: #FFFFFF;" styleClass="card" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="7.0">
                      <children>
                         <Label layoutX="10.0" layoutY="3.0" styleClass="card-title" text="Maintainability Index" textFill="#324c5b" />
-                        <Label fx:id="label_MI_value" layoutX="9.0" layoutY="23.0" text="120.68" textFill="#f14c52">
+                        <Label fx:id="label_MI_value" layoutX="9.0" layoutY="23.0" text="0.0" textFill="#f14c52">
                            <font>
                               <Font name="Roboto Bold" size="35.0" />
                            </font>
                         </Label>
-                        <Label fx:id="label_status_MI" layoutX="150.0" layoutY="25.0" prefHeight="39.0" prefWidth="93.0" text="Moderately Maintainable" textAlignment="RIGHT" textFill="#da3b29" wrapText="true">
+                        <Label fx:id="label_status_MI" layoutX="150.0" layoutY="25.0" prefHeight="39.0" prefWidth="93.0" text="Difﬁcult to Maintain" textAlignment="RIGHT" textFill="#da3b29" wrapText="true">
                            <font>
                               <Font name="Open Sans Italic" size="12.0" />
                            </font>
