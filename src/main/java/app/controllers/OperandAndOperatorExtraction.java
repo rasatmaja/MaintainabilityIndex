@@ -359,6 +359,22 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         insertIntoHasMaps("OPERATOR", "throw");
     }
 
+    public void visit(ConditionalExpr md, Void arg) {
+        super.visit(md, arg);
+        System.out.println("OPERATOR : ? " + " -> [" + md.getBegin().get() + "]-[ConditionalExpr]");
+        insertIntoHasMaps("OPERATOR", "?");
+
+        /* Ada penambahan predicate node untuk cyclomatic complexity*/
+        countPredicaeNode++;
+        String[] compoundConditions = {"||", "&&"};
+        for (String compoundCondition : compoundConditions) {
+            if (md.getCondition().toString().contains(compoundCondition)) {
+                //System.out.println("ada compound: " + compoundCondition);
+                countPredicaeNode += StringUtils.countMatches(md.getCondition().toString(), compoundCondition);
+            }
+        }
+    }
+
     public void insertIntoHasMaps(String category, String node){
         if (category.equalsIgnoreCase("OPERATOR")){
             if(!listOfOperator.containsKey(node)){
