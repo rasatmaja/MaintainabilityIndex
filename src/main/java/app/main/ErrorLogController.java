@@ -36,6 +36,7 @@ public class ErrorLogController {
             this.errorLogStage.setTitle("Error Logs");
             this.errorLogStage.initModality(Modality.APPLICATION_MODAL);
             this.errorLogStage.initOwner(null);
+            this.errorLogStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/app_icon.png")));
             this.errorLogStage.show();
             populateErrorLogs();
             this.errorLogStage.setOnCloseRequest(event -> {

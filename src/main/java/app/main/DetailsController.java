@@ -30,6 +30,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -130,6 +131,7 @@ public class DetailsController implements Initializable {
             scene.getStylesheets().add("/styles/Styles.css");
             this.detailStage.setScene(scene);
             this.detailStage.setTitle("Details Maintainability Index Calculatios");
+            this.detailStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/app_icon.png")));
             this.detailStage.initModality(Modality.APPLICATION_MODAL);
             this.detailStage.initOwner(null);
 

@@ -124,6 +124,7 @@ public class MaintainabilityIndexResultController implements Initializable {
             this.maintainabilityIndexResultStage.setTitle("Maintainability Index Result");
             this.maintainabilityIndexResultStage.initModality(Modality.APPLICATION_MODAL);
             this.maintainabilityIndexResultStage.initOwner(null);
+            this.maintainabilityIndexResultStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/app_icon.png")));
             this.maintainabilityIndexResultStage.show();
             this.maintainabilityIndexResultStage.setOnCloseRequest(event -> {
                 clearAllDataModel();
@@ -352,9 +353,17 @@ public class MaintainabilityIndexResultController implements Initializable {
                 int methodKey = Integer.valueOf(MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getId());
                 detailsController.setMethodKey(methodKey);
 
+                System.out.printf("Class Name: " + MI_TreeTableView.getSelectionModel().getSelectedItem().valueProperty().getValue().getName());
+                System.out.println("LIST OF OPERATOR: ");
                 OperandAndOperator.getInstance().getlistMethodOperator(methodKey).entrySet().forEach(op ->{
                     System.out.println(op.getKey() +" <=> "+ op.getValue());
                 });
+                System.out.println();
+                System.out.println("LIST OF OPERAND: ");
+                OperandAndOperator.getInstance().getlistMethodOperand(methodKey).entrySet().forEach(od ->{
+                    System.out.println(od.getKey() +" <=> "+ od.getValue());
+                });
+                System.out.println("=======================================================================");
             }
             detailsController.showStage();
         }
