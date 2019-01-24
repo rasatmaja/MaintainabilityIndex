@@ -105,8 +105,8 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
     /* BLOCK UNTUK MENCARI SEBUAH OPERATOR */
     public void visit(AssignExpr ae, Void arg) {
         super.visit(ae, arg);
-        System.out.println("OPERATOR : = " + " -> ["+ae.getBegin().get()+"]-[AssignExpr]");
-        insertIntoHasMaps("OPERATOR", "=");
+        System.out.println("OPERATOR :  "+ ae.getOperator().asString() + " -> ["+ae.getBegin().get()+"]-[AssignExpr]");
+        insertIntoHasMaps("OPERATOR", ae.getOperator().asString());
     }
     public void visit(BinaryExpr be, Void arg) {
         super.visit(be, arg);
@@ -341,6 +341,7 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
     }
     public void visit(LambdaExpr le, Void arg) {
         super.visit(le, arg);
+        insertIntoHasMaps("OPERATOR", "->");
         le.getParameters().forEach((parameter) -> {
             System.out.println("OPERAND : " + parameter.toString() + " -> ["+parameter.getBegin().get()+"]-[LambdaExpr]");
             insertIntoHasMaps("OPERAND", parameter.getName().asString());
@@ -402,6 +403,7 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
         super.visit(md, arg);
         System.out.println("OPERATOR : ? " + " -> [" + md.getBegin().get() + "]-[ConditionalExpr]");
         insertIntoHasMaps("OPERATOR", "?");
+        insertIntoHasMaps("OPERATOR", ":");
 
         /* Ada penambahan predicate node untuk cyclomatic complexity*/
         countPredicaeNode++;
@@ -412,6 +414,25 @@ public class OperandAndOperatorExtraction extends VoidVisitorAdapter<Void> {
                 countPredicaeNode += StringUtils.countMatches(md.getCondition().toString(), compoundCondition);
             }
         }
+    }
+
+    public void visit(ClassExpr pt, Void arg) {
+        super.visit(pt, arg);
+        System.out.println("OPERAND  : " + pt.asClassExpr()+ " -> [" + pt.getBegin().get() + "]-[ClassExpr]");
+        insertIntoHasMaps("OPERAND", "class");
+    }
+
+    public void visit(TypeExpr pt, Void arg) {
+        super.visit(pt, arg);
+        System.out.println("OPERAND  : " + pt.getType()+ " -> [" + pt.getBegin().get() + "]-[TypeExpr]");
+        insertIntoHasMaps("OPERAND", pt.getType().toString());
+    }
+
+    public void visit(MethodReferenceExpr pt, Void arg) {
+        super.visit(pt, arg);
+        System.out.println("OPERAND  : " + pt.getIdentifier()+ " -> [" + pt.getBegin().get() + "]-[MethodReferenceExpr]");
+        insertIntoHasMaps("OPERAND", pt.getIdentifier());
+        insertIntoHasMaps("OPERATOR", "::");
     }
 
     public void insertIntoHasMaps(String category, String node){
