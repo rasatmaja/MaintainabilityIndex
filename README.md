@@ -32,7 +32,9 @@ java -jar MaintainabilityIndex-1.0.jar
 ```
 
 ## Screenshot
-![Main Scene](https://github.com/rasioatmaja29/MaintainabilityIndex/blob/master/screenshot/main-scene.png){:class="img-responsive"}
+<p align="center">
+  <img width="460" height="300" src="https://github.com/rasioatmaja29/MaintainabilityIndex/blob/master/screenshot/main-scene.png">
+</p>
 
 ## Authors
 * **Rasio Ganang Atmaja**
