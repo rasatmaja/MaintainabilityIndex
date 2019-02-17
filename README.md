@@ -4,7 +4,7 @@ Sistem kalkulasi Maintainability Index ini merupakan sistem yang dibangun untuk 
 </p>
 
 <p align="justify">
-_The Maintainability Index calculations system provide features for calculate Maintainability Index values of the Java source code and display graph visualizations.  This system uses Java technology that allows the system to run on platforms that support JRE (java runtime environment)._
+<i>The Maintainability Index calculations system provide features for calculate Maintainability Index values of the Java source code and display graph visualizations.  This system uses Java technology that allows the system to run on platforms that support JRE (java runtime environment).</i>
 </p>
 
 #### Maintainability Index Clasifications
