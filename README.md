@@ -33,11 +33,11 @@ java -jar MaintainabilityIndex-1.0.jar
 
 ## Screenshot
 <p align="center">
-  <img width="600" src="https://github.com/rasioatmaja29/MaintainabilityIndex/blob/master/screenshot/main-scene.png">
+  <img width="600" src="./screenshot/main-scene.png">
 </p>
 
 <p align="center">
-  <img width="600" src="https://github.com/rasioatmaja29/MaintainabilityIndex/blob/master/screenshot/list-file-scene.png">
+  <img width="600" src="./screenshot/list-file-scene.png">
 </p>
 
 <p align="center">
@@ -45,11 +45,11 @@ java -jar MaintainabilityIndex-1.0.jar
 </p>
 
 <p align="center">
-  <img width="600" src="https://github.com/rasioatmaja29/MaintainabilityIndex/blob/master/screenshot/detail-calculation-scene.png">
+  <img width="600" src="./screenshot/detail-calculation-scene.png">
 </p>
 
 <p align="center">
-  <img width="600" src="https://github.com/rasioatmaja29/MaintainabilityIndex/blob/master/screenshot/visualization-scene.png">
+  <img width="600" src="./screenshot/visualization-scene.png">
 </p>
 
 ## Authors
