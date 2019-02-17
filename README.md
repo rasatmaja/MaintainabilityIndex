@@ -33,7 +33,7 @@ java -jar MaintainabilityIndex-1.0.jar
 
 ## Screenshot
 <p align="center">
-  <img width="460" height="300" src="https://github.com/rasioatmaja29/MaintainabilityIndex/blob/master/screenshot/main-scene.png">
+  <img width="500" src="https://github.com/rasioatmaja29/MaintainabilityIndex/blob/master/screenshot/main-scene.png">
 </p>
 
 ## Authors
