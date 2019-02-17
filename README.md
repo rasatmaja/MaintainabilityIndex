@@ -25,7 +25,7 @@ _The Maintainability Index calculations system provide features for calculate Ma
 
 ## Installing
 
-Run with compaile the project via terminal 
+Run project via terminal 
 ```
 cd ../MaintainabilityIndex
 
