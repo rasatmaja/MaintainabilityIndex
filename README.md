@@ -32,7 +32,7 @@ java -jar MaintainabilityIndex-1.0.jar
 ```
 
 ## Screenshot
-![Main Scene](https://github.com/rasioatmaja29/MaintainabilityIndex/blob/master/screenshot/main-scene.png) 
+![Main Scene](https://github.com/rasioatmaja29/MaintainabilityIndex/blob/master/screenshot/main-scene.png | width=500) 
 
 ## Authors
 * **Rasio Ganang Atmaja**
